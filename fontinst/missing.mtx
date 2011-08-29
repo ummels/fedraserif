@@ -1,0 +1,34 @@
+\relax
+\metrics
+
+\setglyph{ITpi1}
+      \glyphrule{500}{500}
+      \glyphwarning{missing glyph `itvarpi'}
+\endsetglyph
+
+\setglyph{ITrho1}
+      \glyphrule{500}{500}
+      \glyphwarning{missing glyph `itvarrho'}
+\endsetglyph
+
+\setglyph{UPpi1}
+      \glyphrule{500}{500}
+      \glyphwarning{missing glyph `upvarpi'}
+\endsetglyph
+
+\setglyph{UPrho1}
+      \glyphrule{500}{500}
+      \glyphwarning{missing glyph `upvarrho'}
+\endsetglyph
+
+\setglyph{hookrightchar}
+      \glyphrule{500}{500}
+      \glyphwarning{missing glyph `hookrightchar'}
+\endsetglyph
+
+\setglyph{hookleftchar}
+      \glyphrule{500}{500}
+      \glyphwarning{missing glyph `hookleftchar'}
+\endsetglyph
+
+\endmetrics

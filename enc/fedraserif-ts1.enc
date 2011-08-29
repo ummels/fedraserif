@@ -1,0 +1,66 @@
+% TS1 Encoding
+% CODINGSCHEME TEX TEXT COMPANION SYMBOLS 1---TS1
+%
+% LIGKERN || = 16 ;
+%
+% UNICODING dblbracketleft =: uni301A;
+% UNICODING dblbracketright =: uni301B;
+% UNICODING born =: uni2605;
+% UNICODING naira =: uni20A6;
+% UNICODING rupee =: uni20A8;
+% UNICODING kip =: uni20AD;
+% UNICODING tugrik =: uni20AE;
+% UNICODING peso =: uni20B1;
+% UNICODING hryvnia =: uni20B4;
+% UNICODING servicemark =: uni2120;
+%
+/FedraSerifProTS1Encoding [
+% 0x00
+  /grave.cap /acute.cap /circumflex.cap /tilde.cap /dieresis.cap /hungarumlaut.cap /ring.cap /caron.cap
+  /breve.cap /macron.cap /dotaccent.cap /cedilla /ogonek /quotesinglbase /.notdef /.notdef
+% 0x10
+  /space /.notdef /quotedblbase /.notdef /.notdef /twelveudash /threequartersemdash /capitalcompwordmark
+  /arrowleft /arrowright /.notdef /.notdef /.notdef /.notdef /.notdef /ascendercompwordmark
+% 0x20
+  /blank /.notdef /.notdef /.notdef /dollar /.notdef /.notdef /quotesingle
+  /.notdef /.notdef /asteriskmath /.notdef /comma /hyphendbl /period /fraction
+% 0x30
+  /zero /one /two /three /four /five /six /seven
+  /eight /nine /.notdef /.notdef /angbracketleft /minus /angbracketright /.notdef
+% 0x40
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /mho /.notdef /bigcircle
+% 0x50
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /Omega
+  /.notdef /.notdef /.notdef /dblbracketleft /.notdef /dblbracketright /arrowup /arrowdown
+% 0x60
+  /grave /.notdef /born /divorced /died /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /leaf /married /musicalnote /.notdef
+% 0x70
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /asciitilde /hyphendblchar
+% 0x80
+  /breve /caron /primedbl1 /primedblrev1 /dagger /daggerdbl /bardbl /perthousand
+  /bullet /centigrade /dollaroldstyle /centoldstyle /florin /colonsign /won /naira
+% 0x90
+  /guarani /peso /lira /recipe /interrobang /interrobangdown /dong /trademark
+  /pertenthousand /pilcrow /baht /numero /discount /estimated /openbullet /servicemark
+% 0xA0
+  /quillbracketleft /quillbracketright /cent /sterling /currency /yen /brokenbar /section
+  /dieresis /copyright /ordfeminine /copyleft /logicalnot /uni2117 /registered /macron
+% 0xB0
+  /degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered
+  /referencemark /onesuperior /ordmasculine /radical /onequarter /onehalf /threequarters /euro
+% 0xC0
+  /cruzeiro /franc /mill /peseta /rupee /sheqel /kip /tugrik
+  /hryvnia /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+% 0xD0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /multiply /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+% 0xE0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+% 0xF0
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /divide  /.notdef
+  /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+] def

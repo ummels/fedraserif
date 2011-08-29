@@ -1,0 +1,67 @@
+% TeX extra characters encoding.
+% CODINGSCHEME FONTSPECIFIC
+%
+/FedraSerifProExtraEncoding [ 
+% 0x00
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+% 0x10
+/zeroinferior /oneinferior /twoinferior /threeinferior
+/fourinferior /fiveinferior /sixinferior /seveninferior
+/eightinferior /nineinferior /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef
+% 0x20
+/.notdef /.notdef /.notdef /.notdef
+/dollar.superior /.notdef /.notdef /.notdef
+/parenleftsuperior /parenrightsuperior /asterisk /plussuperior
+/comma.superior /minussuperior /period.superior /fraction
+% 0x30
+/zerosuperior /onesuperior /twosuperior /threesuperior
+/foursuperior /fivesuperior /sixsuperior /sevensuperior
+/eightsuperior /ninesuperior /.notdef /.notdef
+/.notdef /equalsuperior /.notdef /.notdef
+% 0x40
+/.notdef /a.inferior /b.inferior /c.inferior
+/d.inferior /e.inferior /f.inferior /g.inferior
+/h.inferior /i.inferior /j.inferior /k.inferior
+/l.inferior /m.inferior /n.inferior /o.inferior
+% 0x50
+/p.inferior /q.inferior /r.inferior /s.inferior
+/t.inferior /u.inferior /v.inferior /w.inferior
+/x.inferior /y.inferior /z.inferior /.notdef
+/.notdef /.notdef /.notdef /.notdef
+% 0x60
+/.notdef /a.superior /b.superior /c.superior
+/d.superior /e.superior /f.superior /g.superior
+/h.superior /i.superior /j.superior /k.superior
+/l.superior /m.superior /n.superior /o.superior
+% 0x70
+/p.superior /q.superior /r.superior /s.superior
+/t.superior /u.superior /v.superior /w.superior
+/x.superior /y.superior /z.superior /.notdef
+/.notdef /.notdef /.notdef /.notdef
+% 0x80
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+% 0x90
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+% 0xA0
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+% 0xB0
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+% 0xC0
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+% 0xD0
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+% 0xE0
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+% 0xF0
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+] def

@@ -1,0 +1,32 @@
+\relax
+\encoding
+
+\nextslot{78}
+\setslot{triangleright}
+   \comment{The triangle symbol `$\triangleright$'.}
+\endsetslot
+
+\nextslot{80}
+\setslot{triangleleft}
+   \comment{The triangle symbol `$\triangleleft$'.}
+\endsetslot
+
+\nextslot{194}
+\setslot{flat}
+   \comment{The flat musical symbol `$\flat$'.}
+\endsetslot
+
+\setslot{natural}
+   \comment{The natural musical symbol `$\natural$'.}
+\endsetslot
+
+\setslot{sharp}
+   \comment{The sharp musical symbol `$\sharp$'.}
+\endsetslot
+
+\nextslot{201}
+\setslot{weierstrass}
+   \comment{The Weierstrass P symbol `$\wp$'.}
+\endsetslot
+
+\endencoding

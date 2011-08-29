@@ -1,0 +1,18 @@
+\input macros.tex
+
+\def\installopt#1#2#3#4{%
+% #1: family, #2: Fedra weight, #3: FdSymbol weight, #4: version
+  \installfonts
+  \installfont{#1-#2#4-TOsF-OML}{%
+    FdSymbolA-#3 encoding fdsymbol-a,%
+    FdSymbolB-#3 encoding fdsymbol-b,%
+    FdSymbolC-#3 encoding fdsymbol-c,%
+    FdSymbolE-#3 encoding fdsymbol-e,%
+    #1-#2-TOsF-OML encoding fedraserif-oml-up,%
+    #1-#2Italic-TOsF-OML encoding fedraserif-oml-it,%
+    adjustoml,%
+    missing,%
+    tie%
+  }{fedraserif-oml-#4}{}{}{}{}{}%
+  \endinstallfonts
+}
