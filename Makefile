@@ -156,7 +156,7 @@ $(AUXDIR)/$1$2-TOsF-OML.vpl: $(AUXDIR)/$1-TOsF-OML.vpl $(AUXDIR)/$1Italic-TOsF-O
 	weight=$$$$(echo $1 | $(SED) 's/\(.*\)-\(.*\)/\2/'); \
 	fdweight=$$$$(echo $$$$weight | $(SED) 's/Demi/Regular/'); \
 	TEXINPUTS=fontinst:misc: $(PDFTEX) -output-dir misc \\input makeoml \
-	\\installopt{$$$$font}{$$$$weight}{$$$$fdweight}{$2}\\bye
+	\\installoml{$$$$font}{$$$$weight}{$$$$fdweight}{$2}\\bye
 	$(RM) $(AUXDIR)/makeoml.log
 
 .PHONY: $1-tables

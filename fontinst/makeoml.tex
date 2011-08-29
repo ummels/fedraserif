@@ -1,7 +1,11 @@
 \input macros.tex
 
-\def\installopt#1#2#3#4{%
-% #1: family, #2: Fedra weight, #3: FdSymbol weight, #4: version
+% \installoml takes four parameters:
+%   #1 the name of the family (FSerProA or FSerProB)
+%   #2 the weight
+%   #3 the corresponding weight of FdSymbol
+%   #4 the version (Mixed or French)
+\def\installoml#1#2#3#4{%
   \installfonts
   \installfont{#1-#2#4-TOsF-OML}{%
     FdSymbolA-#3 encoding fdsymbol-a,%
