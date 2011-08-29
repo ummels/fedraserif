@@ -423,8 +423,7 @@
 % |\varpi| and |\varrho|, which have the same shape as |\pi| and |\rho|,
 % respectively.
 %
-% \medskip
-% In \TeX\ or \LaTeX, uppercase Greek letters are traditionally set
+% In \TeX\ and \LaTeX, uppercase Greek letters are traditionally set
 % upright in math mode, even when they are used as variables.
 % This differs from the \acro{ISO} standards \acro{ISO31-0:1992} to
 % \acro{ISO31-13:1992}, which mandate italics in this case. While
@@ -452,9 +451,9 @@
 %
 % \subsection{Digits}\label{sec:mathdigits}
 %
-% By default, digits in math mode are set in the default figure version
+% By default, digits in math mode are typeset in the default figure version
 % for text mode (as~selected by the |figures| key). To use lining figures
-% in math mode even if |figures=text| has been set, use the option
+% in math mode even if |figures=text| is active, set the option
 % |stdmathdigits|.
 %
 % Apart from the standard math versions |normal| and |bold|, the package
@@ -497,7 +496,8 @@
 % directly via the commands \texttt{\string\up}\meta{cmd} and
 % \texttt{\string\it}\meta{cmd}.}
 %
-% \DeclareRobustCommand\saveappendix{%
+% \DeclareRobustCommand\makeappendix{%
+%
 % \appendix
 % \section{\acro{NFSS} classification}
 %
@@ -541,7 +541,7 @@
 % \makeatother
 % \end{center}}
 %
-% \StopEventually{\saveappendix}
+% \StopEventually{\makeappendix}
 %
 % \section{The main style file}
 %
@@ -1474,6 +1474,8 @@
 %
 % \section{Font definition files}
 %
+% Using the above macros, the various \acro{FD} files become simple
+% two-liners.
 %    \begin{macrocode}
 %<*fd>
 \input{fedraserif-fd.sty}
