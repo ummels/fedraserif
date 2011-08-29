@@ -36,7 +36,7 @@ higher, as distributed with TeXLive 2011.
 Before starting the installation, you need to copy the original OpenType Pro
 font files as obtained from Typotheque into the root directory of the sources
 (the directory in which e.g. the file Makefile resides). In order for the
-package to be usable, you will need at least the files `FSerProA-Book.otf` and
+package to be usable, you will need at least the files FSerProA-Book.otf and
 FSerProA-BookItalic.otf or the files FSerProB-Book.otf and
 FSerProB-BookItalic.otf.
 
