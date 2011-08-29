@@ -3,12 +3,11 @@ OTFTOTFM := otftotfm
 OTFTOTFMFLAGS :=
 OTFTOPFB := cfftot1
 OTFINFO := otfinfo
-PDFTEX := pdftex
 TFMTOPL := tftopl
 PLTOTFM := pltotf
 VPLTOVF := vptovf
-PDFTEX := pdftex
-PDFLATEX := pdflatex
+PDFTEX := pdftex -interaction nonstopmode -halt-on-error
+PDFLATEX := pdflatex -interaction nonstopmode -halt-on-error
 AWK := awk
 SED := sed
 RM := rm -rf
@@ -99,7 +98,10 @@ lc = $(subst A,a,$(subst B,b,$(subst C,c,$(subst D,d,$(subst E,e,$(subst F,f,$(s
 
 # $(call fonttable,font)
 define fonttable
-echo "$1\n\\\\table\\\\bye" | TEXFONTS=$(TFMDIR):$(VFDIR): ENCFONTS=$(DVIPSDIR): $(PDFTEX) -output-dir $(TABLEDIR) -jobname $1 "\\pdfmapfile{=$(mapfile)}\\input testfont.tex"
+TEXFONTS=$(TFMDIR):$(VFDIR): ENCFONTS=$(DVIPSDIR): \
+$(PDFTEX) -output-dir $(TABLEDIR) -jobname $1 \
+\\pdfmapfile{=$(mapfile)}\\input fntproof.tex \\init $1 \
+\\table\\bye
 endef
 
 # macros for generating font-specific rules
@@ -152,9 +154,9 @@ $1-math: $(TFMDIR)/$1$2-TOsF-OML.tfm $(VFDIR)/$1$2-TOsF-OML.vf $(AUXDIR)/$1$2-TO
 $(AUXDIR)/$1$2-TOsF-OML.vpl: $(AUXDIR)/$1-TOsF-OML.vpl $(AUXDIR)/$1Italic-TOsF-OML.vpl $(plfiles) $(etxfiles) $(mtxfiles) fontinst/makeoml.tex fontinst/macros.tex
 	font=$$$$(echo $1 | $(SED) 's/\(.*\)-\(.*\)/\1/'); \
 	weight=$$$$(echo $1 | $(SED) 's/\(.*\)-\(.*\)/\2/'); \
-	fdweight=$$$$(echo $$$${weight} | $(SED) 's/Demi/Regular/'); \
-	echo "\\installopt{$$$${font}}{$$$${weight}}{$$$${fdweight}}{$2}\\\\bye" | \
-	TEXINPUTS=fontinst:$(AUXDIR): $(PDFTEX) -output-dir $(AUXDIR) makeoml.tex
+	fdweight=$$$$(echo $$$$weight | $(SED) 's/Demi/Regular/'); \
+	TEXINPUTS=fontinst:misc: $(PDFTEX) -output-dir misc \\input makeoml \
+	\\installopt{$$$$font}{$$$$weight}{$$$$fdweight}{$2}\\bye
 	$(RM) $(AUXDIR)/makeoml.log
 
 .PHONY: $1-tables
@@ -193,10 +195,10 @@ dvips: $(mapfile) $(encfiles)
 $(mapfile): glyphlist
 	$(RM) $@; $(TOUCH) $@
 	for font in $(fonts); do \
-	  psname=$$($(OTFINFO) -p $${font}.otf); \
+	  psname=$$($(OTFINFO) -p $$font.otf); \
 	  for i in $(suffixes); do \
 		I=$$(echo $$i | tr [:lower:] [:upper:]); \
-	    echo "$${font}-Base-$$i $${psname} \"$(family)$$I ReEncodeFont\" <$(pkg)-$$i.enc <$${font}.pfb" >> $@; \
+	    echo "$$font-Base-$$i $$psname \"$(family)$$I ReEncodeFont\" <$(pkg)-$$i.enc <$$font.pfb" >> $@; \
 	  done; \
 	done
 
@@ -329,3 +331,7 @@ clean:
 maintainer-clean: clean
 	$(RM) glyphlist
 	$(RM) $(plfiles)
+
+# delete files on error
+
+.DELETE_ON_ERROR:
