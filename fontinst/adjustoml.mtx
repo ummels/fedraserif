@@ -6,11 +6,9 @@
 \adjustmetrics{UPD}{0}{0}{0}{-20}{0}
 \adjustmetrics{UPF}{0}{20}{0}{0}{0}
 \adjustmetrics{UPG}{0}{0}{0}{40}{0}
-%\adjustmetrics{UPJ}{0}{0}{0}{0}{0}
 \adjustmetrics{UPK}{0}{40}{40}{0}{0}
 \adjustmetrics{UPL}{0}{20}{20}{-110}{0}
 \adjustmetrics{UPM}{0}{10}{10}{0}{0}
-%\adjustmetrics{UPN}{0}{0}{0}{0}{0}
 \adjustmetrics{UPP}{0}{10}{-30}{-10}{0}
 \adjustmetrics{UPQ}{0}{50}{100}{-40}{0}
 \adjustmetrics{UPR}{0}{50}{50}{-40}{0}
@@ -25,14 +23,12 @@
 \adjustmetrics{UPgamma}{0}{40}{20}{0}{0}
 \adjustmetrics{UPepsilon1}{0}{20}{0}{20}{0}
 \adjustmetrics{UPzeta}{0}{30}{30}{0}{0}
-%\adjustmetrics{UPeta}{0}{0}{0}{0}{0}
 \adjustmetrics{UPiota}{0}{40}{40}{0}{0}
 \adjustmetrics{UPkappa}{0}{40}{40}{0}{0}
 \adjustmetrics{UPlambda}{10}{40}{40}{-80}{0}
 \adjustmetrics{UPmu}{0}{20}{20}{-20}{0}
 \adjustmetrics{UPnu}{0}{20}{20}{0}{0}
 \adjustmetrics{UPxi}{0}{20}{20}{50}{0}
-%\adjustmetrics{UPrho}{0}{0}{0}{0}{0}
 \adjustmetrics{UPsigma}{0}{50}{0}{0}{0}
 \adjustmetrics{UPsigma1}{0}{20}{20}{20}{0}
 \adjustmetrics{UPtau}{10}{30}{0}{0}{0}
@@ -59,7 +55,6 @@
 \adjustmetrics{UPdigamma}{0}{0}{0}{20}{0}
 \adjustmetrics{UPbackepsilon}{0}{0}{0}{-30}{0}
 \adjustmetrics{UPbackepsilon1}{0}{0}{0}{-30}{0}
-%\adjustmetrics{UPeth}{0}{0}{0}{0}{0}
 \adjustmetrics{UPaleph}{0}{20}{20}{0}{0}
 \adjustmetrics{UPbeth}{20}{0}{0}{-40}{0}
 \adjustmetrics{UPgimel}{0}{0}{0}{-20}{0}
