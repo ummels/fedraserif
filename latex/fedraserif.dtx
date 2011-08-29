@@ -130,10 +130,10 @@
 % \begin{quote}
 %   |\usepackage|\oarg{options}|{fedraserif}|
 % \end{quote}
-% to the preamble of your document.
-% This will change both the text font and the math font to Fedra Serif~A.
-% For Fedra Serif~B, use the option \option{variant=B}. For the list of
-% available options, see Section~\ref{sec:options}.
+% to the preamble of your document. If no options are specified,
+% this will change both the text font and the math font to Fedra Serif~A;
+% use the option \option{variant=B} to select Fedra Serif~B.
+% For the list of available options, see Section~\ref{sec:options}.
 %
 % \subsubsection*{Acknowledgements}
 %
@@ -194,34 +194,47 @@
 % Fedra Serif Pro comes in two variants: \emph{Fedra Serif~A} has a lower
 % contrast and shorter ascenders, which makes it a good choice for small sizes,
 % whereas \emph{Fedra Serif~B} has an increased contrast and longer ascenders.
-% To select one variant, use the |variant| key: Setting |variant=A| will
+% To select one variant, use the |variant| key: setting |variant=A| will
 % select Fedra Serif~A (the default), while |variant=B| will select
 % Fedra Serif~B.
 % Additionally, setting |variant=auto| will select Fedra Serif~A for text
 % in normal and small sizes and Fedra Serif~B for text in large sizes
 % (larger than 12pt).
 %
+% \subsection{Encodings}\label{sec:encodings}
+%
+% The package currently supports the \acro{OT1},
+% \acro{T1}, \acro{LY1} and \acro{QX} encodings for typesetting text
+% with Latin characters. For typesetting text with accented characters,
+% it~is strongly
+% recommended to change the default font encoding from~\acro{OT1}
+% to \acro{T1} or one of the other encodings. This can be achieved
+% by putting |\usepackage[T1]{fontenc}| in the preamble of your
+% document.
+%
 % \subsection{Weights}\label{sec:weights}
 %
 % All fonts of the Fedra Serif Pro family come in four weights, which are
 % (in increasing order) Book, Demi, Medium and Bold. Of these, Book and
 % Demi can be used as the standard text font, while Medium and Bold can
-% be used for emphasis. The option keys |normalweight| and |boldweight|
-% allow to control which weights are used. For example, to use the Demi
+% be used for bold text. The option keys |normalweight| and |boldweight|
+% allow to control which weights are used for the standard \LaTeX\ font
+% series |m| and |b| (or |bx|), selected by |\mdseries| and |\bfseries|,
+% respectively. For example, to use the Demi
 % weight as the standard text font, use the option |normalweight=Demi|.
 % By default, only the Book and the Medium weights are used. Additionally,
 % both keys can be set to the value |auto|, which selects a weight depending
 % on the font size (Book and Medium for normal and large sizes, Demi and
-% Bold for small sizes). Independent of these options, the Demi and the Bold
-% weight can always be accessed using the commands |\fontseries{md}| and
-% |\fontseries{ub}|, respectively.
+% Bold for small sizes). Independently of these options, the Demi and the
+% Bold weight can always be accessed using the commands |\fontseries{md}|
+% and |\fontseries{ub}|, respectively.
 %
 % \subsection{Shapes}\label{sec:shapes}
 %
 % In addition to the normal small caps shapes |sc| and |scit|, there are
-% letterspaced versions |ssc| and |sscit|. Moreover, italics with
+% letterspaced versions |ssc| and |sscit|. Moreover, italic shapes with
 % \emph{swash capitals} are accessible via the |sw|, |scsw| and |sscsw|
-% fontshapes.
+% shapes.
 %
 % \smallskip
 % \newcommand{\pangram}{A Quick Brown Fox Jumps Over The Lazy Dog.}
@@ -247,20 +260,9 @@
 % and the commands |\swshape| and |\textsw|\marg{text} to switch to swash
 % capitals.
 %
-% \subsection{Encodings}\label{sec:encodings}
-%
-% The Fedra Serif Pro fonts are currently avaible in the \acro{OT1},
-% \acro{T1}, \acro{LY1} and \acro{QX} encodings for typesetting text
-% with Latin characters. For typesetting text with accented characters,
-% it~is strongly
-% recommended to change the default font encoding from~\acro{OT1}
-% to \acro{T1} or one of the other encodings. This can be achieved
-% by putting |\usepackage[T1]{fontenc}| in the preamble of your
-% document.
-%
 % \subsection{Figures}\label{sec:figures}
 %
-% Fedra Serif Pro comes with four main figure versions. On the one hand, one
+% Fedra Serif Pro offers four main figure versions. On the one hand, one
 % can choose between \emph{lining figures} and \emph{text figures}, also known
 % as \emph{old-style figures}.
 % On the other hand, one can choose between
@@ -288,14 +290,14 @@
 % Assuming that the \pkg{fontaxes} package is installed on your system, you
 % can use
 % the command |\figureversion| to switch between different figure
-% versions. Possible arguments are |text| or |osf| for text figures,
-% |lining| or |lf| for lining figures, |tabular| or |tab| for tabular figures,
-% and |proportional| or |prop| for proportional figures.
+% versions inside the document. Possible arguments are |text| or |osf|
+% for text figures, |lining| or |lf| for lining figures, |tabular| or |tab|
+% for tabular figures, and |proportional| or |prop| for proportional figures.
 % Note that you can combine several arguments. For example, the command
 % |\figureversion{osf,tabular}| selects tabular text figures.
 %
 % Small and slanted fractions are fractions with a height matching the font's
-% body size. They can be accessed via:
+% body size; they can be accessed via:
 %
 % \medskip
 % \begin{tabular}{@{}ll}
@@ -308,7 +310,7 @@
 % \meta{denominator}.
 %
 % Finally, Fedra Serif Pro offers so-called bullet figures, which are
-% enclosed by a circle. They can be accessed via:
+% enclosed by a circle; they can be accessed via:
 %
 % \medskip
 % \begin{tabular}{@{}ll@{ }l}
@@ -409,19 +411,26 @@
 %
 % \section{Math support}\label{sec:math}
 %
-% By default, we change the math font to Fedra Serif with mathematical
-% symbols taken from FdSymbol. The following options allow to control this
-% behaviour. To~disable this behaviour, use the option |nomath|.
+% By default, we change the math font to Fedra Serif Pro with mathematical
+% symbols taken from FdSymbol. To~disable this behaviour, use the option
+% |nomath|. Note that all other options described in this section have no
+% effect if this option is active.
 %
 % \subsection{Letters}\label{sec:mathletters}
 %
+% The \pkg{fedraserif} package provides all letters available in
+% math mode with the Computer Modern fonts, with the exception of
+% |\varpi| and |\varrho|, which have the same shape as |\pi| and |\rho|,
+% respectively.
+%
+% \medskip
 % In \TeX\ or \LaTeX, uppercase Greek letters are traditionally set
 % upright in math mode, even when they are used as variables.
 % This differs from the \acro{ISO} standards \acro{ISO31-0:1992} to
 % \acro{ISO31-13:1992}, which mandate italics in this case. While
 % the package employs the \TeX\ tradition by default, you can select
 % the \acro{ISO} behaviour by setting the option |math-style=iso|.
-% Independent of this option, you can alyways select upright and
+% Independently of this option, you can alyways select upright and
 % italic greek letters using the commands |\upalpha|, |\italpha|,
 % |\upGamma|, |\itGamma|, etc. Additionally, the |math-style| key
 % can take the value |french|, in which case all Greek and
@@ -443,9 +452,14 @@
 %
 % \subsection{Digits}\label{sec:mathdigits}
 %
-% By default, math mode uses the same figure version than text mode.
-% To override this behaviour and use lining figures in math mode,
-% use the option |stdmathdigits|.
+% By default, digits in math mode are set in the default figure version
+% for text mode (as~selected by the |figures| key). To use lining figures
+% in math mode even if |figures=text| has been set, use the option
+% |stdmathdigits|.
+%
+% Apart from the standard math versions |normal| and |bold|, the package
+% introduces two new math versions |tabular| and |boldtabular|, in which
+% digits are typeset as tabular figures.
 %
 % \subsection{Blackboard characters}\label{sec:mathbb}
 %
