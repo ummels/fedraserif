@@ -1,0 +1,52 @@
+\documentclass[fleqn]{article}
+
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage[variant=B,math-style=iso]{fedraserif}
+%\usepackage[variant=B,math-style=french]{fedraserif}
+	
+\newcommand\mathtest{
+ \def\ii{i} \def\jj{j}
+ \def\\##1{|##1|+}\mathtrial
+ \def\\##1{##1^\Box_\Box+}\mathtrial
+ %\def\\##1{##1^2+}\mathtrial
+ %\def\\##1{##1/2+}\mathtrial
+ %\def\\##1{2/##1+}\mathtrial
+ %\def\\##1{##1,{}+}\mathtrial
+ %\def\\##1{d##1+}\mathtrial
+ \let\ii=\imath \let\jj=\jmath\def\\##1{\hat##1+}\mathtrial}%
+
+\def\mathtrial{$\\A \\B \\C \\D \\E \\F \\G \\H \\I \\J \\K \\L \\M \\N \\O
+ \\P \\Q \\R \\S \\T \\U \\V \\W \\X \\Y \\Z \\a \\b \\c \\d \\e \\f \\g
+ \\h \\i \\\imath \\j \\\jmath \\k \\l \\m \\n \\o \\p \\q \\r \\s \\t \\u \\v \\w \\x \\y
+ \\z \\\alpha \\\beta \\\gamma \\\delta \\\epsilon \\\zeta \\\eta \\\theta
+ \\\iota \\\kappa \\\lambda \\\mu \\\nu \\\xi \\\pi \\\rho \\\sigma \\\tau
+ \\\upsilon \\\phi \\\chi \\\psi \\\omega \\\vartheta \\\varpi \\\varphi
+ \\\varepsilon \\\varsigma \\\varbeta \\\varkappa
+ \\\Gamma \\\Delta \\\Theta \\\Lambda \\\Xi \\\Pi \\\Sigma \\\Upsilon
+ \\\Phi \\\Psi \\\Omega
+ \\\upalpha \\\upbeta \\\upgamma \\\updelta \\\upepsilon \\\upzeta \\\upeta \\\uptheta
+ \\\upiota \\\upkappa \\\uplambda \\\upmu \\\upnu \\\upxi \\\uppi \\\uprho \\\upsigma \\\uptau
+ \\\upupsilon \\\upphi \\\upchi \\\uppsi \\\upomega \\\upvartheta \\\upvarpi \\\upvarphi
+ \\\upvarepsilon \\\upvarsigma \\\upvarbeta \\\upvarkappa
+ \\\upGamma \\\upDelta \\\upTheta \\\upLambda \\\upXi \\\upPi \\\upSigma \\\upUpsilon
+ \\\upPhi \\\upPsi \\\upOmega 
+ \\\partial \\\ell \\\wp \\\hbar \\\nabla \\\mho
+ \\\upell \\\uphbar \\\slashedzero
+ \\\digamma \\\backepsilon \\\varbackepsilon \\\eth
+ \\\updigamma \\\upbackepsilon \\\upvarbackepsilon \\\upeth
+ \\\aleph \\\beth \\\gimel \\\daleth
+ $\par}%
+
+\raggedbottom
+\setlength{\parindent}{0pt}
+\linespread{1.5}
+
+\begin{document}
+\mathtest
+
+\[\textstyle \complement X \sum_{x=2}^9 x^i \prod_{x=2}^9 x^i
+\int_0^9 \!f(x)\,\mathrm{d}x\]
+\[\complement X \sum_{x=2}^9 x^i \prod_{x=2}^9 x^i
+\int_0^9 \!f((x))\,\mathrm{d}x\]
+\end{document}
