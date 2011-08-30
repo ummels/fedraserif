@@ -66,7 +66,7 @@ encfiles := $(suffixes:%=$(DVIPSDIR)/$(pkg)-%.enc)
 baselists := $(fonts:%=%.base)
 mapfile := $(DVIPSDIR)/$(pkg).map
 plfiles := $(foreach w,Book Regular Medium Bold,\
-  $(foreach s,A B C E,fontinst/FdSymbol$s-$w.pl))
+  $(foreach s,A B C E,$(AUXDIR)/FdSymbol$s-$w.pl))
 etxfiles := $(foreach s,a b c e,fontinst/fdsymbol-$s.etx) \
   $(foreach s,french it mixed up,fontinst/$(pkg)-oml-$s.etx)
 mtxfiles := fontinst/adjustoml.mtx fontinst/missing.mtx fontinst fontinst/tie.mtx
@@ -257,7 +257,7 @@ $(VFDIR)/%.vf $(TFMDIR)/%.tfm: $(AUXDIR)/%.vpl
 .PHONY: fdsymbol-metrics
 fdsymbol-metrics: $(plfiles)
 
-$(plfiles): fontinst/%.pl:
+$(plfiles): $(AUXDIR)/%.pl:
 	$(TFMTOPL) $*.tfm $@
 
 # rules for building the LaTeX package
@@ -330,7 +330,6 @@ clean:
 .PHONY: maintainer-clean
 maintainer-clean: clean
 	$(RM) glyphlist
-	$(RM) $(plfiles)
 
 # delete files on error
 
