@@ -51,7 +51,7 @@ flags_ssc := $(flags_sc) --letterspacing=80
 flags_sw := --feature=swsh
 flags_scsw := $(flags_sc) $(flags_sw)
 flags_sscsw := $(flags_ssc) $(flags_sw) 
-flags_math := --letterspacing=40 --math-spacing=255
+flags_math := --letterspacing=40 --math-spacing
 
 otffiles_in := $(wildcard $(fontname)?-*.otf)
 otffiles_up := $(filter $(otffiles_in),$(foreach var,$(variants),$(weights:%=$(fontname)$(var)-%.otf)))

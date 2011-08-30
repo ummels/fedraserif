@@ -544,7 +544,7 @@
    \comment{The vector accent symbol `$\vec{x}$'.}
 \endsetslot
 
-\setslot{UPtie}
+\setslot{tie}
    \comment{The tie accent symbol `\t oo'.}
 \endsetslot
 
@@ -778,10 +778,6 @@
 \endsetslot
 
 \setslot{UPdaleth}
-\endsetslot
-
-\nextslot{255}
-\setslot{skew}
 \endsetslot
 
 \endencoding

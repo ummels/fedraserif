@@ -542,8 +542,4 @@
 \setslot{ITdaleth}
 \endsetslot
 
-\nextslot{255}
-\setslot{skew}
-\endsetslot
-
 \endencoding
