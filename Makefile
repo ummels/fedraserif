@@ -71,10 +71,10 @@ etxfiles := $(foreach s,a b c e,fontinst/fdsymbol-$s.etx) \
   $(foreach s,french it mixed up,fontinst/$(pkg)-oml-$s.etx)
 mtxfiles := fontinst/adjustoml.mtx fontinst/missing.mtx fontinst fontinst/tie.mtx
 styfiles := latex/$(pkg).sty latex/$(pkg)-fd.sty latex/mt-$(family).cfg
-fdfiles := $(foreach enc,$(encodings),\
+fdfiles := $(foreach enc,$(encodings) OML,\
   $(foreach ver,$(figures),latex/$(enc)$(family)-$(ver).fd)) \
-  latex/OML$(family)-TOsF.fd latex/U$(family)-BB.fd \
-  latex/U$(family)-Extra.fd latex/U$(family)-Orn.fd
+  latex/U$(family)-Extra.fd latex/U$(family)-Orn.fd \
+  latex/U$(family)-BB.fd
 tempfiles := latex/$(pkg).aux latex/$(pkg).log latex/$(pkg).out latex/$(pkg).toc
 
 # create output directories

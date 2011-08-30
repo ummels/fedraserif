@@ -48,6 +48,9 @@
 %<qx&osf>\ProvidesFile{QXFedraSerifPro-OsF.fd}[2011/08/29 v0.5 font definitions for QX/FedraSerifPro-OsF]
 %<qx&tlf>\ProvidesFile{QXFedraSerifPro-TLF.fd}[2011/08/29 v0.5 font definitions for QX/FedraSerifPro-TLF]
 %<qx&tosf>\ProvidesFile{QXFedraSerifPro-TOsF.fd}[2011/08/29 v0.5 font definitions for QX/FedraSerifPro-TOsF]
+%<oml&lf>\ProvidesFile{OMLFedraSerifPro-LF.fd}[2011/08/29 v0.5 font definitions for OML/FedraSerifPro-LF]
+%<oml&osf>\ProvidesFile{OMLFedraSerifPro-OsF.fd}[2011/08/29 v0.5 font definitions for OML/FedraSerifPro-OsF]
+%<oml&tlf>\ProvidesFile{OMLFedraSerifPro-TLF.fd}[2011/08/29 v0.5 font definitions for OML/FedraSerifPro-TLF]
 %<oml&tosf>\ProvidesFile{OMLFedraSerifPro-TOsF.fd}[2011/08/29 v0.5 font definitions for OML/FedraSerifPro-TOsF]
 %<u&extra>\ProvidesFile{UFedraSerifPro-Extra.fd}[2011/08/29 v0.5 font definitions for U/FedraSerifPro-Extra]
 %<u&orn>\ProvidesFile{UFedraSerifPro-Orn.fd}[2011/08/29 v0.5 font definitions for U/FedraSerifPro-Orn]
@@ -1338,7 +1341,7 @@
 %    \begin{macrocode}
 \newcommand*{\fdrsf@addconfig}[4][]{%
   \@for\@tempa:=#3\do{%
-    \expandafter%
+    \expandafter
     \gdef\csname fdrsf@config@#2@#1@\@tempa\endcsname{#4}%
   }%
 }
@@ -1360,7 +1363,7 @@
 \fdrsf@addconfig{weight/small}{b}{\fdrsf@bweight@small}
 \fdrsf@addconfig{weight/small}{ub}{Bold}
 \fdrsf@addconfig{weight/normal}{ub}{Bold}
-\fdrsf@addconfig{sub/weight}{sb,bx}{b}
+\fdrsf@addconfig{sub/series}{sb,bx}{b}
 \fdrsf@addconfig{italic}{it,scit,sscit,sw,scsw,sscsw}{Italic}
 \fdrsf@addconfig[OML]{italic}{n}{French}
 \fdrsf@addconfig[OML]{italic}{it}{Mixed}
@@ -1375,12 +1378,10 @@
 %    \end{macrocode}
 % This is the main macro to declare a single font shape.
 %    \begin{macrocode}
-\newcommand*{\DeclareFedraSerifShape}[4]{%
-  %\lowercase{\def\temp@enc{#1}}%
-  %\lowercase{\def\temp@fig{#2}}%
-  \edef\temp@subw{\fdrsf@useconfig{#1}{sub/weight}{#3}}%
-  \edef\temp@subs{\fdrsf@useconfig{#1}{sub/shape}{#4}}%
-  \ifx\temp@subw\empty\ifx\temp@subs\empty%
+\newcommand*\DeclareFedraSerifShape[4]{%
+  \edef\@tempa{\fdrsf@useconfig{#1}{sub/series}{#3}}%
+  \edef\@tempb{\fdrsf@useconfig{#1}{sub/shape}{#4}}%
+  \ifx\@tempa\empty\ifx\@tempb\empty
     \DeclareFontShape{#1}{FedraSerifPro-#2}{#3}{#4}{%
       <-7.1>s*[\fdrsf@scale]%
         FSerPro\fdrsf@variant@normal-%
@@ -1398,21 +1399,21 @@
         \fdrsf@useconfig{#1}{italic}{#4}-#2%
         \fdrsf@useconfig{#1}{shape}{#4}-#1%
     }{}%
-  \else%
+  \else
     \DeclareFontShape{#1}{FedraSerifPro-#2}{#3}{#4}{%
-      <->ssub* FedraSerifPro-#2/#3/\temp@subs%
+      <->ssub* FedraSerifPro-#2/#3/\@tempb
     }{}%
-  \fi\else%
+  \fi\else
     \DeclareFontShape{#1}{FedraSerifPro-#2}{#3}{#4}{%
-      <->ssub* FedraSerifPro-#2/\temp@subw/#4%
+      <->ssub* FedraSerifPro-#2/\@tempa/#4%
     }{}%
-  \fi%
+  \fi
 }
 \fdrsf@makeglobal{DeclareFedraSerifShape}
 %    \end{macrocode}
 % Finally, we provide commands to declare a complete family.
 %    \begin{macrocode}
-\newcommand*{\DeclareFedraSerifFamily}[4]{%
+\newcommand*\DeclareFedraSerifFamily[4]{%
   \DeclareFontFamily{#1}{FedraSerifPro-#2}{}%
   \@for\fdrsf@series:=#3\do{%
     \@for\fdrsf@shape:=#4\do{%
@@ -1421,24 +1422,32 @@
   }%
 }
 \fdrsf@makeglobal{DeclareFedraSerifFamily}
-\newcommand*{\DeclareFedraSerifLargeFamily}[2]{%
+\newcommand*\DeclareFedraSerifLargeFamily[2]{%
   \DeclareFedraSerifFamily{#1}{#2}{m,md,sb,b,bx,ub}%
     {n,it,sc,ssc,scit,sscit,sw,scsw,sscsw,sl,scsl,sscsl}%
 }
 \fdrsf@makeglobal{DeclareFedraSerifLargeFamily}
-\newcommand*{\DeclareFedraSerifSmallFamily}[2]{%
+\newcommand*\DeclareFedraSerifSmallFamily[2]{%
   \DeclareFedraSerifFamily{#1}{#2}{m,md,sb,b,bx,ub}{n,it,sl}%
 }
 \fdrsf@makeglobal{DeclareFedraSerifSmallFamily}
-\newcommand*{\DeclareFedraSerifTinyFamily}[2]{%
+\newcommand*\DeclareFedraSerifTinyFamily[2]{%
   \DeclareFedraSerifFamily{#1}{#2}{m,md,sb,b,bx,ub}{n}%
 }
 \fdrsf@makeglobal{DeclareFedraSerifTinyFamily}
-\newcommand*{\DeclareFedraSerifMathFamily}[2]{%
-  \DeclareFontFamily{#1}{FedraSerifPro-#2}{\skewchar\font=127}%
+\newcommand*\DeclareFedraSerifMathFamily[1]{%
+  \def\@tempa{#1}%
+  \def\@tempb{TOsF}%
+  \DeclareFontFamily{OML}{FedraSerifPro-#1}{\skewchar\font=255}%
   \@for\fdrsf@series:=m,md,sb,b,bx,ub\do{%
     \@for\fdrsf@shape:=n,it\do{%
-      \DeclareFedraSerifShape{#1}{#2}{\fdrsf@series}{\fdrsf@shape}%
+      \ifx\@tempa\@tempb
+        \DeclareFedraSerifShape{OML}{TOsF}{\fdrsf@series}{\fdrsf@shape}%
+      \else
+        \DeclareFontShape{OML}{FedraSerifPro-#1}{\fdrsf@series}{\fdrsf@shape}{%
+          <->ssub* FedraSerifPro-TOsF/\fdrsf@series/\fdrsf@shape
+        }{}%
+      \fi
     }%
   }%
 }
@@ -1499,7 +1508,10 @@
 %<qx&osf>\DeclareFedraSerifLargeFamily{QX}{OsF}
 %<qx&tlf>\DeclareFedraSerifLargeFamily{QX}{TLF}
 %<qx&tosf>\DeclareFedraSerifLargeFamily{QX}{TOsF}
-%<oml&tosf>\DeclareFedraSerifMathFamily{OML}{TOsF}
+%<oml&lf>\DeclareFedraSerifMathFamily{LF}
+%<oml&osf>\DeclareFedraSerifMathFamily{OsF}
+%<oml&tlf>\DeclareFedraSerifMathFamily{TLF}
+%<oml&tosf>\DeclareFedraSerifMathFamily{TOsF}
 %<u&extra>\DeclareFedraSerifSmallFamily{U}{Extra}
 %<u&orn>\DeclareFedraSerifSmallFamily{U}{Orn}
 %<u&bb>\DeclareFedraSerifFamily{U}{BB}{m}{n}
