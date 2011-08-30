@@ -28,8 +28,8 @@ file texmf.cnf. For MiKTeX, the file is called miktex.ini.
 Installation
 ------------
 
-Building the font requires the [LCDF typetools][LCDF] in version 2.90 or
-higher, as distributed with TeXLive 2011.
+Building the font metrics requires the [LCDF typetools][LCDF] in version 2.90
+or higher, as distributed with TeXLive 2011.
 
 [LCDF]: http://www.lcdf.org/type/
 
