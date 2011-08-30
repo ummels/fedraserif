@@ -2,10 +2,12 @@
 \metrics
 
 \resetglyph{tie}
-   \movert{400}
-   \moveup{400}
+   \movert{200}
+   \moveup{500}
    \glyph{slurabove}{700}
-   \moveup{-200}
+   \moveup{-300}
+   \movert{-300}
+   \resetitalic{250}
 \endresetglyph
 
 \endmetrics
