@@ -21,8 +21,8 @@ DVIPSDIR := dvips
 TFMDIR := tfm
 VFDIR := vf
 AUXDIR := misc
-TABLEDIR := tables
-outdirs := $(DVIPSDIR) $(TFMDIR) $(VFDIR) $(AUXDIR) $(TABLEDIR)
+TESTDIR := test
+outdirs := $(DVIPSDIR) $(TFMDIR) $(VFDIR) $(AUXDIR) $(TESTDIR)
 
 ifneq (,$(findstring install,$(MAKECMDGOALS)))
 TEXMFDIR := $(shell kpsewhich -expand-var='$$TEXMFHOME')
@@ -99,7 +99,7 @@ lc = $(subst A,a,$(subst B,b,$(subst C,c,$(subst D,d,$(subst E,e,$(subst F,f,$(s
 # $(call fonttable,font)
 define fonttable
 TEXFONTS=$(TFMDIR):$(VFDIR): ENCFONTS=$(DVIPSDIR): \
-$(PDFTEX) -output-dir $(TABLEDIR) -jobname $1 \
+$(PDFTEX) -output-dir $(TESTDIR) -jobname $1 \
 \\pdfmapfile{=$(mapfile)}\\input fntproof.tex \\init $1 \
 \\table\\bye
 endef
@@ -128,8 +128,8 @@ $(AUXDIR)/$1-$4$(call shapestr,$3)-$2.vpl: $1.otf enc/$(pkg)-$(call encname,$2,$
 	$(TOUCH) $$@
 
 .PHONY: $1-tables
-$1-tables: $(TABLEDIR)/$1-$4$(call shapestr,$3)-$2.pdf
-$(TABLEDIR)/$1-$4$(call shapestr,$3)-$2.pdf: $(TFMDIR)/$1-$4$(call shapestr,$3)-$2.tfm $(VFDIR)/$1-$4$(call shapestr,$3)-$2.vf $1.pfb $(mapfile) $(encfiles)
+$1-tables: $(TESTDIR)/$1-$4$(call shapestr,$3)-$2.pdf
+$(TESTDIR)/$1-$4$(call shapestr,$3)-$2.pdf: $(TFMDIR)/$1-$4$(call shapestr,$3)-$2.tfm $(VFDIR)/$1-$4$(call shapestr,$3)-$2.vf $1.pfb $(mapfile) $(encfiles)
 	$(call fonttable,$1-$4$(call shapestr,$3)-$2)
 endef
 
@@ -160,8 +160,8 @@ $(AUXDIR)/$1$2-TOsF-OML.vpl: $(AUXDIR)/$1-TOsF-OML.vpl $(AUXDIR)/$1Italic-TOsF-O
 	$(RM) $(AUXDIR)/makeoml.log
 
 .PHONY: $1-tables
-$1-tables: $(TABLEDIR)/$1$2-TOsF-OML.pdf
-$(TABLEDIR)/$1$2-TOsF-OML.pdf: $(TFMDIR)/$1$2-TOsF-OML.tfm $(VFDIR)/$1$2-TOsF-OML.vf $(TFMDIR)/$1-TOsF-OML.tfm $(VFDIR)/$1-TOsF-OML.vf $(TFMDIR)/$1Italic-TOsF-OML.tfm $(VFDIR)/$1Italic-TOsF-OML.vf $1.pfb $1Italic.pfb $(mapfile) $(encfiles)
+$1-tables: $(TESTDIR)/$1$2-TOsF-OML.pdf
+$(TESTDIR)/$1$2-TOsF-OML.pdf: $(TFMDIR)/$1$2-TOsF-OML.tfm $(VFDIR)/$1$2-TOsF-OML.vf $(TFMDIR)/$1-TOsF-OML.tfm $(VFDIR)/$1-TOsF-OML.vf $(TFMDIR)/$1Italic-TOsF-OML.tfm $(VFDIR)/$1Italic-TOsF-OML.vf $1.pfb $1Italic.pfb $(mapfile) $(encfiles)
 	$(call fonttable,$1$2-TOsF-OML)
 endef
 
