@@ -492,7 +492,7 @@
    \comment{The vector accent symbol `$\vec{x}$'.}
 \endsetslot
 
-\setslot{ITskew}
+\setslot{UPtie}
    \comment{The tie accent symbol `\t oo'.}
 \endsetslot
 
