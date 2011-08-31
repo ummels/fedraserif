@@ -1363,7 +1363,7 @@
 \fdrsf@addconfig{weight/small}{b}{\fdrsf@bweight@small}
 \fdrsf@addconfig{weight/small}{ub}{Bold}
 \fdrsf@addconfig{weight/normal}{ub}{Bold}
-\fdrsf@addconfig{sub/series}{sb,bx}{b}
+\fdrsf@addconfig{subs/series}{sb,bx}{b}
 \fdrsf@addconfig{italic}{it,scit,sscit,sw,scsw,sscsw}{Italic}
 \fdrsf@addconfig[OML]{italic}{n}{French}
 \fdrsf@addconfig[OML]{italic}{it}{Mixed}
@@ -1372,16 +1372,16 @@
 \fdrsf@addconfig{shape}{sw}{-sw}
 \fdrsf@addconfig{shape}{scsw}{-scsw}
 \fdrsf@addconfig{shape}{sscsw}{-sscsw}
-\fdrsf@addconfig{sub/shape}{sl}{it}
-\fdrsf@addconfig{sub/shape}{scsl}{scit}
-\fdrsf@addconfig{sub/shape}{sscsl}{sscit}
+\fdrsf@addconfig{subs/shape}{sl}{it}
+\fdrsf@addconfig{subs/shape}{scsl}{scit}
+\fdrsf@addconfig{subs/shape}{sscsl}{sscit}
 %    \end{macrocode}
 % This is the main macro to declare a single font shape.
 %    \begin{macrocode}
 \newcommand*\DeclareFedraSerifShape[4]{%
-  \edef\@tempa{\fdrsf@useconfig{#1}{sub/series}{#3}}%
-  \edef\@tempb{\fdrsf@useconfig{#1}{sub/shape}{#4}}%
-  \ifx\@tempa\empty\ifx\@tempb\empty
+  \edef\@@tempa{\fdrsf@useconfig{#1}{subs/series}{#3}}%
+  \edef\@@tempb{\fdrsf@useconfig{#1}{subs/shape}{#4}}%
+  \ifx\@@tempa\empty\ifx\@@tempb\empty
     \DeclareFontShape{#1}{FedraSerifPro-#2}{#3}{#4}{%
       <-7.1>s*[\fdrsf@scale]%
         FSerPro\fdrsf@variant@normal-%
@@ -1401,11 +1401,11 @@
     }{}%
   \else
     \DeclareFontShape{#1}{FedraSerifPro-#2}{#3}{#4}{%
-      <->ssub* FedraSerifPro-#2/#3/\@tempb
+      <->ssub* FedraSerifPro-#2/#3/\@@tempb
     }{}%
   \fi\else
     \DeclareFontShape{#1}{FedraSerifPro-#2}{#3}{#4}{%
-      <->ssub* FedraSerifPro-#2/\@tempa/#4%
+      <->ssub* FedraSerifPro-#2/\@@tempa/#4%
     }{}%
   \fi
 }
