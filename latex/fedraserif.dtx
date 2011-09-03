@@ -662,7 +662,7 @@
 \fdrsf@boolkey{fedrabb}{%
   \iffdrsf@fedrabb
     \renewcommand{\fdrsf@load@bb}{%
-      \let\mathbb\undefined%
+      \let\mathbb\undefined
       \DeclareMathAlphabet\mathbb{U}{\fdrsf@family-BB}{m}{n}%
       \renewcommand{\Bbbk}{\mathbb{k}}%
     }%
@@ -680,26 +680,25 @@
   \iffdrsf@footnotemarks
     \@ifundefined{deffootnotemark}{%
       \def\@makefnmark{%
-        \begingroup%
-        \normalfont%
-        \fontfamily{\fdrsf@family-Extra}\fontencoding{U}\selectfont%
+        \begingroup
+        \usefont{U}{\fdrsf@family-Extra}{m}{n}%
         \@thefnmark\kern0.1em%
-        \endgroup%
+        \endgroup
       }%
     }{%
       \deffootnotemark{%
-        \begingroup%
-        \fontfamily{\fdrsf@family-Extra}\fontencoding{U}\selectfont%
-        \thefootnotemark%
-        \endgroup%
+        \begingroup
+        \usefont{U}{\fdrsf@family-Extra}{m}{n}%
+        \thefootnotemark
+        \endgroup
       }%
     }%
     \@ifundefined{deffootnote}{}{%
       \deffootnote[1em]{1.5em}{1em}{%
-        \begingroup%
-        \fontfamily{\fdrsf@family-Extra}\fontencoding{U}\selectfont%
+        \begingroup
+        \usefont{U}{\fdrsf@family-Extra}{m}{n}%
         \thefootnotemark\kern0.1em%
-        \endgroup%
+        \endgroup
       }%
     }%
   \fi
@@ -804,10 +803,11 @@
 %    \begin{macrocode}
 \renewcommand\fdsy@text[1]{%
   \ifx\fdsy@bold\math@version
-    \text{\fontfamily{\fdrsf@mathfamily}\fontseries{b}\selectfont#1}%
+    \text{\usefont{T1}{\fdrsf@mathfamily}{b}{n}#1}%
   \else
-    \text{\fontfamily{\fdrsf@mathfamily}\fontseries{m}\selectfont#1}%
-  \fi}
+    \text{\usefont{T1}{\fdrsf@mathfamily}{m}{n}#1}%
+  \fi
+}
 %    \end{macrocode}
 %
 % Redefine the standard math versions |normal| and |bold|.
@@ -1020,7 +1020,7 @@
 %
 % \subsection{Superior and inferior figures}
 %
-% We provide commands to convert numbers to inferior and superior figures.
+% The following command converts numbers to inferior figures.
 %    \begin{macrocode}
 \newcommand*{\fdrsf@@inferior}[1]{%
   \ifx#1\end
@@ -1033,13 +1033,7 @@
 }
 \newcommand*{\fdrsf@inferior}[1]{%
   \begingroup
-  \fontencoding{U}\fontfamily{\fdrsf@family-Extra}\selectfont
   \edef\@tempa{#1}\expandafter\fdrsf@@inferior\@tempa\end
-  \endgroup
-}
-\newcommand*{\fdrsf@superior}[1]{%
-  \begingroup
-  \fontencoding{U}\fontfamily{\fdrsf@family-Extra}\selectfont#1%
   \endgroup
 }
 %    \end{macrocode}
@@ -1056,25 +1050,28 @@
 % We provide two commands for generating numerical fractions.
 %    \begin{macrocode}
 \newcommand*{\fdrsf@smallfrac}[2]{%
+  \begingroup
+  \fontencoding{U}\fontfamily{\fdrsf@family-Extra}\fontshape{n}\selectfont
   \leavevmode
   \setbox\@tempboxa\vbox{%
     \baselineskip\z@skip%
     \lineskip.25ex%
     \lineskiplimit-\maxdimen
     \ialign{\hfil##\hfil\crcr
-      \vbox to 1.25ex{\vss\hbox{\fdrsf@superior{#1}}\vskip.25ex}\crcr
+      \vbox to 1.25ex{\vss\hbox{#1}\vskip.25ex}\crcr
       \leavevmode\leaders\hrule height 0.91ex depth -0.87ex\hfill\crcr
       \vtop to 1ex{\vbox{}\hbox{\fdrsf@inferior{#2}}\vss}\crcr
       \noalign{\vskip-1.2ex}}}%
   \box\@tempboxa
+  \endgroup
  }
 \DeclareRobustCommand*{\smallfrac}[2]{%
   \fdrsf@ensuretext{\kern0.08em\fdrsf@smallfrac{#1}{#2}\kern0.1em}%
 }
 \newcommand*{\fdrsf@slantfrac}[2]{%
   \begingroup
-  \fontencoding{U}\fontfamily{\fdrsf@family-Extra}\selectfont
-  \fdrsf@superior{#1}\kern-0.05em/\kern0em\fdrsf@inferior{#2}%
+  \fontencoding{U}\fontfamily{\fdrsf@family-Extra}\fontshape{n}\selectfont
+  #1\kern-0.05em/\kern0em\fdrsf@inferior{#2}%
   \endgroup
 }
 \DeclareRobustCommand*{\slantfrac}[2]{%
