@@ -790,7 +790,7 @@
 }{}
 %    \end{macrocode}
 %
-% \subsubsection*{Math fonts}
+% \subsection{Math font setup}
 %
 % We use FdSymbol for most mathematical symbols.
 %
@@ -849,15 +849,8 @@
   \DeclareMathAccent{\breve}{\mathalpha}{operators}{"08}
   \DeclareMathAccent{\bar}{\mathalpha}{operators}{"09}
   \DeclareMathAccent{\dot}{\mathalpha}{operators}{"0A}
-%    \end{macrocode}
-% Replace some symbols provided by FdSymbol with their Fedra counterparts.
-%    \begin{macrocode}
   \let\hbar\undefined
   \DeclareMathSymbol{\hbar}{\mathord}{letters}{"AE}
-  \DeclareMathSymbol{\nabla}{\mathord}{letters}{"BB}
-%    \end{macrocode}
-% Define some more symbols, which are not provided by FdSymbol.
-%    \begin{macrocode}
   \DeclareMathSymbol{\uphbar}{\mathord}{letters}{"B6}
   \DeclareMathSymbol{\partial}{\mathord}{letters}{"40}
   \DeclareMathSymbol{\ell}{\mathord}{letters}{"60}
@@ -865,10 +858,11 @@
   \DeclareMathSymbol{\slashedzero}{\mathord}{letters}{"B8}
   \let\mho\undefined
   \DeclareMathSymbol{\mho}{\mathord}{letters}{"BA}
+  \DeclareMathSymbol{\nabla}{\mathord}{letters}{"BB}
   \DeclareRobustCommand{\lambdabar}{\middlebar\lambda}
   \DeclareRobustCommand{\lambdaslash}{\middleslash\lambda}
 %    \end{macrocode}
-% Execute the hook set up above to redefine the mathhbb alphabet.
+% Execute the hook set up above to redefine the mathbb alphabet.
 %    \begin{macrocode}
   \fdrsf@load@bb
 %    \end{macrocode}
