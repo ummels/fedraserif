@@ -152,11 +152,9 @@ define mathrule
 .PHONY: $1-math
 $1-math: $(TFMDIR)/$1$2-TOsF-OML.tfm $(VFDIR)/$1$2-TOsF-OML.vf $(AUXDIR)/$1$2-TOsF-OML.vpl
 $(AUXDIR)/$1$2-TOsF-OML.vpl: $(AUXDIR)/$1-TOsF-OML.vpl $(AUXDIR)/$1Italic-TOsF-OML.vpl $(plfiles) $(etxfiles) $(mtxfiles) fontinst/makeoml.tex fontinst/macros.tex
-	font=$$$$(echo $1 | $(SED) 's/\(.*\)-\(.*\)/\1/'); \
-	weight=$$$$(echo $1 | $(SED) 's/\(.*\)-\(.*\)/\2/'); \
-	fdweight=$$$$(echo $$$$weight | $(SED) 's/Demi/Regular/'); \
-	TEXINPUTS=fontinst:misc: $(PDFTEX) -output-dir misc \\input makeoml \
-	\\installoml{$$$$font}{$$$$weight}{$$$$fdweight}{$2}\\bye
+	weight=$$$$(echo $1 | $(SED) 's/.*-\(.*\)/\1/;s/Demi/Regular/'); \
+	TEXINPUTS=fontinst:misc: $(PDFTEX) -output-dir $(AUXDIR) \
+	\\input makeoml \\installoml{$1}{$$$$weight}{$2}\\bye
 	$(RM) $(AUXDIR)/makeoml.log
 
 .PHONY: $1-tables

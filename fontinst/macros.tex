@@ -1,19 +1,5 @@
 \input fontinst.sty
 
-\fontinstcc
-\def\metrics_given_encoding#1#2{
-   \x_cs\edef{s-afm-name}{#1-#2}
-   \if_file_exists{#1.pl}\then
-      \generalpltomtx{#1}{#1-#2}{pl}{#2}
-   \else
-      \if_file_exists{#1.vpl}\then
-         \generalpltomtx{#1}{#1-#2}{vpl}{#2}
-      \else
-         \unsetstr{afm-name}
-   \fi\fi
-}
-\normalcc
-
 % based on mathpazo's haxzplmr.mtx
 
 % \shiftglyph takes five parameters:

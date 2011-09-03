@@ -1,22 +1,21 @@
 \input macros.tex
 
-% \installoml takes four parameters:
-%   #1 the name of the family (FSerProA or FSerProB)
-%   #2 the weight
-%   #3 the corresponding weight of FdSymbol
-%   #4 the version (Mixed or French)
-\def\installoml#1#2#3#4{%
+% \installoml takes three parameters:
+%   #1 the name of the font
+%   #2 the weight for FdSymbol
+%   #3 the version (Mixed or French)
+\def\installoml#1#2#3{%
   \installfonts
-  \installfont{#1-#2#4-TOsF-OML}{%
-    FdSymbolA-#3 encoding fdsymbol-a,%
-    FdSymbolB-#3 encoding fdsymbol-b,%
-    FdSymbolC-#3 encoding fdsymbol-c,%
-    FdSymbolE-#3 encoding fdsymbol-e,%
-    #1-#2-TOsF-OML encoding fedraserif-oml-up,%
-    #1-#2Italic-TOsF-OML encoding fedraserif-oml-it,%
+  \installfont{#1#3-TOsF-OML}{%
+    FdSymbolA-#2 encoding fdsymbol-a,%
+    FdSymbolB-#2 encoding fdsymbol-b,%
+    FdSymbolC-#2 encoding fdsymbol-c,%
+    FdSymbolE-#2 encoding fdsymbol-e,%
+    #1-TOsF-OML encoding fedraserif-oml-up,%
+    #1Italic-TOsF-OML encoding fedraserif-oml-it,%
     tie,%
     missing,%
     adjustoml%
-  }{fedraserif-oml-#4}{}{}{}{}{}%
+  }{fedraserif-oml-#3}{}{}{}{}{}%
   \endinstallfonts
 }
