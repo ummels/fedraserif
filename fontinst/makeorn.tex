@@ -1,0 +1,12 @@
+\input fontinst.sty
+
+% \installorn takes one parameter:
+%   #1 the name of the font
+\def\installorn#1{%
+  \installfonts
+  \installfont{#1-Pi-U}{%
+    #1-Orn-U encoding fedraserif-orn-up,%
+    #1Italic-Orn-U encoding fedraserif-orn-it%
+  }{fedraserif-orn}{}{}{}{}{}%
+  \endinstallfonts
+}

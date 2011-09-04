@@ -73,7 +73,7 @@ mtxfiles := fontinst/adjustoml.mtx fontinst/missing.mtx fontinst fontinst/tie.mt
 styfiles := latex/$(pkg).sty latex/$(pkg)-fd.sty latex/mt-$(family).cfg
 fdfiles := $(foreach enc,$(encodings) OML,\
   $(foreach ver,$(figures),latex/$(enc)$(family)-$(ver).fd)) \
-  latex/U$(family)-Extra.fd latex/U$(family)-Orn.fd \
+  latex/U$(family)-Extra.fd latex/U$(family)-Pi.fd \
   latex/U$(family)-BB.fd
 tempfiles := latex/$(pkg).aux latex/$(pkg).log latex/$(pkg).out latex/$(pkg).toc
 
@@ -100,8 +100,7 @@ lc = $(subst A,a,$(subst B,b,$(subst C,c,$(subst D,d,$(subst E,e,$(subst F,f,$(s
 define fonttable
 TEXFONTS=$(TFMDIR):$(VFDIR): ENCFONTS=$(DVIPSDIR): \
 $(PDFTEX) -output-dir $(TESTDIR) -jobname $1 \
-\\pdfmapfile{=$(mapfile)}\\input fntproof.tex \\init $1 \
-\\table\\bye
+\\pdfmapfile{=$(mapfile)}\\input fntproof.tex \\init $1 \\table\\bye
 endef
 
 # macros for generating font-specific rules
@@ -147,10 +146,25 @@ $(foreach ver,Extra Orn BB,\
   $(eval $(call fontrule,$1,U,n,$(ver),$(flags_common))))
 endef
 
+# $(call pirule,font)
+define pirule
+.PHONY: $1-virtual
+$1-virtual: $(TFMDIR)/$1-Pi-U.tfm $(VFDIR)/$1-Pi-U.vf $(AUXDIR)/$1-Pi-U.vpl
+$(AUXDIR)/$1-Pi-U.vpl: $(AUXDIR)/$1-Orn-U.vpl $(AUXDIR)/$1Italic-Orn-U.vpl fontinst/$(pkg)-orn-up.etx fontinst/$(pkg)-orn-it.etx fontinst/$(pkg)-orn.etx fontinst/makeorn.tex
+	TEXINPUTS=fontinst:misc: $(PDFTEX) -output-dir $(AUXDIR) \
+	\\input makeorn \\installorn{$1}\\bye
+	$(RM) $(AUXDIR)/makeorn.log
+
+.PHONY: $1-tables
+$1-tables: $(TESTDIR)/$1-Pi-U.pdf
+$(TESTDIR)/$1-Pi-U.pdf: $(TFMDIR)/$1-Pi-U.tfm $(VFDIR)/$1-Pi-U.vf $(TFMDIR)/$1-Orn-U.tfm $(VFDIR)/$1-Orn-U.vf $(TFMDIR)/$1Italic-Orn-U.tfm $(VFDIR)/$1Italic-Orn-U.vf $1.pfb $1Italic.pfb $(mapfile) $(encfiles)
+	$(call fonttable,$1-Pi-U)
+endef
+
 # $(call mathrule,font,math_version)
 define mathrule
-.PHONY: $1-math
-$1-math: $(TFMDIR)/$1$2-TOsF-OML.tfm $(VFDIR)/$1$2-TOsF-OML.vf $(AUXDIR)/$1$2-TOsF-OML.vpl
+.PHONY: $1-virtual
+$1-virtual: $(TFMDIR)/$1$2-TOsF-OML.tfm $(VFDIR)/$1$2-TOsF-OML.vf $(AUXDIR)/$1$2-TOsF-OML.vpl
 $(AUXDIR)/$1$2-TOsF-OML.vpl: $(AUXDIR)/$1-TOsF-OML.vpl $(AUXDIR)/$1Italic-TOsF-OML.vpl $(plfiles) $(etxfiles) $(mtxfiles) fontinst/makeoml.tex fontinst/macros.tex
 	weight=$$$$(echo $1 | $(SED) 's/.*-\(.*\)/\1/;s/Demi/Regular/'); \
 	TEXINPUTS=fontinst:misc: $(PDFTEX) -output-dir $(AUXDIR) \
@@ -163,16 +177,10 @@ $(TESTDIR)/$1$2-TOsF-OML.pdf: $(TFMDIR)/$1$2-TOsF-OML.tfm $(VFDIR)/$1$2-TOsF-OML
 	$(call fonttable,$1$2-TOsF-OML)
 endef
 
-# $(call mathrules,font)
-define mathrules
-$(eval $(call mathrule,$1,Mixed))
-$(eval $(call mathrule,$1,French))
-endef
-
 # default rule
 
 .PHONY: all
-all: type1 dvips metrics math latex
+all: type1 dvips metrics virtual latex
 
 # rules for building Type 1 fonts
 
@@ -231,8 +239,8 @@ basemetrics: $(fonts:%=%-basemetrics)
 .PHONY: metrics
 metrics: $(fonts:%=%-metrics)
 
-.PHONY: math
-math: $(fonts_up:%=%-math)
+.PHONY: virtual
+virtual: $(fonts_up:%=%-virtual)
 
 .PHONY: tables
 tables: $(fonts:%=%-tables)
@@ -240,7 +248,9 @@ tables: $(fonts:%=%-tables)
 $(foreach font,$(fonts),$(eval $(call baserules,$(font))))
 $(foreach font,$(fonts_up),$(eval $(call fontrules,$(font),$(shapes_up))))
 $(foreach font,$(fonts_it),$(eval $(call fontrules,$(font),$(shapes_it))))
-$(foreach font,$(fonts_up),$(eval $(call mathrules,$(font))))
+$(foreach font,$(fonts_up),$(eval $(call pirule,$(font))))
+$(foreach font,$(fonts_up),$(eval $(call mathrule,$(font),Mixed)))
+$(foreach font,$(fonts_up),$(eval $(call mathrule,$(font),French)))
 
 # rules for building metrics from property lists
 

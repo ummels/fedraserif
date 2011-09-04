@@ -28,26 +28,29 @@
 /two.closecirc_fina /three.closecirc_fina /four.closecirc_fina /five.closecirc_fina
 /six.closecirc_fina /seven.closecirc_fina /eight.closecirc_fina /nine.closecirc_fina
 % 0x50
-/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
-/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/anoteleia /bullet /openbullet /bullet.alt1 /bullet.alt2 /uni25AA /uni25AB /uni25A0
+/uni25A1 /uni25B8 /uni25C2 /uni25B9 /uni25C3 /uni25B6 /uni25C0 /uni25B7
 % 0x60
-/.notdef /.notdef /.notdef /.notdef /uni2190 /uni2196 /arrowup /uni2197
-/uni2192 /uni2198 /arrowdown /uni2199 /anoteleia /bullet /openbullet /bullet.alt1
+/uni25C1 /uni25BA /uni25C4 /uni25BB /uni25C5 /uni25CF /uni25CB /uni2981
+/uni25C9 /uni25CE /uni2665 /uni2661 /uni24CA /uni267E /uni2708 /uni2708.alt
 % 0x70
-/bullet.alt2 /uni25AA /uni25AB /uni25A0 /uni25A1 /uni25B8 /uni25C2 /uni25B9
-/uni25C3 /uni25B6 /uni25C0 /uni25B7 /uni25C1 /uni25BA /uni25C4 /uni25BB
+/uni2139 /uni263A /uni2605 /uni235F /uni2192 /uni2190 /arrowup /arrowdown
+/uni2197 /uni2196 /uni2199 /uni2198 /uni261B /uni261A /uni261E /uni261C
 % 0x80
-/uni25C5 /uni25CF /uni25CB /uni2981 /uni25EF /uni25C9 /uni2665 /uni2661
-/uni24BB /uni24C2 /uni2117 /uni24C9 /uni24CA /uni24CC /uni2708.alt /uni2708
+/uni261D /uni261F /uni2610 /uni2611 /uni2713 /uni2612 /uni2709 /uni2641
+/uni270E /uni231A /uni2740 /uni213B /uni260F /.notdef /.notdef /.notdef
 % 0x90
-/uni2139 /uni263A /uni267E /uni2605 /uni235F /uni261A /uni261B /uni261C
-/uni261D /uni261E /uni261F /uni2610 /uni2611 /uni2713 /uni2612 /uni2709
+/orn.01 /orn.02 /orn.03 /orn.04 /orn.05 /orn.06 /orn.07 /orn.08
+/orn.09 /orn.10 /orn.11 /orn.12 /orn.13 /orn.14 /orn.15 /orn.16
 % 0xA0
-/orn.09 /uni260F /orn.05 /orn.07 /orn.15 /uni2641 /uni270E /uni231A
-/orn.19 /orn.06 /orn.13 /uni213B /orn.02 /orn.10 /orn.12 /orn.11
+/orn.17 /orn.18 /orn.19 /orn.20 /orn.21 /orn.22 /orn.23 /orn.24
+/orn.25 /orn.26 /orn.27 /orn.28 /orn.29 /orn.30 /orn.31 /orn.32
 % 0xB0
-/orn.08 /orn.17 /orn.16 /orn.20 /orn.03 /orn.04 /orn.14 /uni2740
-/apple /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/orn.33 /orn.34 /orn.35 /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+% 0xC0
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
 % 0xD0
 /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
 /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef

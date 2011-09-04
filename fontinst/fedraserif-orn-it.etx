@@ -1,0 +1,83 @@
+\relax
+\encoding
+
+\needsfontinstversion{1.917}
+
+\setstr{codingscheme}{FONTSPECIFIC}
+\setstr{encodingname}{FontSpecific}
+
+\setint{italicslant}{0}
+\setint{interword}{0}            % interword space
+\setint{stretchword}{0}          % interword stretch
+\setint{shrinkword}{0}           % interword shrink
+
+\ifisglyph{x}\then
+   \setint{xheight}{\height{x}}
+\Else
+   \setint{xheight}{500}
+\Fi
+
+\setint{quad}{1000}              % quad
+\setint{extraspace}{0}           % extra space after .
+
+\setfontdimen{1}{italicslant}    % italic slant
+\setfontdimen{2}{interword}      % interword space
+\setfontdimen{3}{stretchword}    % interword stretch
+\setfontdimen{4}{shrinkword}     % interword shrink
+\setfontdimen{5}{xheight}        % x-height
+\setfontdimen{6}{quad}           % quad
+\setfontdimen{7}{extraspace}     % extra space after .
+
+\nextslot{145}
+\setslot{airmail}
+\endsetslot
+
+\setslot{blackbottle}
+\endsetslot
+
+\setslot{whitebottle}
+\endsetslot
+
+\setslot{document}
+\endsetslot
+
+\setslot{dog}
+\endsetslot
+
+\setslot{house}
+\endsetslot
+
+\setslot{old}
+\endsetslot
+
+\setslot{postcard}
+\endsetslot
+
+\setslot{priority}
+\endsetslot
+
+\setslot{newalt}
+\endsetslot
+
+\setslot{new}
+\endsetslot
+
+\setslot{floppy}
+\endsetslot
+
+\setslot{glass}
+\endsetslot
+
+\setslot{factory}
+\endsetslot
+
+\setslot{shopping}
+\endsetslot
+
+\setslot{speechbubble}
+\endsetslot
+
+\setslot{wave}
+\endsetslot
+
+\endencoding

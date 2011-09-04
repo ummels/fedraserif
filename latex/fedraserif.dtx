@@ -53,7 +53,7 @@
 %<oml&tlf>\ProvidesFile{OMLFedraSerifPro-TLF.fd}[2011/08/29 v0.5 font definitions for OML/FedraSerifPro-TLF]
 %<oml&tosf>\ProvidesFile{OMLFedraSerifPro-TOsF.fd}[2011/08/29 v0.5 font definitions for OML/FedraSerifPro-TOsF]
 %<u&extra>\ProvidesFile{UFedraSerifPro-Extra.fd}[2011/08/29 v0.5 font definitions for U/FedraSerifPro-Extra]
-%<u&orn>\ProvidesFile{UFedraSerifPro-Orn.fd}[2011/08/29 v0.5 font definitions for U/FedraSerifPro-Orn]
+%<u&orn>\ProvidesFile{UFedraSerifPro-Pi.fd}[2011/08/29 v0.5 font definitions for U/FedraSerifPro-Pi]
 %<u&bb>\ProvidesFile{UFedraSerifPro-BB.fd}[2011/08/29 v0.5 font definitions for U/FedraSerifPro-BB]
 %<*driver>
 \documentclass{ltxdoc}
@@ -333,6 +333,59 @@
 % of \textsuperscript{1,a}. However, this only works for footnote marks that
 % consist of figures and the lowercase letters a--z.
 %
+% \subsection{Dingbats}
+%
+% Assuming that the \pkg{pifont} package is loaded, you can access Fedra
+% Serif's ornamental characters via:
+%
+% \smallskip
+% \begin{tabular}{@{}l}
+%   |\Pisymbol{FedraSerifPro-Pi}|\marg{number}
+% \end{tabular}
+%
+% \medskip\noindent
+% The available glyphs are listed in Table~\ref{table:dingbats}.
+% \begin{table}
+% \figureversion{tabular}\centering
+% \newcommand*\showding[1]{#1 & \Pisymbol{FedraSerifPro-Pi}{#1}}\relax
+% \begin{tabular}{@{}*{4}{r@{\quad}l}@{}}
+% \toprule
+%  number & glyph & number & glyph & number & glyph & number & glyph\\
+% \midrule
+% \showding{100} & \showding{128} & \showding{156} & \showding{184}\\
+% \showding{101} & \showding{129} & \showding{157} & \showding{185}\\
+% \showding{102} & \showding{130} & \showding{158} & \showding{186}\\
+% \showding{103} & \showding{131} & \showding{159} & \showding{187}\\
+% \showding{104} & \showding{132} & \showding{160} & \showding{188}\\
+% \showding{105} & \showding{133} & \showding{161} & \showding{189}\\
+% \showding{106} & \showding{134} & \showding{162} & \showding{190}\\
+% \showding{107} & \showding{135} & \showding{163} & \showding{191}\\
+% \showding{108} & \showding{136} & \showding{164} & \showding{192}\\
+% \showding{109} & \showding{137} & \showding{165} & \showding{193}\\
+% \showding{110} & \showding{138} & \showding{166} & \showding{194}\\
+% \showding{111} & \showding{139} & \showding{167} & \showding{195}\\
+% \showding{112} & \showding{140} & \showding{168} & \showding{196}\\
+% \showding{113} & \showding{141} & \showding{169} & \showding{197}\\
+% \showding{114} & \showding{142} & \showding{170} & \showding{198}\\
+% \showding{115} & \showding{143} & \showding{171} & \showding{199}\\
+% \showding{116} & \showding{144} & \showding{172} & \showding{200}\\
+% \showding{117} & \showding{145} & \showding{173} & \showding{201}\\
+% \showding{118} & \showding{146} & \showding{174} & \showding{202}\\
+% \showding{119} & \showding{147} & \showding{175} & \showding{203}\\
+% \showding{120} & \showding{148} & \showding{176} & \showding{204}\\
+% \showding{121} & \showding{149} & \showding{177} & \showding{205}\\
+% \showding{122} & \showding{150} & \showding{178} & \showding{206}\\
+% \showding{123} & \showding{151} & \showding{179} & \showding{207}\\
+% \showding{124} & \showding{152} & \showding{180} & \showding{208}\\
+% \showding{125} & \showding{153} & \showding{181} & \showding{209}\\
+% \showding{126} & \showding{154} & \showding{182} & \showding{210}\\
+% \showding{127} & \showding{155} & \showding{183} & \\
+% \bottomrule
+% \end{tabular}
+% \caption{\label{table:dingbats}Dingbats available with
+%  the \pkg{fedraserif} package}
+% \end{table}
+%
 % \subsection{Additional notes}
 %
 % Fedra Serif Pro implements a large subset of the glyphs made available
@@ -361,56 +414,6 @@
 %   \sym\textkip & \sym\texttugrik & \sym\texthryvnia
 % \end{tabular}
 % \endgroup
-%
-%\iffalse
-% \medskip\noindent
-% Assuming the \pkg{pifont} package is loaded, you can access Fedra's
-% symbol and ornament characters via:
-% \begin{quote}
-%   |\Pisymbol{FedraSerifPro-Orn}|\marg{number}
-% \end{quote}
-% The available glyphs are listed in Table~\ref{table:ornaments}.
-%
-% \begin{table}
-% \figureversion{tabular}\centering
-% \newcommand*\orn[1]{#1 & \Pisymbol{FedraSerifPro-Orn}{#1}}\relax
-% \begin{tabular}{@{}*{4}{r@{\quad}l}@{}}
-% \toprule
-%  Number & Glyph & Number & Glyph & Number & Glyph & Number & Glyph\\
-% \midrule
-% \orn{100} & \orn{127} & \orn{154} & \orn{181}\\
-% \orn{101} & \orn{128} & \orn{155} & \orn{182}\\
-% \orn{102} & \orn{129} & \orn{156} & \orn{183}\\
-% \orn{103} & \orn{130} & \orn{157} & \orn{184}\\
-% \orn{104} & \orn{131} & \orn{158} & \orn{185}\\
-% \orn{105} & \orn{132} & \orn{159} & \orn{186}\\
-% \orn{106} & \orn{133} & \orn{160} & \orn{187}\\
-% \orn{107} & \orn{134} & \orn{161} & \orn{188}\\
-% \orn{108} & \orn{135} & \orn{162} & \orn{189}\\
-% \orn{109} & \orn{136} & \orn{163} & \orn{190}\\
-% \orn{110} & \orn{137} & \orn{164} & \orn{191}\\
-% \orn{111} & \orn{138} & \orn{165} & \orn{192}\\
-% \orn{112} & \orn{139} & \orn{166} & \orn{193}\\
-% \orn{113} & \orn{140} & \orn{167} & \orn{194}\\
-% \orn{114} & \orn{141} & \orn{168} & \orn{195}\\
-% \orn{115} & \orn{142} & \orn{169} & \orn{196}\\
-% \orn{116} & \orn{143} & \orn{170} & \orn{197}\\
-% \orn{117} & \orn{144} & \orn{171} & \orn{198}\\
-% \orn{118} & \orn{145} & \orn{172} & \orn{199}\\
-% \orn{119} & \orn{146} & \orn{173} & \orn{200}\\
-% \orn{120} & \orn{147} & \orn{174} & \orn{201}\\
-% \orn{121} & \orn{148} & \orn{175} & \orn{202}\\
-% \orn{122} & \orn{149} & \orn{176} & \orn{203}\\
-% \orn{123} & \orn{150} & \orn{177} & \orn{204}\\
-% \orn{124} & \orn{151} & \orn{178} & \orn{205}\\
-% \orn{125} & \orn{152} & \orn{179} & \orn{206}\\
-% \orn{126} & \orn{153} & \orn{180} & \orn{207}\\
-% \bottomrule
-% \end{tabular}
-% \caption{\label{table:ornaments} Ornamental symbols available with
-%  the \pkg{fedraserif} package}
-% \end{table}
-%\fi
 %
 % \section{Math support}\label{sec:math}
 %
@@ -506,17 +509,18 @@
 %
 % Parenthesised combinations are provided via substitutions.
 %
-% \nobreak\smallskip
+% \nopagebreak\smallskip
 % \begin{center}
 % \makeatletter
 % \let\>=\\%
-% \begin{tabular}{@{}p{5em}p{11em}p{5em}p{11.5em}@{}}
+% \begin{tabular}{@{}p{5em}p{11em}p{6.5em}p{11.5em}@{}}
 %   \toprule
 %   Encoding & Family & Series & Shape \\
 %   \midrule
 %   \raggedright \acro{OT1}, \acro{T1}, \acro{TS1}, \acro{LY1}, \acro{QX} &
-%   FedraSerifPro-OsF, FedraSerifPro-LF, FedraSerifPro-TOsF, FedraSerifPro-TLF &
-%   m, md,\> b (sb, bx),\> ub &
+%   FedraSerifPro-LF, FedraSerifPro-OsF, FedraSerifPro-TLF,
+%   FedraSerifPro-TOsF &
+%   m, md,\> b (sb, bx), ub &
 %   n, it (sl), sw,\>
 %   sc, scit (scsl), scsw,\>
 %   ssc, sscit (sscsl), sscsw \\
@@ -524,16 +528,24 @@
 %   \midrule
 %   \addlinespace
 %   \acro{OML} &
-%   FedraSerifPro-TOsF &
-%   m, md,\> b (sb, bx),\> ub &
+%   FedraSerifPro-TOsF
+%   (FedraSerifPro-LF, FedraSerifPro-OsF, FedraSerifPro-TLF) &
+%   m, md,\> b (sb, bx), ub &
 %   n, it \\
 %   \addlinespace
 %   \midrule
 %   \addlinespace
 %   \acro{U} &
-%   FedraSerifPro-Extra, FedraSerifPro-Orn &
-%   m, md,\> b (sb, bx),\> ub &
+%   FedraSerifPro-Extra &
+%   m, md,\> b (sb, bx), ub &
 %   n, it (sl) \\
+%   \addlinespace
+%   \midrule
+%   \addlinespace
+%   \acro{U} &
+%   FedraSerifPro-Pi &
+%   m, md,\> b (sb, bx), ub &
+%   n \\
 %   \addlinespace
 %   \midrule
 %   \addlinespace
@@ -982,7 +994,7 @@
   }
   \DeclareRobustCommand*{\openbullet}[1]{%
     \begingroup
-    \fontencoding{U}\fontfamily{\fdrsf@family-Orn}\selectfont
+    \usefont{U}{\fdrsf@family-Pi}{m}{n}%
     \edef\@tempa{#1}\expandafter\fdrsf@openbullet\@tempa\end
     \endgroup
   }
@@ -1011,7 +1023,7 @@
   }
   \DeclareRobustCommand*{\closedbullet}[1]{%
     \begingroup
-    \fontencoding{U}\fontfamily{\fdrsf@family-Orn}\selectfont
+    \usefont{U}{\fdrsf@family-Pi}{m}{n}%
     \edef\@tempa{#1}\expandafter\fdrsf@closedbullet\@tempa\end
     \endgroup
   }
@@ -1504,7 +1516,7 @@
 %<oml&tlf>\DeclareFedraSerifMathFamily{TLF}
 %<oml&tosf>\DeclareFedraSerifMathFamily{TOsF}
 %<u&extra>\DeclareFedraSerifSmallFamily{U}{Extra}
-%<u&orn>\DeclareFedraSerifSmallFamily{U}{Orn}
+%<u&orn>\DeclareFedraSerifTinyFamily{U}{Pi}
 %<u&bb>\DeclareFedraSerifFamily{U}{BB}{m}{n}
 %</fd>
 %    \end{macrocode}
