@@ -2,7 +2,7 @@
 % CODINGSCHEME EXTENDED TEX FONT ENCODING - LATIN
 %
 % LIGKERN f {L} k ; f {L} b ; f {L} h ;
-% LIGKERN ff {L} b ; ff {L} h ; ff {L} k ;
+% LIGKERN ff {L} k ; ff {L} b ; ff {L} h ;
 % LIGKERN less less =: guillemotleft ;
 % LIGKERN greater greater =: guillemotright ;
 % LIGKERN || = 32 ;
