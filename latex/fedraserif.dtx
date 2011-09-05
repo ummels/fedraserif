@@ -757,6 +757,7 @@
     \UndeclareTextCommand{\textsection}{QX}
     \UndeclareTextCommand{\textregistered}{QX}
     \UndeclareTextCommand{\copyright}{QX}
+    \let\copyright\textcopyright
     \UndeclareTextCommand{\textdiv}{QX}
     \UndeclareTextCommand{\textminus}{QX}
     \UndeclareTextCommand{\texttimes}{QX}
@@ -1178,6 +1179,25 @@
 %
 %    \begin{macrocode}
 \SetProtrusion
+   [ name     = FedraSerifPro-QX,
+     load     = FedraSerifPro-n   ]
+   { encoding = {QX},
+     family   = {FedraSerifPro-OsF,FedraSerifPro-LF,FedraSerifPro-TOsF,FedraSerifPro-TLF},
+     shape    = {n,sc,ssc} }
+   {
+     _ = {100,100},
+     \textbackslash    = {100,200},   \textellipsis      = {100,200},
+     \textperiodcentered = {500,700}, \quotedblbase      = {400,400},
+     \textquotedbl     = {400,400},   \textquotesingle   = {400,400},
+     \guillemotleft    = {200,200},   \guillemotright    = {200,200},
+     \textexclamdown   = {100,   },   \textquestiondown  = {100,   },
+     \textbraceleft    = {400,200},   \textbraceright    = {200,400},
+     \textless         = {200,100},   \textgreater       = {100,200}
+   }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\SetProtrusion
   [ name     = FedraSerifPro-it ]
   {  }
   {
@@ -1222,6 +1242,24 @@
      \textbackslash    = {100,200},
      \quotesinglbase   = {300,700},   \quotedblbase      = {400,500},
      \guilsinglleft    = {400,400},   \guilsinglright    = {300,500},
+     \guillemotleft    = {300,300},   \guillemotright    = {300,300},
+     \textexclamdown   = {100,   },   \textquestiondown  = {200,   },
+     \textbraceleft    = {200,100},   \textbraceright    = {200,200},
+   }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\SetProtrusion
+   [ name     = FedraSerifPro-QX-it,
+     load     = FedraSerifPro-it     ]
+   { encoding = {QX},
+     family   = {FedraSerifPro-OsF,FedraSerifPro-LF,FedraSerifPro-TOsF,FedraSerifPro-TLF},
+     shape    = {it,sl,sw,scit,scsl,scsw} }
+   {
+     _ = {  ,100},
+     \textbackslash    = {100,200},   \textellipsis      = {100,200},
+     \textperiodcentered = {500,700}, \quotedblbase      = {400,500},
+     \textquotedbl     = {400,400},   \textquotesingle   = {400,400},
      \guillemotleft    = {300,300},   \guillemotright    = {300,300},
      \textexclamdown   = {100,   },   \textquestiondown  = {200,   },
      \textbraceleft    = {200,100},   \textbraceright    = {200,200},
