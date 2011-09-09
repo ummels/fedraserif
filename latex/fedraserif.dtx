@@ -673,14 +673,13 @@
 %
 \fdrsf@boolkey{fedrabb}{%
   \iffdrsf@fedrabb
-    \renewcommand{\fdrsf@load@bb}{%
-      \let\mathbb\undefined
+    \renewcommand\fdrsf@load@bb{%
       \DeclareMathAlphabet\mathbb{U}{\fdrsf@family-BB}{m}{n}%
-      \renewcommand{\Bbbk}{\mathbb{k}}%
+      \renewcommand\Bbbk{\mathbb{k}}%
     }%
   \fi
 }
-\newcommand{\fdrsf@load@bb}{}
+\newcommand\fdrsf@load@bb{}
 %    \end{macrocode}
 %
 % This option allows to use superiour figures for footnote marks.
