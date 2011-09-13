@@ -27,7 +27,7 @@
 %<style>\NeedsTeXFormat{LaTeX2e}
 %<style>\ProvidesPackage{fedraserif}[2011/08/29 v0.5 LaTeX support package for Fedra Serif Pro]
 %<mtcfg>\ProvidesFile{mt-FedraSerifPro.cfg}[2011/08/29 v0.5 microtype config file for Fedra Serif Pro]
-%<fontdef>\ProvidesFile{fedraserif-fd.sty}[2011/08/29 v0.5 font definition macros for Fedra]
+%<fontdef>\ProvidesFile{fedraserif-fd.sty}[2011/08/29 v0.5 font definition macros for Fedra Serif Pro]
 %<ot1&lf>\ProvidesFile{OT1FedraSerifPro-LF.fd}[2011/08/29 v0.5 font definitions for OT1/FedraSerifPro-LF]
 %<ot1&osf>\ProvidesFile{OT1FedraSerifPro-OsF.fd}[2011/08/29 v0.5 font definitions for OT1/FedraSerifPro-OsF]
 %<ot1&tlf>\ProvidesFile{OT1FedraSerifPro-TLF.fd}[2011/08/29 v0.5 font definitions for OT1/FedraSerifPro-TLF]
@@ -114,7 +114,7 @@
 %
 % \GetFileInfo{fedraserif.dtx}
 %
-% \title{The fedraserif package:\\ \LaTeX\ support for Fedra Serif Pro}
+% \title{\LaTeX\ support for Fedra Serif Pro}
 % \author{Michael Ummels}
 % \date{\fileversion\ -- \filedate}
 % \maketitle
@@ -497,16 +497,11 @@
 % used instead, which has the advantage that all uppercase roman
 % letters are available.
 %
-% \DeclareRobustCommand\makeappendix{%
-%
-% \appendix
 % \section{\acro{NFSS} classification}
 %
-% Parenthesised combinations are provided via substitutions.
-%
-% \nopagebreak\smallskip
-% \begin{center}
-% \makeatletter
+% Table~\ref{tab:nfss} lists all fonts made available with
+% this package. Parenthesised combinations are provided via substitutions.
+% \begin{table}
 % \let\>=\\%
 % \begin{tabular}{@{}p{5em}p{11em}p{6.5em}p{11.5em}@{}}
 %   \toprule
@@ -547,11 +542,11 @@
 %   \acro{U} &
 %   FedraSerifPro-BB & m & n \\
 %   \bottomrule
-% \end{tabular}\par
-% \makeatother
-% \end{center}}
+% \end{tabular}
+% \caption{\label{tab:nfss}NFSS classification}
+% \end{table}
 %
-% \StopEventually{\makeappendix}
+% \StopEventually{}
 %
 % \section{Implementation}
 %
@@ -1296,7 +1291,7 @@
 %    \end{macrocode}
 % The macro to make commands global is taken from the \pkg{otfontdef} package.
 %    \begin{macrocode}
-\newcommand*\fdrsf@makeglobal[1]{
+\newcommand*\fdrsf@makeglobal[1]{%
   \global\expandafter\let\csname #1\expandafter\endcsname
   \csname #1\endcsname
 }
