@@ -63,7 +63,9 @@
 \usepackage[variant=B,footnotemarks,fedrabb]{fedraserif}
 \usepackage[scaled=1.05]{inconsolata}
 \usepackage[british]{babel}
-\usepackage{booktabs,pifont}
+\usepackage{booktabs}
+\usepackage{pifont}
+\usepackage{floatrow}
 \usepackage[unicode,bookmarks]{hyperref}
 \hypersetup{
   bookmarksnumbered,
@@ -84,6 +86,8 @@
 
 \renewcommand{\theCodelineNo}%
   {\normalfont\figureversion{tab}\scriptsize\arabic{CodelineNo}}
+
+\floatsetup[table]{capposition=top}
 
 \begin{document}
 \DocInput{fedraserif.dtx}
@@ -131,8 +135,10 @@
 % Typotheque\footnote{\url{http://www.typotheque.com/fonts/}}.
 % You can load this package by adding
 % \begin{quote}
-%   |\usepackage|\oarg{options}|{fedraserif}|
+% |\usepackage|\oarg{options}|{fedraserif}|
 % \end{quote}
+%
+% \noindent
 % to the preamble of your document. If no options are specified,
 % this will change both the text font and the math font to Fedra Serif~A;
 % use the option \option{variant=B} to select Fedra Serif~B.
@@ -166,16 +172,15 @@
 %
 % All package options are set using a \meta{key}|=|\meta{value} syntax.
 % Boolean options accept |true| and |false| as values, and setting a Boolean
-% key without a value is equivalent to setting it to |true|. The following
-% table lists all option keys of the \pkg{fedraserif} package with their
-% possible values; values that are marked with an asterisk correspond to
-% the default behaviour of the package.
-%
-% \smallskip
-% \begin{center}
+% key without a value is equivalent to setting it to |true|.
+% Table~\ref{tab:options} lists all option keys of the \pkg{fedraserif}
+% package with their possible values; values that are marked with an asterisk
+% correspond to the default behaviour of the package.
+% \begin{table}
+% \centering
 % \begin{tabular}{@{}lll@{}}
 % \toprule
-% key & values & see Section \\
+% Key & Values & Section \\
 % \midrule
 % |boldweight| & |Medium|*, |Bold|, |auto| & \ref{sec:weights} \\
 % |fedrabb| & |true|, |false|* & \ref{sec:mathbb} \\
@@ -188,7 +193,8 @@
 % |variant| & |A|*, |B| & \ref{sec:variants} \\
 % \bottomrule
 % \end{tabular}
-% \end{center}
+% \caption{\label{tab:options}Summary of options}
+% \end{table}
 %
 % \section{Font selection}\label{sec:fonts}
 %
@@ -237,15 +243,16 @@
 % In addition to the normal small caps shapes |sc| and |scit|, there are
 % letterspaced versions |ssc| and |sscit|. Moreover, italic shapes with
 % \emph{swash capitals} are accessible via the |sw|, |scsw| and |sscsw|
-% shapes.
-%
-% \smallskip
-% \newcommand{\pangram}{A Quick Brown Fox Jumps Over The Lazy Dog.}
-% \begin{center}
+% shapes (see Table~\ref{tab:shapes}).
+% \begin{table}
+% \centering
+% \newcommand\pangram{A Quick Brown Fox Jumps Over The Lazy Dog.}
 % \begin{tabular}{@{}ll@{}}
 % \toprule
-% shape & example \\
+% Shape & Example \\
 % \midrule
+% |n| & \pangram \\
+% |it| & \textit{\pangram} \\
 % |sc| & \textsc{\pangram} \\
 % |ssc| & \textssc{\pangram} \\
 % |scit| & \textit{\textsc{\pangram}} \\
@@ -255,9 +262,9 @@
 % |sscsw| & \textssc{\textsw{\pangram}} \\
 % \bottomrule
 % \end{tabular}
-% \end{center}
+% \caption{\label{tab:shapes}Summary of font shapes}
+% \end{table}
 %
-% \smallskip
 % If the \pkg{fontaxes} package is available, you can use the commands
 % |\sscshape| and |\textssc|\marg{text} to switch to letterspaced small caps
 % and the commands |\swshape| and |\textsw|\marg{text} to switch to swash
@@ -265,27 +272,27 @@
 %
 % \subsection{Figures}\label{sec:figures}
 %
-% Fedra Serif Pro offers four main figure versions. On the one hand, one
+% Fedra Serif Pro offers four main figure versions (see \ref{tab:figures}).
+% On the one hand, one
 % can choose between \emph{lining figures} and \emph{text figures}, also known
 % as \emph{old-style figures}.
 % On the other hand, one can choose between
 % \emph{proportional figures} and \emph{tabular figures}.
-%
-% \smallskip
-% \begin{center}
+% \begin{table}
+% \centering
 % \begin{tabular}{@{}lll@{}}
 % \toprule
-% & lining figures & text figures \\
+% & Lining figures & Text figures \\
 % \midrule
-% proportional & \figureversion{lining,proportional}0123456789
+% Proportional & \figureversion{lining,proportional}0123456789
 %  & \figureversion{text,proportional}0123456789 \\
-% tabular & \figureversion{lining,tabular}0123456789
+% Tabular & \figureversion{lining,tabular}0123456789
 %  & \figureversion{text,tabular}0123456789 \\
 % \bottomrule
 % \end{tabular}
-% \end{center}
+% \caption{\label{tab:figures}Summary of figure versions}
+% \end{table}
 %
-% \smallskip
 % By default, proportional lining figures are used throughout the document.
 % If you want to use text figures instead, use the option |figures=text| or
 % |figures=osf|.
@@ -301,27 +308,23 @@
 %
 % Small and slanted fractions are fractions with a height matching the font's
 % body size; they can be accessed via:
-%
-% \medskip
+% \begin{quote}
 % \begin{tabular}{@{}ll}
 %   |\smallfrac|\marg{numerator}\marg{denominator}& \smallfrac{3}{17} \\
 %   |\slantfrac|\marg{numerator}\marg{denominator}& \slantfrac{3}{17}
 % \end{tabular}
-%
-% \medskip\noindent
+% \end{quote}
 % Note that only figures can be used for \meta{numerator} and
 % \meta{denominator}.
 %
 % Finally, Fedra Serif Pro offers so-called bullet figures, which are
 % enclosed by a circle; they can be accessed via:
-%
-% \medskip
+% \begin{quote}
 % \begin{tabular}{@{}ll@{ }l}
 %   |\openbullet|\marg{number} & \openbullet{1} & \openbullet{234} \\
 %   |\closedbullet|\marg{number} & \closedbullet{5} & \closedbullet{678}
 % \end{tabular}
-%
-% \medskip\noindent
+% \end{quote}
 % As for small and slanted fractions, only figures can be used for
 % \meta{number}.
 %
@@ -337,13 +340,9 @@
 %
 % Assuming that the \pkg{pifont} package is loaded, you can access Fedra
 % Serif's ornamental characters via:
-%
-% \smallskip
-% \begin{tabular}{@{}l}
+% \begin{quote}
 %   |\Pisymbol{FedraSerifPro-Pi}|\marg{number}
-% \end{tabular}
-%
-% \medskip\noindent
+% \end{quote}
 % The available glyphs are listed in Table~\ref{table:dingbats}.
 % \begin{table}
 % \figureversion{tabular}\centering
@@ -390,8 +389,7 @@
 %
 % Fedra Serif Pro implements a large subset of the glyphs made available
 % by the \acro{TS1} encoding. However, the following glyphs are missing:
-%
-% \smallskip
+% \begin{quote}
 % \begin{tabular}{@{}lll}
 %   |\textdblhyphen| & |\textdivorced| & |\textdied| \\
 %   |\textleaf| & |\textmarried| & |\textmusicalnote| \\
@@ -400,20 +398,17 @@
 %   |\textbaht| & |\textdiscount| & |\textlquill| \\
 %   |\textrquill| & |\textcopyleft| & |\textreferencemark|
 % \end{tabular}
-%
-% \medskip\noindent
+% \end{quote}
 % In addition to the monetary symbols defined by the \acro{TS1} encoding,
-% the following commands are available for typesetting currencies:
-%
-% \smallskip
-% \begingroup
-% \newcommand*\sym[1]{\ttfamily\string#1 & #1}%
+% the following currency symbols are available:
+% \begin{quote}
+% \newcommand*\sym[1]{#1 & \ttfamily\string#1}%
 % \begin{tabular}{@{}*2{ll@{\qquad}}ll@{}}
 %   \sym\textcruzeiro & \sym\textfranc & \sym\textmill \\
 %   \sym\textpeseta & \sym\textrupee & \sym\textsheqel \\
 %   \sym\textkip & \sym\texttugrik & \sym\texthryvnia
 % \end{tabular}
-% \endgroup
+% \end{quote}
 %
 % \section{Math support}\label{sec:math}
 %
@@ -423,11 +418,6 @@
 % effect if this option is active.
 %
 % \subsection{Letters}\label{sec:mathletters}
-%
-% The \pkg{fedraserif} package provides all letters available in
-% math mode with the Computer Modern fonts, with the exception of
-% |\varpi| and |\varrho|, which have the same shape as |\pi| and |\rho|,
-% respectively.
 %
 % In \TeX\ and \LaTeX, uppercase Greek letters are traditionally set
 % upright in math mode, even when they are used as variables.
@@ -439,8 +429,11 @@
 % italic greek letters using the commands |\upalpha|, |\italpha|,
 % |\upGamma|, |\itGamma|, etc. Additionally, the |math-style| key
 % can take the value |french|, in which case all Greek and
-% uppercase roman letters are typeset upright.
-% \begin{center}
+% uppercase roman letters are typeset upright. For an illustration
+% of the differences between the three values for |math-style|,
+% see Table~\ref{tab:math-styles}.
+% \begin{table}
+% \centering
 % \begin{tabular}{@{}ll@{}}
 % \toprule
 % |math-style| & example \\
@@ -453,7 +446,34 @@
 %   \upalpha,\upbeta,\ldots,\upGamma,\upDelta,\ldots$ \\
 % \bottomrule
 % \end{tabular}
-% \end{center}
+% \caption{\label{tab:math-styles}The different styles for letters
+% in math mode}
+% \end{table}
+%
+% The \pkg{fedraserif} package provides all letters available in
+% math mode with the Computer Modern fonts, with the exception of
+% |\varpi| and |\varrho|, which have the same shape as |\pi| and |\rho|,
+% respectively. Additionally, the following letters and letter-like
+% symbols are can be typeset:
+% \begin{quote}
+% \newcommand*\sym[1]{$#1$ & \ttfamily\string#1}%
+% \begin{tabular}{@{}*2{ll@{\qquad}}ll@{}}
+%   \sym\varbeta\footnotemark & \sym\varkappa\footnotemark[\arabic{footnote}]
+% & \sym\digamma\footnotemark[\arabic{footnote}] \\
+%   \sym\backepsilon\footnotemark[\arabic{footnote}]
+% & \sym\varbackepsilon\footnotemark[\arabic{footnote}] & \sym\hslash \\
+%   \sym\lambdabar & \sym\lambdaslash &
+%   \sym\eth\footnotemark[\arabic{footnote}] \\
+%   \sym\slashedzero & \sym\mho & \sym\upell \\
+%   \sym\uphbar & \sym\beth & \sym\gimel \\
+%   \sym\daleth
+% \end{tabular}
+% \footnotetext{The shape of the symbol is different if the option
+% \option{math-style=french} is selected. Upright and italic shapes are
+% also available
+% directly via the commands \texttt{\string\up}\meta{cmd} and
+% \texttt{\string\it}\meta{cmd}, respectively.}
+% \end{quote}
 %
 % \subsection{Digits}\label{sec:mathdigits}
 %
@@ -468,7 +488,7 @@
 %
 % \subsection{Blackboard characters}\label{sec:mathbb}
 %
-% \newcommand{\fedrabb}[1]{{\usefont{U}{FedraSerifPro-BB}{m}{n}#1}}
+% \newcommand*\fedrabb[1]{{\usefont{U}{FedraSerifPro-BB}{m}{n}#1}}
 % Fedra Serif Pro has a limited set of blackboard characters, namely
 % \fedrabb{N}, \fedrabb{Z}, \fedrabb{Q}, \fedrabb{R}, \fedrabb{C},
 % \fedrabb{k} and \fedrabb{l}. To use these characters for the
@@ -476,31 +496,6 @@
 % If this option is not selected, the AMS blackboard bold font is
 % used instead, which has the advantage that all uppercase roman
 % letters are available.
-%
-% \subsection{Symbols}\label{sec:symbols}
-%
-% The \pkg{fedraserif} package provides all
-% symbols defined by the \pkg{fdsymbol} package. Additionally, the following
-% symbols are available in math mode:
-%
-% \smallskip
-% \begingroup
-% \newcommand*\sym[1]{$#1$ & \ttfamily\string#1}%
-% \begin{tabular}{@{}*2{ll@{\qquad}}ll@{}}
-%   \sym\varbeta\footnotemark & \sym\varkappa\footnotemark[\arabic{footnote}]
-% & \sym\digamma\footnotemark[\arabic{footnote}] \\
-%   \sym\backepsilon\footnotemark[\arabic{footnote}]
-% & \sym\varbackepsilon\footnotemark[\arabic{footnote}] & \sym\hbar \\
-%   \sym\hslash & \sym\lambdabar & \sym\lambdaslash \\
-%   \sym\eth\footnotemark[\arabic{footnote}] & \sym\slashedzero & \sym\nabla \\
-%   \sym\mho & \sym\upell & \sym\uphbar
-% \end{tabular}
-% \endgroup
-% \footnotetext{The shape of the symbol is different if the option
-% \option{math-style=french} is selected. Upright and italic shapes are
-% also available
-% directly via the commands \texttt{\string\up}\meta{cmd} and
-% \texttt{\string\it}\meta{cmd}.}
 %
 % \DeclareRobustCommand\makeappendix{%
 %
@@ -558,7 +553,7 @@
 %
 % \StopEventually{\makeappendix}
 %
-% \section{The main style file}
+% \section{Implementation}
 %
 % \subsection{Options}
 %
@@ -791,8 +786,8 @@
 %    \end{macrocode}
 %
 % The font selection commands such as |\figureversion|, |\textsw|, and
-% |\textssc| are provided by the package \pkg{fontaxes} (bundled with
-% \pkg{MinionPro}).
+% |\textssc| are provided by the \pkg{fontaxes} package (bundled with
+% the \pkg{MinionPro} package).
 %
 %    \begin{macrocode}
 \IfFileExists{fontaxes.sty}{
@@ -1049,7 +1044,7 @@
   \endgroup
 }
 %    \end{macrocode}
-% |\ensuretext| switches to text mode, if necessary.
+% |\fdrsf@ensuretext| switches to text mode, if necessary.
 %    \begin{macrocode}
 \newcommand*{\fdrsf@ensuretext}[1]{%
   \ifmmode
@@ -1117,7 +1112,7 @@
 %</style>
 %    \end{macrocode}
 %
-% \section{Support for character protrusion}
+% \section{Microtype configuration file}
 %
 % The \pkg{microtype} configuration. All four families use the same
 % file (cf.\ section~\ref{sec:fontdef}).
@@ -1375,7 +1370,7 @@
 \fdrsf@makeglobal{fdrsf@scale}
 %    \end{macrocode}
 %
-% \subsection{Font Configuration}
+% \subsection{Font configuration}
 %
 % We define commands to write to and read from the configuration database.
 %    \begin{macrocode}
