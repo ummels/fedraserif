@@ -148,9 +148,9 @@ endef
 
 # $(call pirule,font)
 define pirule
-.PHONY: $1-virtual
+.PHONY: $1-pifont
 ifneq ($(filter $1Italic,$(fonts_it)),)
-$1-virtual: $(TFMDIR)/$1-Pi-U.tfm $(VFDIR)/$1-Pi-U.vf $(AUXDIR)/$1-Pi-U.vpl
+$1-pifont: $(TFMDIR)/$1-Pi-U.tfm $(VFDIR)/$1-Pi-U.vf $(AUXDIR)/$1-Pi-U.vpl
 endif
 
 $(AUXDIR)/$1-Pi-U.vpl: $(AUXDIR)/$1-Orn-U.vpl $(AUXDIR)/$1Italic-Orn-U.vpl $(addprefix fontinst/,$(pkg)-orn-up.etx $(pkg)-orn-it.etx $(pkg)-orn.etx makeorn.tex)
@@ -169,9 +169,9 @@ endef
 
 # $(call mathrule,font,math_version)
 define mathrule
-.PHONY: $1-virtual
+.PHONY: $1-math
 ifneq ($(filter $1Italic,$(fonts_it)),)
-$1-virtual: $(TFMDIR)/$1$2-TOsF-OML.tfm $(VFDIR)/$1$2-TOsF-OML.vf $(AUXDIR)/$1$2-TOsF-OML.vpl
+$1-math: $(TFMDIR)/$1$2-TOsF-OML.tfm $(VFDIR)/$1$2-TOsF-OML.vf $(AUXDIR)/$1$2-TOsF-OML.vpl
 endif
 
 $(AUXDIR)/$1$2-TOsF-OML.vpl: $(AUXDIR)/$1-TOsF-OML.vpl $(AUXDIR)/$1Italic-TOsF-OML.vpl $(plfiles) $(foreach s,a b c e,fontinst/fdsymbol-$s.etx) $(foreach s,french it mixed up,fontinst/$(pkg)-oml-$s.etx) $(addprefix fontinst/,adjustoml.mtx missing.mtx tie.mtx makeoml.tex macros.tex)
@@ -192,7 +192,7 @@ endef
 # default rule
 
 .PHONY: all
-all: type1 dvips metrics virtual latex
+all: type1 dvips metrics pifonts math latex
 
 # rules for building Type 1 fonts
 
@@ -251,8 +251,11 @@ basemetrics: $(fonts:%=%-basemetrics)
 .PHONY: metrics
 metrics: $(fonts:%=%-metrics)
 
-.PHONY: virtual
-virtual: $(fonts_up:%=%-virtual)
+.PHONY: pifonts
+pifonts: $(fonts_up:%=%-pifont)
+
+.PHONY: math
+math: $(fonts_up:%=%-math)
 
 .PHONY: tables
 tables: $(fonts:%=%-tables)
