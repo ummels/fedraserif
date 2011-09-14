@@ -106,6 +106,7 @@ endef
 define baserule
 .PHONY: $1-basemetrics
 $1-basemetrics: $(AUXDIR)/$1-Base-$2.pl $(TFMDIR)/$1-Base-$2.tfm
+
 $(AUXDIR)/$1-Base-$2.pl: $1.otf $(DVIPSDIR)/$(pkg)-$2.enc
 	$(OTFTOTFM) $(OTFTOTFMFLAGS) $(flags_basic) --literal-encoding=$(DVIPSDIR)/$(pkg)-$2.enc $1.otf $1-Base-$2
 endef
@@ -119,12 +120,14 @@ endef
 define fontrule
 .PHONY: $1-metrics
 $1-metrics: $(TFMDIR)/$1-$4$(call shapestr,$3)-$2.tfm $(VFDIR)/$1-$4$(call shapestr,$3)-$2.vf $(AUXDIR)/$1-$4$(call shapestr,$3)-$2.vpl
+
 $(AUXDIR)/$1-$4$(call shapestr,$3)-$2.vpl: $1.otf enc/$(pkg)-$(call encname,$2,$4).enc $1.base $(suffixes:%=$(TFMDIR)/$1-Base-%.tfm)
 	$(OTFTOTFM) $(OTFTOTFMFLAGS) $(flags_basic) $(flags_$4) $(flags_$3) $5 --base-encoding=$1.base --encoding=enc/$(pkg)-$(call encname,$2,$4).enc $1.otf $1-$4$(call shapestr,$3)-$2
 	$(TOUCH) $$@
 
 .PHONY: $1-tables
 $1-tables: $(TESTDIR)/$1-$4$(call shapestr,$3)-$2.pdf
+
 $(TESTDIR)/$1-$4$(call shapestr,$3)-$2.pdf: $(TFMDIR)/$1-$4$(call shapestr,$3)-$2.tfm $(VFDIR)/$1-$4$(call shapestr,$3)-$2.vf $1.pfb $(mapfile) $(encfiles)
 	$(call fonttable,$1-$4$(call shapestr,$3)-$2)
 endef
@@ -146,14 +149,20 @@ endef
 # $(call pirule,font)
 define pirule
 .PHONY: $1-virtual
+ifneq ($(filter $1Italic,$(fonts_it)),)
 $1-virtual: $(TFMDIR)/$1-Pi-U.tfm $(VFDIR)/$1-Pi-U.vf $(AUXDIR)/$1-Pi-U.vpl
+endif
+
 $(AUXDIR)/$1-Pi-U.vpl: $(AUXDIR)/$1-Orn-U.vpl $(AUXDIR)/$1Italic-Orn-U.vpl $(addprefix fontinst/,$(pkg)-orn-up.etx $(pkg)-orn-it.etx $(pkg)-orn.etx makeorn.tex)
 	TEXINPUTS=fontinst:misc: $(PDFTEX) -output-dir $(AUXDIR) \
 	\\input makeorn \\installorn{$1}\\bye
 	$(RM) $(AUXDIR)/makeorn.log
 
 .PHONY: $1-tables
+ifneq ($(filter $1Italic,$(fonts_it)),)
 $1-tables: $(TESTDIR)/$1-Pi-U.pdf
+endif
+
 $(TESTDIR)/$1-Pi-U.pdf: $(TFMDIR)/$1-Pi-U.tfm $(VFDIR)/$1-Pi-U.vf $(TFMDIR)/$1-Orn-U.tfm $(VFDIR)/$1-Orn-U.vf $(TFMDIR)/$1Italic-Orn-U.tfm $(VFDIR)/$1Italic-Orn-U.vf $1.pfb $1Italic.pfb $(mapfile) $(encfiles)
 	$(call fonttable,$1-Pi-U)
 endef
@@ -161,7 +170,10 @@ endef
 # $(call mathrule,font,math_version)
 define mathrule
 .PHONY: $1-virtual
+ifneq ($(filter $1Italic,$(fonts_it)),)
 $1-virtual: $(TFMDIR)/$1$2-TOsF-OML.tfm $(VFDIR)/$1$2-TOsF-OML.vf $(AUXDIR)/$1$2-TOsF-OML.vpl
+endif
+
 $(AUXDIR)/$1$2-TOsF-OML.vpl: $(AUXDIR)/$1-TOsF-OML.vpl $(AUXDIR)/$1Italic-TOsF-OML.vpl $(plfiles) $(foreach s,a b c e,fontinst/fdsymbol-$s.etx) $(foreach s,french it mixed up,fontinst/$(pkg)-oml-$s.etx) $(addprefix fontinst/,adjustoml.mtx missing.mtx tie.mtx makeoml.tex macros.tex)
 	weight=$$$$(echo $1 | $(SED) 's/.*-\(.*\)/\1/;s/Demi/Regular/'); \
 	TEXINPUTS=fontinst:misc: $(PDFTEX) -output-dir $(AUXDIR) \
@@ -169,7 +181,10 @@ $(AUXDIR)/$1$2-TOsF-OML.vpl: $(AUXDIR)/$1-TOsF-OML.vpl $(AUXDIR)/$1Italic-TOsF-O
 	$(RM) $(AUXDIR)/makeoml.log
 
 .PHONY: $1-tables
+ifneq ($(filter $1Italic,$(fonts_it)),)
 $1-tables: $(TESTDIR)/$1$2-TOsF-OML.pdf
+endif
+
 $(TESTDIR)/$1$2-TOsF-OML.pdf: $(TFMDIR)/$1$2-TOsF-OML.tfm $(VFDIR)/$1$2-TOsF-OML.vf $(TFMDIR)/$1-TOsF-OML.tfm $(VFDIR)/$1-TOsF-OML.vf $(TFMDIR)/$1Italic-TOsF-OML.tfm $(VFDIR)/$1Italic-TOsF-OML.vf $1.pfb $1Italic.pfb $(mapfile) $(encfiles)
 	$(call fonttable,$1$2-TOsF-OML)
 endef
