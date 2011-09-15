@@ -24,8 +24,8 @@
 %<*driver>
 \ProvidesFile{fedraserif.dtx}[2011/08/29 v0.5 LaTeX support package for Fedra Serif Pro]
 %</driver>
-%<style>\NeedsTeXFormat{LaTeX2e}
-%<style>\ProvidesPackage{fedraserif}[2011/08/29 v0.5 LaTeX support package for Fedra Serif Pro]
+%<package>\NeedsTeXFormat{LaTeX2e}
+%<package>\ProvidesPackage{fedraserif}[2011/08/29 v0.5 LaTeX support package for Fedra Serif Pro]
 %<mtcfg>\ProvidesFile{mt-FedraSerifPro.cfg}[2011/08/29 v0.5 microtype config file for Fedra Serif Pro]
 %<fontdef>\ProvidesFile{fedraserif-fd.sty}[2011/08/29 v0.5 font definition macros for Fedra Serif Pro]
 %<ot1&lf>\ProvidesFile{OT1FedraSerifPro-LF.fd}[2011/08/29 v0.5 font definitions for OT1/FedraSerifPro-LF]
@@ -48,6 +48,10 @@
 %<qx&osf>\ProvidesFile{QXFedraSerifPro-OsF.fd}[2011/08/29 v0.5 font definitions for QX/FedraSerifPro-OsF]
 %<qx&tlf>\ProvidesFile{QXFedraSerifPro-TLF.fd}[2011/08/29 v0.5 font definitions for QX/FedraSerifPro-TLF]
 %<qx&tosf>\ProvidesFile{QXFedraSerifPro-TOsF.fd}[2011/08/29 v0.5 font definitions for QX/FedraSerifPro-TOsF]
+%<t5&lf>\ProvidesFile{T5FedraSerifPro-LF.fd}[2011/08/29 v0.5 font definitions for T5/FedraSerifPro-LF]
+%<t5&osf>\ProvidesFile{T5FedraSerifPro-OsF.fd}[2011/08/29 v0.5 font definitions for T5/FedraSerifPro-OsF]
+%<t5&tlf>\ProvidesFile{T5FedraSerifPro-TLF.fd}[2011/08/29 v0.5 font definitions for T5/FedraSerifPro-TLF]
+%<t5&tosf>\ProvidesFile{T5FedraSerifPro-TOsF.fd}[2011/08/29 v0.5 font definitions for T5/FedraSerifPro-TOsF]
 %<oml&lf>\ProvidesFile{OMLFedraSerifPro-LF.fd}[2011/08/29 v0.5 font definitions for OML/FedraSerifPro-LF]
 %<oml&osf>\ProvidesFile{OMLFedraSerifPro-OsF.fd}[2011/08/29 v0.5 font definitions for OML/FedraSerifPro-OsF]
 %<oml&tlf>\ProvidesFile{OMLFedraSerifPro-TLF.fd}[2011/08/29 v0.5 font definitions for OML/FedraSerifPro-TLF]
@@ -66,7 +70,7 @@
 \usepackage{booktabs}
 \usepackage{pifont}
 \usepackage{floatrow}
-\usepackage[unicode,bookmarks]{hyperref}
+\usepackage{hyperref}
 \hypersetup{
   bookmarksnumbered,
   colorlinks=false,
@@ -135,7 +139,7 @@
 % Typotheque\footnote{\url{http://www.typotheque.com/fonts/}}.
 % You can load this package by adding
 % \begin{quote}
-% |\usepackage|\oarg{options}|{fedraserif}|
+%   |\usepackage|\oarg{options}|{fedraserif}|
 % \end{quote}
 %
 % \noindent
@@ -212,10 +216,11 @@
 %
 % \subsection{Encodings}\label{sec:encodings}
 %
-% The package currently supports the \acro{OT1},
-% \acro{T1}, \acro{LY1} and \acro{QX} encodings for typesetting text
-% with Latin characters. For typesetting text with accented characters,
-% it~is strongly
+% The package currently supports the \acro{OT1}, \acro{T1}, \acro{LY1},
+% \acro{QX} and \acro{T5} encodings for typesetting text with Latin
+% characters, as well as the \acro{TS1} encoding for typesetting text
+% symbols.
+% For typesetting text with accented characters, it~is strongly
 % recommended to change the default font encoding from~\acro{OT1}
 % to \acro{T1} or one of the other encodings. This can be achieved
 % by putting |\usepackage[T1]{fontenc}| in the preamble of your
@@ -554,7 +559,7 @@
 %
 % We use \pkg{xkeyval}'s key mechanism to declare all options.
 %    \begin{macrocode}
-%<*style>
+%<*package>
 \RequirePackage{xkeyval}
 \newcommand*\fdrsf@boolkey[2]{%
   \define@boolkey{fedraserif.sty}[fdrsf@]{#1}[true]{#2}%
@@ -1104,7 +1109,7 @@
 \iffdrsf@text
   \normalfont
 \fi
-%</style>
+%</package>
 %    \end{macrocode}
 %
 % \section{Microtype configuration file}
@@ -1187,6 +1192,24 @@
 %
 %    \begin{macrocode}
 \SetProtrusion
+   [ name     = FedraSerifPro-T5,
+     load     = FedraSerifPro-n   ]
+   { encoding = {T5},
+     family   = {FedraSerifPro-OsF,FedraSerifPro-LF,FedraSerifPro-TOsF,FedraSerifPro-TLF},
+     shape    = {n,sc,ssc} }
+   {
+     _ = {100,100},
+     \textbackslash    = {100,200},
+     \quotesinglbase   = {400,400},   \quotedblbase      = {400,400},
+     \guilsinglleft    = {400,300},   \guilsinglright    = {300,400},
+     \guillemotleft    = {200,200},   \guillemotright    = {200,200},
+     \textbraceleft    = {400,200},   \textbraceright    = {200,400},
+     \textless         = {200,100},   \textgreater       = {100,200}
+   }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\SetProtrusion
   [ name     = FedraSerifPro-it ]
   {  }
   {
@@ -1251,6 +1274,23 @@
      \textquotedbl     = {400,400},   \textquotesingle   = {400,400},
      \guillemotleft    = {300,300},   \guillemotright    = {300,300},
      \textexclamdown   = {100,   },   \textquestiondown  = {200,   },
+     \textbraceleft    = {200,100},   \textbraceright    = {200,200},
+   }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\SetProtrusion
+   [ name     = FedraSerifPro-T5-it,
+     load     = FedraSerifPro-it     ]
+   { encoding = {T5},
+     family   = {FedraSerifPro-OsF,FedraSerifPro-LF,FedraSerifPro-TOsF,FedraSerifPro-TLF},
+     shape    = {it,sl,sw,scit,scsl,scsw} }
+   {
+     _ = {  ,100},
+     \textbackslash    = {100,200},
+     \quotesinglbase   = {300,700},   \quotedblbase      = {400,500},
+     \guilsinglleft    = {400,400},   \guilsinglright    = {300,500},
+     \guillemotleft    = {300,300},   \guillemotright    = {300,300},
      \textbraceleft    = {200,100},   \textbraceright    = {200,200},
    }
 %</mtcfg>
@@ -1538,6 +1578,10 @@
 %<qx&osf>\DeclareFedraSerifLargeFamily{QX}{OsF}
 %<qx&tlf>\DeclareFedraSerifLargeFamily{QX}{TLF}
 %<qx&tosf>\DeclareFedraSerifLargeFamily{QX}{TOsF}
+%<t5&lf>\DeclareFedraSerifLargeFamily{T5}{LF}
+%<t5&osf>\DeclareFedraSerifLargeFamily{T5}{OsF}
+%<t5&tlf>\DeclareFedraSerifLargeFamily{T5}{TLF}
+%<t5&tosf>\DeclareFedraSerifLargeFamily{T5}{TOsF}
 %<oml&lf>\DeclareFedraSerifMathFamily{LF}
 %<oml&osf>\DeclareFedraSerifMathFamily{OsF}
 %<oml&tlf>\DeclareFedraSerifMathFamily{TLF}

@@ -35,7 +35,7 @@ variants := A B
 weights := Book Demi Medium Bold
 shapes_up := n sc ssc
 shapes_it := n sc ssc sw scsw sscsw
-encodings := OT1 T1 TS1 LY1 QX
+encodings := OT1 T1 TS1 LY1 QX T5
 figures := LF OsF TLF TOsF
 
 flags_basic := --pl --encoding-directory=$(DVIPSDIR) --tfm-directory=$(TFMDIR) --vf-directory=$(VFDIR) --pl-directory=$(AUXDIR) --vpl-directory=$(AUXDIR) --no-type1 --no-dotlessj --no-updmap --no-map
