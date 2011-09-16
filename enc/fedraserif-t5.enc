@@ -1,11 +1,11 @@
 % CODINGSCHEME VIETNAMESE TEX FONT ENCODING
 %
-% LIGKERN f {L} f ; f {L} i ; f {L} j ; f {L} k ; f {L} l ;
-% LIGKERN f {L} b ; f {L} h ; f {L} igrave ;
+% LIGKERN f {L} * ;
 % LIGKERN endash hyphen =: emdash ;
 % LIGKERN quoteleft quoteleft =: quotedblleft ;
 % LIGKERN quoteright quoteright =: quotedblright ;
 % LIGKERN comma comma =: quotedblbase ;
+% LIGKERN || = 32 ;
 %
 /FedraSerifProT5Encoding [
 % 0x00
@@ -15,7 +15,7 @@
 /quotedblleft /quotedblright /quotedblbase /guillemotleft /guillemotright /endash /emdash /cwm
 /zeroinferior /dotlessi /uni1EF6 /uni1EF7 /uni1EF4 /uni1EF5 /Dcroat /dcroat
 % 0x20
-/visualspace /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright
 /parenleft /parenright /asterisk /plus /comma /hyphen /period /slash
 % 0x30
 /zero /one /two /three /four /five /six /seven
