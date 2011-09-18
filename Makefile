@@ -17,12 +17,6 @@ INSTALL := install
 INSTALLDIR := $(INSTALL) -d
 INSTALLDATA := $(INSTALL) -m 644
 
-DVIPSDIR := dvips
-TFMDIR := tfm
-VFDIR := vf
-AUXDIR := misc
-TESTDIR := test
-
 ifneq (,$(findstring install,$(MAKECMDGOALS)))
 TEXMFDIR := $(shell kpsewhich -expand-var='$$TEXMFHOME')
 endif
@@ -38,7 +32,7 @@ shapes_it := n sc ssc sw scsw sscsw
 encodings := OT1 T1 TS1 LY1 QX T5
 figures := LF OsF TLF TOsF
 
-flags_basic := --pl --encoding-directory=$(DVIPSDIR) --tfm-directory=$(TFMDIR) --vf-directory=$(VFDIR) --pl-directory=$(AUXDIR) --vpl-directory=$(AUXDIR) --no-type1 --no-dotlessj --no-updmap --no-map
+flags_basic := --pl --encoding-directory=$(dvipsdir) --tfm-directory=$(tfmdir) --vf-directory=$(vfdir) --pl-directory=$(auxdir) --vpl-directory=$(auxdir) --no-type1 --no-dotlessj --no-updmap --no-map
 flags_common := --warn-missing --feature=kern --feature=liga
 flags_OsF := --feature=pnum
 flags_TOsF := --feature=tnum
@@ -51,6 +45,13 @@ flags_scsw := $(flags_sc) $(flags_sw)
 flags_sscsw := $(flags_ssc) $(flags_sw) 
 flags_math := --letterspacing=40 --math-spacing
 
+dvipsdir := dvips
+tfmdir := tfm
+vfdir := vf
+auxdir := misc
+testdir := test
+outdirs := $(dvipsdir) $(tfmdir) $(vfdir) $(auxdir) $(testdir)
+
 otffiles_in := $(wildcard $(fontname)?-*.otf)
 otffiles_up := $(filter $(otffiles_in),$(foreach var,$(variants),$(weights:%=$(fontname)$(var)-%.otf)))
 otffiles_it := $(filter $(otffiles_in),$(foreach var,$(variants),$(weights:%=$(fontname)$(var)-%Italic.otf)))
@@ -61,18 +62,17 @@ fonts := $(fonts_up) $(fonts_it)
 pfbfiles := $(fonts:%=%.pfb)
 suffixes := $(shell $(AWK) -f scripts/print-suffixes.awk glyphlist 2> /dev/null)
 glyphlists := $(suffixes:%=.glyphlist-%)
-encfiles := $(suffixes:%=$(DVIPSDIR)/$(pkg)-%.enc) 
+encfiles := $(suffixes:%=$(dvipsdir)/$(pkg)-%.enc) 
 baselists := $(fonts:%=%.base)
-mapfile := $(DVIPSDIR)/$(pkg).map
+mapfile := $(dvipsdir)/$(pkg).map
 plfiles := $(foreach w,Book Regular Medium Bold,\
-  $(foreach s,A B C E,$(AUXDIR)/FdSymbol$s-$w.pl))
+  $(foreach s,A B C E,$(auxdir)/FdSymbol$s-$w.pl))
 styfiles := $(addprefix latex/,$(pkg).sty $(pkg)-fd.sty mt-$(family).cfg)
 fdfiles := $(foreach enc,$(encodings) OML,\
   $(foreach ver,$(figures),latex/$(enc)$(family)-$(ver).fd)) \
   latex/U$(family)-Extra.fd latex/U$(family)-Pi.fd \
   latex/U$(family)-BB.fd
 tempfiles := $(addprefix latex/,$(pkg).aux $(pkg).log $(pkg).out $(pkg).toc)
-outdirs := $(DVIPSDIR) $(TFMDIR) $(VFDIR) $(AUXDIR) $(TESTDIR)
 
 # create output directories
 
@@ -80,7 +80,7 @@ ifeq (,$(findstring clean,$(MAKECMDGOALS)))
 create-dirs := $(shell $(MKDIR) $(outdirs))
 endif
 
-# auxilary functions
+# auxiliary functions
 
 # $(call shapestr,shape)
 shapestr = $(if $(findstring $1,n),,-$1)
@@ -95,8 +95,8 @@ lc = $(subst A,a,$(subst B,b,$(subst C,c,$(subst D,d,$(subst E,e,$(subst F,f,$(s
 
 # $(call fonttable,font)
 define fonttable
-TEXFONTS=$(TFMDIR):$(VFDIR): ENCFONTS=$(DVIPSDIR): \
-$(PDFTEX) -output-dir $(TESTDIR) -jobname $1 \
+TEXFONTS=$(tfmdir):$(vfdir): ENCFONTS=$(dvipsdir): \
+$(PDFTEX) -output-dir $(testdir) -jobname $1 \
 \\pdfmapfile{=$(mapfile)}\\input fntproof.tex \\init $1 \\table\\bye
 endef
 
@@ -105,10 +105,10 @@ endef
 # $(call baserule,font,suffix)
 define baserule
 .PHONY: $1-basemetrics
-$1-basemetrics: $(AUXDIR)/$1-Base-$2.pl $(TFMDIR)/$1-Base-$2.tfm
+$1-basemetrics: $(auxdir)/$1-Base-$2.pl $(tfmdir)/$1-Base-$2.tfm
 
-$(AUXDIR)/$1-Base-$2.pl: $1.otf $(DVIPSDIR)/$(pkg)-$2.enc
-	$(OTFTOTFM) $(OTFTOTFMFLAGS) $(flags_basic) --literal-encoding=$(DVIPSDIR)/$(pkg)-$2.enc $1.otf $1-Base-$2
+$(auxdir)/$1-Base-$2.pl: $1.otf $(dvipsdir)/$(pkg)-$2.enc
+	$(OTFTOTFM) $(OTFTOTFMFLAGS) $(flags_basic) --literal-encoding=$(dvipsdir)/$(pkg)-$2.enc $1.otf $1-Base-$2
 endef
 
 # $(call baserules,font)
@@ -119,16 +119,16 @@ endef
 # $(call fontrule,font,encoding,shape,version,flags)
 define fontrule
 .PHONY: $1-metrics
-$1-metrics: $(TFMDIR)/$1-$4$(call shapestr,$3)-$2.tfm $(VFDIR)/$1-$4$(call shapestr,$3)-$2.vf $(AUXDIR)/$1-$4$(call shapestr,$3)-$2.vpl
+$1-metrics: $(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf $(auxdir)/$1-$4$(call shapestr,$3)-$2.vpl
 
-$(AUXDIR)/$1-$4$(call shapestr,$3)-$2.vpl: $1.otf enc/$(pkg)-$(call encname,$2,$4).enc $1.base $(suffixes:%=$(TFMDIR)/$1-Base-%.tfm)
+$(auxdir)/$1-$4$(call shapestr,$3)-$2.vpl: $1.otf enc/$(pkg)-$(call encname,$2,$4).enc $1.base $(suffixes:%=$(tfmdir)/$1-Base-%.tfm)
 	$(OTFTOTFM) $(OTFTOTFMFLAGS) $(flags_basic) $(flags_$4) $(flags_$3) $5 --base-encoding=$1.base --encoding=enc/$(pkg)-$(call encname,$2,$4).enc $1.otf $1-$4$(call shapestr,$3)-$2
 	$(TOUCH) $$@
 
 .PHONY: $1-tables
-$1-tables: $(TESTDIR)/$1-$4$(call shapestr,$3)-$2.pdf
+$1-tables: $(testdir)/$1-$4$(call shapestr,$3)-$2.pdf
 
-$(TESTDIR)/$1-$4$(call shapestr,$3)-$2.pdf: $(TFMDIR)/$1-$4$(call shapestr,$3)-$2.tfm $(VFDIR)/$1-$4$(call shapestr,$3)-$2.vf $1.pfb $(mapfile) $(encfiles)
+$(testdir)/$1-$4$(call shapestr,$3)-$2.pdf: $(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf $1.pfb $(mapfile) $(encfiles)
 	$(call fonttable,$1-$4$(call shapestr,$3)-$2)
 endef
 
@@ -150,20 +150,20 @@ endef
 define pirule
 .PHONY: $1-pifont
 ifneq ($(filter $1Italic,$(fonts_it)),)
-$1-pifont: $(TFMDIR)/$1-Pi-U.tfm $(VFDIR)/$1-Pi-U.vf $(AUXDIR)/$1-Pi-U.vpl
+$1-pifont: $(tfmdir)/$1-Pi-U.tfm $(vfdir)/$1-Pi-U.vf $(auxdir)/$1-Pi-U.vpl
 endif
 
-$(AUXDIR)/$1-Pi-U.vpl: $(AUXDIR)/$1-Orn-U.vpl $(AUXDIR)/$1Italic-Orn-U.vpl $(addprefix fontinst/,$(pkg)-orn-up.etx $(pkg)-orn-it.etx $(pkg)-orn.etx makeorn.tex)
-	TEXINPUTS=fontinst:misc: $(PDFTEX) -output-dir $(AUXDIR) \
+$(auxdir)/$1-Pi-U.vpl: $(auxdir)/$1-Orn-U.vpl $(auxdir)/$1Italic-Orn-U.vpl $(addprefix fontinst/,$(pkg)-orn-up.etx $(pkg)-orn-it.etx $(pkg)-orn.etx makeorn.tex)
+	TEXINPUTS=fontinst:misc: $(PDFTEX) -output-dir $(auxdir) \
 	\\input makeorn \\installorn{$1}\\bye
-	$(RM) $(AUXDIR)/makeorn.log
+	$(RM) $(auxdir)/makeorn.log
 
 .PHONY: $1-tables
 ifneq ($(filter $1Italic,$(fonts_it)),)
-$1-tables: $(TESTDIR)/$1-Pi-U.pdf
+$1-tables: $(testdir)/$1-Pi-U.pdf
 endif
 
-$(TESTDIR)/$1-Pi-U.pdf: $(TFMDIR)/$1-Pi-U.tfm $(VFDIR)/$1-Pi-U.vf $(TFMDIR)/$1-Orn-U.tfm $(VFDIR)/$1-Orn-U.vf $(TFMDIR)/$1Italic-Orn-U.tfm $(VFDIR)/$1Italic-Orn-U.vf $1.pfb $1Italic.pfb $(mapfile) $(encfiles)
+$(testdir)/$1-Pi-U.pdf: $(tfmdir)/$1-Pi-U.tfm $(vfdir)/$1-Pi-U.vf $(tfmdir)/$1-Orn-U.tfm $(vfdir)/$1-Orn-U.vf $(tfmdir)/$1Italic-Orn-U.tfm $(vfdir)/$1Italic-Orn-U.vf $1.pfb $1Italic.pfb $(mapfile) $(encfiles)
 	$(call fonttable,$1-Pi-U)
 endef
 
@@ -171,21 +171,21 @@ endef
 define mathrule
 .PHONY: $1-math
 ifneq ($(filter $1Italic,$(fonts_it)),)
-$1-math: $(TFMDIR)/$1$2-TOsF-OML.tfm $(VFDIR)/$1$2-TOsF-OML.vf $(AUXDIR)/$1$2-TOsF-OML.vpl
+$1-math: $(tfmdir)/$1$2-TOsF-OML.tfm $(vfdir)/$1$2-TOsF-OML.vf $(auxdir)/$1$2-TOsF-OML.vpl
 endif
 
-$(AUXDIR)/$1$2-TOsF-OML.vpl: $(AUXDIR)/$1-TOsF-OML.vpl $(AUXDIR)/$1Italic-TOsF-OML.vpl $(plfiles) $(foreach s,a b c e,fontinst/fdsymbol-$s.etx) $(foreach s,french it mixed up,fontinst/$(pkg)-oml-$s.etx) $(addprefix fontinst/,adjustoml.mtx missing.mtx tie.mtx makeoml.tex macros.tex)
+$(auxdir)/$1$2-TOsF-OML.vpl: $(auxdir)/$1-TOsF-OML.vpl $(auxdir)/$1Italic-TOsF-OML.vpl $(plfiles) $(foreach s,a b c e,fontinst/fdsymbol-$s.etx) $(foreach s,french it mixed up,fontinst/$(pkg)-oml-$s.etx) $(addprefix fontinst/,adjustoml.mtx missing.mtx tie.mtx makeoml.tex macros.tex)
 	weight=$$$$(echo $1 | $(SED) 's/.*-\(.*\)/\1/;s/Demi/Regular/'); \
-	TEXINPUTS=fontinst:misc: $(PDFTEX) -output-dir $(AUXDIR) \
+	TEXINPUTS=fontinst:misc: $(PDFTEX) -output-dir $(auxdir) \
 	\\input makeoml \\installoml{$1}{$$$$weight}{$2}\\bye
-	$(RM) $(AUXDIR)/makeoml.log
+	$(RM) $(auxdir)/makeoml.log
 
 .PHONY: $1-tables
 ifneq ($(filter $1Italic,$(fonts_it)),)
-$1-tables: $(TESTDIR)/$1$2-TOsF-OML.pdf
+$1-tables: $(testdir)/$1$2-TOsF-OML.pdf
 endif
 
-$(TESTDIR)/$1$2-TOsF-OML.pdf: $(TFMDIR)/$1$2-TOsF-OML.tfm $(VFDIR)/$1$2-TOsF-OML.vf $(TFMDIR)/$1-TOsF-OML.tfm $(VFDIR)/$1-TOsF-OML.vf $(TFMDIR)/$1Italic-TOsF-OML.tfm $(VFDIR)/$1Italic-TOsF-OML.vf $1.pfb $1Italic.pfb $(mapfile) $(encfiles)
+$(testdir)/$1$2-TOsF-OML.pdf: $(tfmdir)/$1$2-TOsF-OML.tfm $(vfdir)/$1$2-TOsF-OML.vf $(tfmdir)/$1-TOsF-OML.tfm $(vfdir)/$1-TOsF-OML.vf $(tfmdir)/$1Italic-TOsF-OML.tfm $(vfdir)/$1Italic-TOsF-OML.vf $1.pfb $1Italic.pfb $(mapfile) $(encfiles)
 	$(call fonttable,$1$2-TOsF-OML)
 endef
 
@@ -223,7 +223,7 @@ $(mapfile): glyphlist
 $(glyphlists): glyphlist
 	grep '^/' glyphlist | split -a 1 -l 256 - .glyphlist-
 
-$(encfiles): $(DVIPSDIR)/$(pkg)-%.enc: .glyphlist-%
+$(encfiles): $(dvipsdir)/$(pkg)-%.enc: .glyphlist-%
 	echo "% CODINGSCHEME FONTSPECIFIC" > $@
 	I=$$(echo $* | tr [:lower:] [:upper:]); \
 	echo "/$(family)$$I [" >> $@
@@ -269,18 +269,18 @@ $(foreach font,$(fonts_up),$(eval $(call mathrule,$(font),French)))
 
 # rules for building metrics from property lists
 
-$(TFMDIR)/%.tfm: $(AUXDIR)/%.pl
+$(tfmdir)/%.tfm: $(auxdir)/%.pl
 	$(PLTOTFM) $< $@
 
-$(VFDIR)/%.vf $(TFMDIR)/%.tfm: $(AUXDIR)/%.vpl
-	$(VPLTOVF) $< $(VFDIR)/$*.vf $(TFMDIR)/$*.tfm
+$(vfdir)/%.vf $(tfmdir)/%.tfm: $(auxdir)/%.vpl
+	$(VPLTOVF) $< $(vfdir)/$*.vf $(tfmdir)/$*.tfm
 
 # rules for building property lists for FdSymbol
 
 .PHONY: fdsymbol-metrics
 fdsymbol-metrics: $(plfiles)
 
-$(plfiles): $(AUXDIR)/%.pl:
+$(plfiles): $(auxdir)/%.pl:
 	$(TFMTOPL) $*.tfm $@
 
 # rules for building the LaTeX package
@@ -306,8 +306,8 @@ latex/$(pkg).pdf: latex/$(pkg).dtx
 
 .PHONY: check
 check:
-	@! ls $(DVIPSDIR)/a_*.enc > /dev/null 2>&1 || ! echo "Found auto-generated encoding files: $$(ls -m $(DVIPSDIR)/a_*.enc)\nAdd glyphs to glyphlist, remove these files, and remake." 1>&2
-	@! ls $(AUXDIR)/*--base.pl > /dev/null 2>&1 || ! echo "Found auto-generated base metrics: $$(ls -m $(AUXDIR)/*--base.pl)" 1>&2
+	@! ls $(dvipsdir)/a_*.enc > /dev/null 2>&1 || ! echo "Found auto-generated encoding files: $$(ls -m $(dvipsdir)/a_*.enc)\nAdd glyphs to glyphlist, remove these files, and remake." 1>&2
+	@! ls $(auxdir)/*--base.pl > /dev/null 2>&1 || ! echo "Found auto-generated base metrics: $$(ls -m $(auxdir)/*--base.pl)" 1>&2
 
 # rules for (un)installing everything
 
@@ -316,9 +316,9 @@ install: all check
 	$(INSTALLDIR) $(TEXMFDIR)/fonts/type1/$(vendor)/$(pkg)
 	$(INSTALLDATA) $(pfbfiles) $(TEXMFDIR)/fonts/type1/$(vendor)/$(pkg)
 	$(INSTALLDIR) $(TEXMFDIR)/fonts/tfm/$(vendor)/$(pkg)
-	$(INSTALLDATA) $(TFMDIR)/*.tfm $(TEXMFDIR)/fonts/tfm/$(vendor)/$(pkg)
+	$(INSTALLDATA) $(tfmdir)/*.tfm $(TEXMFDIR)/fonts/tfm/$(vendor)/$(pkg)
 	$(INSTALLDIR) $(TEXMFDIR)/fonts/vf/$(vendor)/$(pkg)
-	$(INSTALLDATA) $(VFDIR)/*.vf $(TEXMFDIR)/fonts/vf/$(vendor)/$(pkg)
+	$(INSTALLDATA) $(vfdir)/*.vf $(TEXMFDIR)/fonts/vf/$(vendor)/$(pkg)
 	$(INSTALLDIR) $(TEXMFDIR)/fonts/map/dvips/$(pkg)
 	$(INSTALLDATA) $(mapfile) $(TEXMFDIR)/fonts/map/dvips/$(pkg)
 	$(INSTALLDIR) $(TEXMFDIR)/fonts/enc/dvips/$(pkg)
