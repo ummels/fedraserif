@@ -11,6 +11,7 @@
 *.sty
 *.cfg
 *.fd
+*.tex
 *.tmproj
 *.otf
 *.pfb
