@@ -327,6 +327,8 @@ install: all check
 	$(INSTALLDATA) $(styfiles) $(fdfiles) $(TEXMFDIR)/tex/latex/$(pkg)
 	$(INSTALLDIR) $(TEXMFDIR)/doc/latex/$(pkg)
 	$(INSTALLDATA) latex/$(pkg).pdf $(TEXMFDIR)/doc/latex/$(pkg)
+	$(INSTALLDIR) $(TEXMFDIR)/source/latex/$(pkg)
+	$(INSTALLDATA) latex/$(pkg).ins latex/$(pkg).dtx $(TEXMFDIR)/source/latex/$(pkg)
 
 .PHONY: uninstall
 uninstall:
@@ -337,6 +339,7 @@ uninstall:
 	$(RM) $(TEXMFDIR)/fonts/enc/dvips/$(pkg)
 	$(RM) $(TEXMFDIR)/tex/latex/$(pkg)
 	$(RM) $(TEXMFDIR)/doc/latex/$(pkg)
+	$(RM) $(TEXMFDIR)/source/latex/$(pkg)
 
 # rules for cleaning the source tree
 
