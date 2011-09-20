@@ -72,7 +72,7 @@ fdfiles := $(foreach enc,$(encodings) OML,\
   $(foreach ver,$(figures),latex/$(enc)$(family)-$(ver).fd)) \
   latex/U$(family)-Extra.fd latex/U$(family)-Pi.fd \
   latex/U$(family)-BB.fd
-tempfiles := $(addprefix latex/,$(pkg).aux $(pkg).log $(pkg).out $(pkg).toc)
+tempfiles := $(addprefix latex/,$(pkg).aux $(pkg).log $(pkg).out $(pkg).toc $(pkg).hd)
 
 # create output directories
 
