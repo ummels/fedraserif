@@ -32,6 +32,13 @@ shapes_it := n sc ssc sw scsw sscsw
 encodings := OT1 T1 TS1 LY1 QX T5
 figures := LF OsF TLF TOsF
 
+dvipsdir := dvips
+tfmdir := tfm
+vfdir := vf
+auxdir := misc
+testdir := test
+outdirs := $(dvipsdir) $(tfmdir) $(vfdir) $(auxdir) $(testdir)
+
 flags_basic := --pl --encoding-directory=$(dvipsdir) --tfm-directory=$(tfmdir) --vf-directory=$(vfdir) --pl-directory=$(auxdir) --vpl-directory=$(auxdir) --no-type1 --no-dotlessj --no-updmap --no-map
 flags_common := --warn-missing --feature=kern --feature=liga
 flags_OsF := --feature=pnum
@@ -44,13 +51,6 @@ flags_sw := --feature=swsh
 flags_scsw := $(flags_sc) $(flags_sw)
 flags_sscsw := $(flags_ssc) $(flags_sw) 
 flags_math := --letterspacing=40 --math-spacing
-
-dvipsdir := dvips
-tfmdir := tfm
-vfdir := vf
-auxdir := misc
-testdir := test
-outdirs := $(dvipsdir) $(tfmdir) $(vfdir) $(auxdir) $(testdir)
 
 otffiles_in := $(wildcard $(fontname)?-*.otf)
 otffiles_up := $(filter $(otffiles_in),$(foreach var,$(variants),$(weights:%=$(fontname)$(var)-%.otf)))
