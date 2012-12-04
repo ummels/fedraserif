@@ -1,4 +1,4 @@
-SHELL := /bin/sh
+SHELL := /bin/bash
 OTFTOTFM := otftotfm
 OTFTOTFMFLAGS :=
 OTFTOPFB := cfftot1
