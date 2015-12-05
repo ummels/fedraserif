@@ -4,6 +4,7 @@ OTFTOTFMFLAGS :=
 OTFTOPFB := cfftot1
 OTFINFO := otfinfo
 TFMTOPL := tftopl
+VFTOVP := vftovp
 PLTOTFM := pltotf
 VPLTOVF := vptovf
 PDFTEX := pdftex -interaction nonstopmode -halt-on-error
@@ -39,7 +40,7 @@ auxdir := misc
 testdir := test
 outdirs := $(dvipsdir) $(tfmdir) $(vfdir) $(auxdir) $(testdir)
 
-flags_basic := --pl --encoding-directory=$(dvipsdir) --tfm-directory=$(tfmdir) --vf-directory=$(vfdir) --pl-directory=$(auxdir) --vpl-directory=$(auxdir) --no-type1 --no-dotlessj --no-updmap --no-map
+flags_basic := --encoding-directory=$(dvipsdir) --tfm-directory=$(tfmdir) --vf-directory=$(vfdir) --pl-directory=$(auxdir) --vpl-directory=$(auxdir) --no-type1 --no-dotlessj --no-updmap --no-map
 flags_common := --warn-missing --feature=kern --feature=liga
 flags_OsF := --feature=pnum
 flags_TOsF := --feature=tnum
@@ -107,8 +108,9 @@ define baserule
 .PHONY: $1-basemetrics
 $1-basemetrics: $(auxdir)/$1-Base-$2.pl $(tfmdir)/$1-Base-$2.tfm
 
-$(auxdir)/$1-Base-$2.pl: $1.otf $(dvipsdir)/$(pkg)-$2.enc
+$(tfmdir)/$1-Base-$2.tfm $(auxdir)/$1-Base-$2.pl: $1.otf $(dvipsdir)/$(pkg)-$2.enc
 	$(OTFTOTFM) $(OTFTOTFMFLAGS) $(flags_basic) --literal-encoding=$(dvipsdir)/$(pkg)-$2.enc $1.otf $1-Base-$2
+	$(TFMTOPL) $(tfmdir)/$1-Base-$2.tfm $(auxdir)/$1-Base-$2.pl
 endef
 
 # $(call baserules,font)
@@ -121,9 +123,9 @@ define fontrule
 .PHONY: $1-metrics
 $1-metrics: $(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf $(auxdir)/$1-$4$(call shapestr,$3)-$2.vpl
 
-$(auxdir)/$1-$4$(call shapestr,$3)-$2.vpl: $1.otf enc/$(pkg)-$(call encname,$2,$4).enc $1.base $(suffixes:%=$(tfmdir)/$1-Base-%.tfm)
+$(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf $(auxdir)/$1-$4$(call shapestr,$3)-$2.vpl: $1.otf enc/$(pkg)-$(call encname,$2,$4).enc $1.base $(suffixes:%=$(tfmdir)/$1-Base-%.tfm)
 	$(OTFTOTFM) $(OTFTOTFMFLAGS) $(flags_basic) $(flags_$4) $(flags_$3) $5 --base-encoding=$1.base --encoding=enc/$(pkg)-$(call encname,$2,$4).enc $1.otf $1-$4$(call shapestr,$3)-$2
-	$(TOUCH) $$@
+	$(VFTOVP) $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf $(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm $(auxdir)/$1-$4$(call shapestr,$3)-$2.vpl
 
 .PHONY: $1-tables
 $1-tables: $(testdir)/$1-$4$(call shapestr,$3)-$2.pdf
