@@ -108,9 +108,11 @@ define baserule
 .PHONY: $1-basemetrics
 $1-basemetrics: $(auxdir)/$1-Base-$2.pl $(tfmdir)/$1-Base-$2.tfm
 
-$(tfmdir)/$1-Base-$2.tfm $(auxdir)/$1-Base-$2.pl: $1.otf $(dvipsdir)/$(pkg)-$2.enc
+$(tfmdir)/$1-Base-$2.tfm: $1.otf $(dvipsdir)/$(pkg)-$2.enc
 	$(OTFTOTFM) $(OTFTOTFMFLAGS) $(flags_basic) --literal-encoding=$(dvipsdir)/$(pkg)-$2.enc $1.otf $1-Base-$2
-	$(TFMTOPL) $(tfmdir)/$1-Base-$2.tfm $(auxdir)/$1-Base-$2.pl
+
+$(auxdir)/$1-Base-$2.pl: $(tfmdir)/$1-Base-$2.tfm
+	$(TFMTOPL) $$< $$@
 endef
 
 # $(call baserules,font)
@@ -123,9 +125,11 @@ define fontrule
 .PHONY: $1-metrics
 $1-metrics: $(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf $(auxdir)/$1-$4$(call shapestr,$3)-$2.vpl
 
-$(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf $(auxdir)/$1-$4$(call shapestr,$3)-$2.vpl: $1.otf enc/$(pkg)-$(call encname,$2,$4).enc $1.base $(suffixes:%=$(tfmdir)/$1-Base-%.tfm)
+$(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf: $1.otf enc/$(pkg)-$(call encname,$2,$4).enc $1.base $(suffixes:%=$(tfmdir)/$1-Base-%.tfm)
 	$(OTFTOTFM) $(OTFTOTFMFLAGS) $(flags_basic) $(flags_$4) $(flags_$3) $5 --base-encoding=$1.base --encoding=enc/$(pkg)-$(call encname,$2,$4).enc $1.otf $1-$4$(call shapestr,$3)-$2
-	$(VFTOVP) $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf $(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm $(auxdir)/$1-$4$(call shapestr,$3)-$2.vpl
+
+$(auxdir)/$1-$4$(call shapestr,$3)-$2.vpl: $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf $(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm
+	$(VFTOVP) $$^ $$@
 
 .PHONY: $1-tables
 $1-tables: $(testdir)/$1-$4$(call shapestr,$3)-$2.pdf
