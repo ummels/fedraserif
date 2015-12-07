@@ -18,7 +18,7 @@ text font, use the command
 
     \usepackage[variant=B]{fedraserif}
 
-instead. See the PDF documentation for the details.
+instead. See the [PDF documentation](latex/fedraserif.pdf) for the details.
 
 If you get errors about insufficient memory, you might need to
 increase the values of `font_mem_size` and `font_max` in your TeX
