@@ -30,10 +30,11 @@ Installation
 
 Building the font metrics requires the [LCDF typetools][LCDF] in version 2.90
 or higher, as distributed with TeXLive 2011. Building the math font
-requires additionally that the TFM files for fdsymbol are installed on your
+requires additionally that the TFM files for [fdsymbol] are installed on your
 system (in a directory that is searched by TeX for TFM files).
 
 [LCDF]: http://www.lcdf.org/type/
+[fdsymbol]: https://www.github.com/ummels/fdsymbol
 
 Before starting the installation, you need to copy the original OpenType Pro
 font files as obtained from Typotheque into the root directory of the sources
