@@ -11,7 +11,7 @@
    \comment{The triangle symbol `$\triangleleft$'.}
 \endsetslot
 
-\nextslot{194}
+\nextslot{196}
 \setslot{flat}
    \comment{The flat musical symbol `$\flat$'.}
 \endsetslot
@@ -24,7 +24,7 @@
    \comment{The sharp musical symbol `$\sharp$'.}
 \endsetslot
 
-\nextslot{201}
+\nextslot{203}
 \setslot{weierstrass}
    \comment{The Weierstrass P symbol `$\wp$'.}
 \endsetslot
