@@ -161,9 +161,8 @@
 % \pkg{fdsymbol} package (version~0.7 or higher) installed. Apart from
 % \pkg{fdsymbol}, the \pkg{fedraserif} package automatically loads the
 % packages \pkg{textcomp} and \pkg{amsmath}.
-% Additionally, the \pkg{fontaxes} package, which is bundled with the
-% \pkg{MinionPro} package, is loaded if it is present in your
-% \LaTeX\ installation.
+% Additionally, the \pkg{fontaxes} package is loaded if it is present in
+% your \LaTeX\ installation.
 % If you want to pass options to these packages, you can
 % either load these packages beforehand, or you can include the options
 % in the |\documentclass| command. Unless the option \option{nomath} is
@@ -227,19 +226,35 @@
 % \subsection{Weights}\label{sec:weights}
 %
 % All fonts of the Fedra Serif Pro family come in four weights, which are
-% (in increasing order) Book, Demi, Medium and Bold. Of these, Book and
-% Demi can be used as the standard text font, while Medium and Bold can
-% be used for bold text. The option keys |normalweight| and |boldweight|
-% allow to control which weights are used for the standard \LaTeX\ font
-% series |m| and |b| (or |bx|), selected by |\mdseries| and |\bfseries|,
-% respectively. For example, to use the Demi
+% (in increasing order) Book, Demi, Medium and Bold, shown in
+% Table~\ref{tab:weights}.
+% \begin{table}
+% \centering
+% \newcommand\pangram{A Quick Brown Fox Jumps Over The Lazy Dog.}
+% \begin{tabular}{@{}lll@{}}
+% \toprule
+% Weight & Series & Example \\
+% \midrule
+% Book & |sl| & \fontseries{sl}\selectfont\pangram \\
+% Demi & |md| & \fontseries{md}\selectfont\pangram \\
+% Medium & |sb| & \fontseries{sb}\selectfont\pangram \\
+% Bold & |ub| & \fontseries{ub}\selectfont\pangram \\
+% \bottomrule
+% \end{tabular}
+% \caption{\label{tab:weights}Summary of font weights}
+% \end{table}
+% Of these, Book and Demi can be used as the standard text font, while Medium
+% and Bold can be used for bold text. The option keys |normalweight| and
+% |boldweight| allow to control which weights are used for the standard
+% \LaTeX\ font series |m| and |b| (or |bx|), selected by |\mdseries| and
+% |\bfseries|, respectively. For example, to use the Demi
 % weight as the standard text font, use the option |normalweight=Demi|.
 % By default, only the Book and the Medium weights are used. Additionally,
 % both keys can be set to the value |auto|, which selects a weight depending
 % on the font size (Book and Medium for normal and large sizes, Demi and
-% Bold for small sizes). Independently of these options, the Demi and the
-% Bold weight can always be accessed using the commands |\fontseries{md}|
-% and |\fontseries{ub}|, respectively.
+% Bold for small sizes). Independently of these options, all weights can
+% accessed using |\fontseries|. For instance, the Demi weight can be
+% accessed using the command |\fontseries{md}|.
 %
 % \subsection{Shapes}\label{sec:shapes}
 %
@@ -397,9 +412,10 @@
 %   |\textdblhyphen| & |\textdivorced| & |\textdied| \\
 %   |\textleaf| & |\textmarried| & |\textmusicalnote| \\
 %   |\textdblhyphenchar| & |\textdollaroldstyle| & |\textcentoldstyle| \\
-%   |\textguarani| & |\textpertenthousand| & |\textpilcrow| \\
-%   |\textbaht| & |\textdiscount| & |\textlquill| \\
-%   |\textrquill| & |\textcopyleft| & |\textreferencemark|
+%   |\textguarani| & |\textrecipe| & |\textpertenthousand| \\
+%   |\textpilcrow| & |\textbaht| & |\textdiscount| \\
+%   |\textlquill| & |\textrquill| & |\textcopyleft| \\
+%   |\textreferencemark| & &
 % \end{tabular}
 % \end{quote}
 % In addition to the monetary symbols defined by the \acro{TS1} encoding,
@@ -787,8 +803,7 @@
 %    \end{macrocode}
 %
 % The font selection commands such as |\figureversion|, |\textsw|, and
-% |\textssc| are provided by the \pkg{fontaxes} package (bundled with
-% the \pkg{MinionPro} package).
+% |\textssc| are provided by the \pkg{fontaxes} package.
 %
 %    \begin{macrocode}
 \IfFileExists{fontaxes.sty}{
