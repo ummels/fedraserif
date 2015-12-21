@@ -128,8 +128,8 @@ $1-metrics: $(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm $(vfdir)/$1-$4$(call shape
 $(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf: $1.otf enc/$(pkg)-$(call encname,$2,$4).enc $1.base $(suffixes:%=$(tfmdir)/$1-Base-%.tfm)
 	$(OTFTOTFM) $(OTFTOTFMFLAGS) $(flags_basic) $(flags_$4) $(flags_$3) $5 --base-encoding=$1.base --encoding=enc/$(pkg)-$(call encname,$2,$4).enc $1.otf $1-$4$(call shapestr,$3)-$2
 
-$(auxdir)/$1-$4$(call shapestr,$3)-$2.vpl: $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf $(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm
-	$(VFTOVP) $$^ $$@
+$(auxdir)/$1-$4$(call shapestr,$3)-$2.vpl: $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf $(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm $(suffixes:%=$(tfmdir)/$1-Base-%.tfm)
+	TFMFONTS=$(tfmdir) $(VFTOVP) $$< > $$@
 
 .PHONY: $1-tables
 $1-tables: $(testdir)/$1-$4$(call shapestr,$3)-$2.pdf
