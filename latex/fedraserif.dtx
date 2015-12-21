@@ -99,7 +99,7 @@
 %</driver>
 %\fi
 %
-% \CheckSum{1136}
+% \CheckSum{1123}
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -165,7 +165,7 @@
 % your \LaTeX\ installation.
 % If you want to pass options to these packages, you can
 % either load these packages beforehand, or you can include the options
-% in the |\documentclass| command. Unless the option \option{nomath} is
+% in the |\documentclass| command. Unless the option \option{math=false} is
 % used, the \pkg{fedraserif} package is \emph{not} compatible with
 % \pkg{amssymb} and \pkg{amsfonts} (since \pkg{fdsymbol} is not).
 %
@@ -187,8 +187,8 @@
 % |fedrabb| & |true|, |false|* & \ref{sec:mathbb} \\
 % |footnotemarks| & |true|, |false|* & \ref{sec:footnotes} \\
 % |figures| & |lining|* (|lf|), |text| (|osf|) & \ref{sec:figures} \\
+% |math| & |true|*, |false| & \ref{sec:math} \\
 % |math-style| & |tex|*, |iso|, |french| & \ref{sec:mathletters} \\
-% |nomath| & |true|, |false|* & \ref{sec:math} \\
 % |normalweight| & |Book|*, |Demi|, |auto| & \ref{sec:weights} \\
 % |stdmathdigits| & |true|, |false|* & \ref{sec:mathdigits} \\
 % |variant| & |A|*, |B| & \ref{sec:variants} \\
@@ -201,9 +201,10 @@
 %
 % \subsection{Variants}\label{sec:variants}
 %
-% Fedra Serif Pro comes in two variants: \emph{Fedra Serif~A} has a lower
-% contrast and shorter ascenders, which makes it a good choice for small sizes,
-% whereas \emph{Fedra Serif~B} has an increased contrast and longer ascenders.
+% Fedra Serif Pro comes in two variants, licensed separately:
+% \emph{Fedra Serif~A} has a lower contrast and shorter ascenders, which makes
+% it a good choice for small sizes, whereas \emph{Fedra Serif~B} features an
+% increased contrast and longer ascenders.
 % To select one variant, use the |variant| key: setting |variant=A| will
 % select Fedra Serif~A (the default), while |variant=B| will select
 % Fedra Serif~B.
@@ -433,8 +434,8 @@
 %
 % By default, we change the math font to Fedra Serif Pro with mathematical
 % symbols taken from FdSymbol. To~disable this behaviour, use the option
-% |nomath|. Note that all other options described in this section have no
-% effect if this option is active.
+% |math=false|. Note that all other options described in this section have no
+% effect if math support is disabled.
 %
 % \subsection{Letters}\label{sec:mathletters}
 %
@@ -582,10 +583,6 @@
 \newcommand*\fdrsf@choicekey[3]{%
   \define@choicekey*{fedraserif.sty}{#1}[\@tempa\@tempb]{#2}{#3}%
 }
-\newif\iffdrsf@text
-\fdrsf@texttrue
-\newif\iffdrsf@math
-\fdrsf@mathtrue
 %    \end{macrocode}
 %
 % \subsubsection*{Font selection}
@@ -619,6 +616,11 @@
 }
 %    \end{macrocode}
 % The next option toggles the math font setup.
+%    \begin{macrocode}
+\fdrsf@boolkey{math}{}
+%    \end{macrocode}
+% For compatibility with oloder versions of this package, we also define
+% a dual option to disable math support.
 %    \begin{macrocode}
 \fdrsf@boolkey{nomath}{%
   \iffdrsf@nomath\fdrsf@mathfalse\else\fdrsf@mathtrue\fi%
@@ -730,7 +732,7 @@
 % \subsubsection*{Defaults}
 %
 %    \begin{macrocode}
-\ExecuteOptionsX{math-style=tex}
+\ExecuteOptionsX{math,math-style=tex}
 \ProcessOptionsX\relax
 %    \end{macrocode}
 %
@@ -739,67 +741,65 @@
 %    \begin{macrocode}
 \RequirePackage[scale=0.9]{fedraserif-fd}
 \@ifpackageloaded{textcomp}{}{\RequirePackage{textcomp}}
-\iffdrsf@text
-  \renewcommand\rmdefault{\fdrsf@textfamily}
-  \DeclareEncodingSubset{TS1}{\fdrsf@family-LF}{1}
-  \DeclareEncodingSubset{TS1}{\fdrsf@family-TLF}{1}
-  \DeclareEncodingSubset{TS1}{\fdrsf@family-OsF}{1}
-  \DeclareEncodingSubset{TS1}{\fdrsf@family-TOsF}{1}
+\renewcommand\rmdefault{\fdrsf@textfamily}
+\DeclareEncodingSubset{TS1}{\fdrsf@family-LF}{1}
+\DeclareEncodingSubset{TS1}{\fdrsf@family-TLF}{1}
+\DeclareEncodingSubset{TS1}{\fdrsf@family-OsF}{1}
+\DeclareEncodingSubset{TS1}{\fdrsf@family-TOsF}{1}
 %    \end{macrocode}
 % In order to accomodate ligatures and glyph variants, we had to remove
 % some glyphs from the standard encodings, but most of them can still be
 % accessed through the \acro{TS1} encoding.
 %    \begin{macrocode}
-  \AtBeginDocument{
-    \UndeclareTextCommand{\textcompwordmark}{T1}
-    \UndeclareTextCommand{\textvisiblespace}{T1}
-    \UndeclareTextCommand{\textperthousand}{T1}
-    \UndeclareTextCommand{\textpertenthousand}{T1}
-    \UndeclareTextCommand{\textsterling}{T1}
-    \UndeclareTextCommand{\textsection}{T1}
-    \UndeclareTextCommand{\textmu}{QX}
-    \UndeclareTextCommand{\texteuro}{QX}
-    \UndeclareTextCommand{\textEuro}{QX}
-    \let\textEuro\texteuro
-    \UndeclareTextCommand{\textdagger}{QX}
-    \UndeclareTextCommand{\textdaggerdbl}{QX}
-    \UndeclareTextCommand{\textdegree}{QX}
-    \UndeclareTextCommand{\textsection}{QX}
-    \UndeclareTextCommand{\textregistered}{QX}
-    \UndeclareTextCommand{\copyright}{QX}
-    \let\copyright\textcopyright
-    \UndeclareTextCommand{\textdiv}{QX}
-    \UndeclareTextCommand{\textminus}{QX}
-    \UndeclareTextCommand{\texttimes}{QX}
-    \UndeclareTextCommand{\textpm}{QX}
-    \UndeclareTextCommand{\textbullet}{QX}
-    \UndeclareTextCommand{\textcurrency}{QX}
-    \UndeclareTextCommand{\textperthousand}{QX}
-    \UndeclareTextCommand{\textanglearc}{QX}
-    \UndeclareTextCommand{\textvisiblespace}{T5}
+\AtBeginDocument{
+  \UndeclareTextCommand{\textcompwordmark}{T1}
+  \UndeclareTextCommand{\textvisiblespace}{T1}
+  \UndeclareTextCommand{\textperthousand}{T1}
+  \UndeclareTextCommand{\textpertenthousand}{T1}
+  \UndeclareTextCommand{\textsterling}{T1}
+  \UndeclareTextCommand{\textsection}{T1}
+  \UndeclareTextCommand{\textmu}{QX}
+  \UndeclareTextCommand{\texteuro}{QX}
+  \UndeclareTextCommand{\textEuro}{QX}
+  \let\textEuro\texteuro
+  \UndeclareTextCommand{\textdagger}{QX}
+  \UndeclareTextCommand{\textdaggerdbl}{QX}
+  \UndeclareTextCommand{\textdegree}{QX}
+  \UndeclareTextCommand{\textsection}{QX}
+  \UndeclareTextCommand{\textregistered}{QX}
+  \UndeclareTextCommand{\copyright}{QX}
+  \let\copyright\textcopyright
+  \UndeclareTextCommand{\textdiv}{QX}
+  \UndeclareTextCommand{\textminus}{QX}
+  \UndeclareTextCommand{\texttimes}{QX}
+  \UndeclareTextCommand{\textpm}{QX}
+  \UndeclareTextCommand{\textbullet}{QX}
+  \UndeclareTextCommand{\textcurrency}{QX}
+  \UndeclareTextCommand{\textperthousand}{QX}
+  \UndeclareTextCommand{\textanglearc}{QX}
+  \UndeclareTextCommand{\textvisiblespace}{T5}
 %    \end{macrocode}
 % Additional currency symbols are stored in empty slots of the TS1 encoding.
 %    \begin{macrocode}
-    \DeclareTextSymbol{\textcruzeiro}{TS1}{192}
-    \DeclareTextSymbol{\textfranc}{TS1}{193}
-    \DeclareTextSymbol{\textmill}{TS1}{194}
-    \DeclareTextSymbol{\textpeseta}{TS1}{195}
-    \DeclareTextSymbol{\textrupee}{TS1}{196}
-    \DeclareTextSymbol{\textsheqel}{TS1}{197}
-    \DeclareTextSymbol{\textkip}{TS1}{198}
-    \DeclareTextSymbol{\texttugrik}{TS1}{199}
-    \DeclareTextSymbol{\texthryvnia}{TS1}{200}
-    \DeclareTextSymbolDefault{\textcruzeiro}{TS1}
-    \DeclareTextSymbolDefault{\textfranc}{TS1}
-    \DeclareTextSymbolDefault{\textmill}{TS1}
-    \DeclareTextSymbolDefault{\textpeseta}{TS1}
-    \DeclareTextSymbolDefault{\textrupee}{TS1}
-    \DeclareTextSymbolDefault{\textsheqel}{TS1}
-    \DeclareTextSymbolDefault{\textkip}{TS1}
-    \DeclareTextSymbolDefault{\texttugrik}{TS1}
-    \DeclareTextSymbolDefault{\texthryvnia}{TS1}
-  }
-\fi
+  \DeclareTextSymbol{\textcruzeiro}{TS1}{192}
+  \DeclareTextSymbol{\textfranc}{TS1}{193}
+  \DeclareTextSymbol{\textmill}{TS1}{194}
+  \DeclareTextSymbol{\textpeseta}{TS1}{195}
+  \DeclareTextSymbol{\textrupee}{TS1}{196}
+  \DeclareTextSymbol{\textsheqel}{TS1}{197}
+  \DeclareTextSymbol{\textkip}{TS1}{198}
+  \DeclareTextSymbol{\texttugrik}{TS1}{199}
+  \DeclareTextSymbol{\texthryvnia}{TS1}{200}
+  \DeclareTextSymbolDefault{\textcruzeiro}{TS1}
+  \DeclareTextSymbolDefault{\textfranc}{TS1}
+  \DeclareTextSymbolDefault{\textmill}{TS1}
+  \DeclareTextSymbolDefault{\textpeseta}{TS1}
+  \DeclareTextSymbolDefault{\textrupee}{TS1}
+  \DeclareTextSymbolDefault{\textsheqel}{TS1}
+  \DeclareTextSymbolDefault{\textkip}{TS1}
+  \DeclareTextSymbolDefault{\texttugrik}{TS1}
+  \DeclareTextSymbolDefault{\texthryvnia}{TS1}
+}
 %    \end{macrocode}
 %
 % The font selection commands such as |\figureversion|, |\textsw|, and
@@ -824,13 +824,13 @@
 % Some math symbols are taken from the text font by \pkg{fdsymbol}.
 % Use the correct math figure version for these.
 %    \begin{macrocode}
-\renewcommand\fdsy@text[1]{%
-  \ifx\fdsy@bold\math@version
-    \text{\usefont{T1}{\fdrsf@mathfamily}{b}{n}#1}%
-  \else
-    \text{\usefont{T1}{\fdrsf@mathfamily}{m}{n}#1}%
-  \fi
-}
+  \renewcommand\fdsy@text[1]{%
+    \ifx\fdsy@bold\math@version
+      \text{\usefont{T1}{\fdrsf@mathfamily}{b}{n}#1}%
+    \else
+      \text{\usefont{T1}{\fdrsf@mathfamily}{m}{n}#1}%
+    \fi
+  }
 %    \end{macrocode}
 %
 % Redefine the standard math versions |normal| and |bold|.
@@ -982,63 +982,61 @@
 %
 % We provide two commands to access Fedra's bullet figures.
 %    \begin{macrocode}
-\iffdrsf@text
-  \newcommand*{\fdrsf@@openbullet}[2]{%
-    \ifx#2\end
-      \char3#1%
-      \let\next\@gobble
-    \else
-      \char2#1\kern-0.02em%
-      \let\next\fdrsf@@openbullet
-    \fi
-    \next#2%
-  }
-  \newcommand*{\fdrsf@openbullet}[2]{%
-    \ifx#2\end
-      \char0#1%
-      \let\next\@gobble
-    \else%
-      \char1#1\kern-0.02em%
-      \let\next\fdrsf@@openbullet
-    \fi
-    \next#2%
-  }
-  \DeclareRobustCommand*{\openbullet}[1]{%
-    \begingroup
-    \usefont{U}{\fdrsf@family-Pi}{m}{n}%
-    \edef\@tempa{#1}\expandafter\fdrsf@openbullet\@tempa\end
-    \endgroup
-  }
+\newcommand*{\fdrsf@@openbullet}[2]{%
+  \ifx#2\end
+    \char3#1%
+    \let\next\@gobble
+  \else
+    \char2#1\kern-0.02em%
+    \let\next\fdrsf@@openbullet
+  \fi
+  \next#2%
+}
+\newcommand*{\fdrsf@openbullet}[2]{%
+  \ifx#2\end
+    \char0#1%
+    \let\next\@gobble
+  \else%
+    \char1#1\kern-0.02em%
+    \let\next\fdrsf@@openbullet
+  \fi
+  \next#2%
+}
+\DeclareRobustCommand*{\openbullet}[1]{%
+  \begingroup
+  \usefont{U}{\fdrsf@family-Pi}{m}{n}%
+  \edef\@tempa{#1}\expandafter\fdrsf@openbullet\@tempa\end
+  \endgroup
+}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-  \newcommand*{\fdrsf@@closedbullet}[2]{%
-    \ifx#2\end
-      \char7#1%
-      \let\next\@gobble
-    \else
-      \char6#1\kern-0.02em%
-      \let\next\fdrsf@@closedbullet
-    \fi
-    \next#2%
-  }
-  \newcommand*{\fdrsf@closedbullet}[2]{%
-    \ifx#2\end
-      \char4#1%
-      \let\next\@gobble
-    \else
-      \char5#1\kern-0.02em%
-      \let\next\fdrsf@@closedbullet
-    \fi
-    \next#2%
-  }
-  \DeclareRobustCommand*{\closedbullet}[1]{%
-    \begingroup
-    \usefont{U}{\fdrsf@family-Pi}{m}{n}%
-    \edef\@tempa{#1}\expandafter\fdrsf@closedbullet\@tempa\end
-    \endgroup
-  }
-\fi
+\newcommand*{\fdrsf@@closedbullet}[2]{%
+  \ifx#2\end
+    \char7#1%
+    \let\next\@gobble
+  \else
+    \char6#1\kern-0.02em%
+    \let\next\fdrsf@@closedbullet
+  \fi
+  \next#2%
+}
+\newcommand*{\fdrsf@closedbullet}[2]{%
+  \ifx#2\end
+    \char4#1%
+    \let\next\@gobble
+  \else
+    \char5#1\kern-0.02em%
+    \let\next\fdrsf@@closedbullet
+  \fi
+  \next#2%
+}
+\DeclareRobustCommand*{\closedbullet}[1]{%
+  \begingroup
+  \usefont{U}{\fdrsf@family-Pi}{m}{n}%
+  \edef\@tempa{#1}\expandafter\fdrsf@closedbullet\@tempa\end
+  \endgroup
+}
 %    \end{macrocode}
 %
 % \subsection{Superior and inferior figures}
@@ -1105,26 +1103,22 @@
 % \subsection{Logos}
 %
 %    \begin{macrocode}
-\iffdrsf@text
-  \DeclareRobustCommand{\LaTeX}{L\kern-.26em%
-    {\sbox\z@ T%
-      \vbox to\ht\z@{\hbox{\check@mathfonts
-        \fontsize\sf@size\z@
-        \math@fontsfalse\selectfont
-        A}%
-      \vss}%
-    }%
-    \kern-.05em%
-    \TeX
-  }
-\fi
+\DeclareRobustCommand{\LaTeX}{L\kern-.26em%
+  {\sbox\z@ T%
+    \vbox to\ht\z@{\hbox{\check@mathfonts
+      \fontsize\sf@size\z@
+      \math@fontsfalse\selectfont
+      A}%
+    \vss}%
+  }%
+  \kern-.05em%
+  \TeX
+}
 %    \end{macrocode}
 %
 % Make the changes take effect. This concludes the main style file.
 %    \begin{macrocode}
-\iffdrsf@text
-  \normalfont
-\fi
+\normalfont
 %</package>
 %    \end{macrocode}
 %
