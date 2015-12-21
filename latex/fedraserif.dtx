@@ -1550,18 +1550,18 @@
 % has not been loaded yet (which should be the case); otherwise we can
 % execute the alias definitions directly.
 %    \begin{macrocode}
-\gdef\fdrsf@MicroType@Aliases{%
+\gdef\fdrsf@Microtype@Aliases{%
   \DeclareMicrotypeAlias{FedraSerifPro-LF}{FedraSerifPro}%
   \DeclareMicrotypeAlias{FedraSerifPro-OsF}{FedraSerifPro}%
   \DeclareMicrotypeAlias{FedraSerifPro-TLF}{FedraSerifPro}%
   \DeclareMicrotypeAlias{FedraSerifPro-TOsF}{FedraSerifPro}%
 }
 \@ifundefined{Microtype@Hook}{%
-  \global\let\Microtype@Hook\fdrsf@MicroType@Aliases
+  \global\let\Microtype@Hook\fdrsf@Microtype@Aliases
 }{%
   \g@addto@macro\Microtype@Hook{\fdrsf@Microtype@Aliases}%
 }%
-\@ifundefined{DeclareMicroTypeAlias}{}{\fdrsf@MicroType@Aliases}%
+\@ifundefined{DeclareMicrotypeAlias}{}{\fdrsf@Microtype@Aliases}%
 %    \end{macrocode}
 %
 %    \begin{macrocode}
