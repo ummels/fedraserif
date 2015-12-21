@@ -99,7 +99,7 @@
 %</driver>
 %\fi
 %
-% \CheckSum{1133}
+% \CheckSum{1136}
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -514,7 +514,7 @@
 %   \acro{QX}, \acro{T5} &
 %   FedraSerifPro-LF, FedraSerifPro-OsF, FedraSerifPro-TLF,
 %   FedraSerifPro-TOsF &
-%   m, md,\> b (sb, bx), ub &
+%   sl, m, md,\> b (bx), sb, ub &
 %   n, it (sl), sw,\>
 %   sc, scit (scsl), scsw,\>
 %   ssc, sscit (sscsl), sscsw \\
@@ -524,14 +524,14 @@
 %   \acro{OML} &
 %   FedraSerifPro-TOsF
 %   (FedraSerifPro-LF, FedraSerifPro-OsF, FedraSerifPro-TLF) &
-%   m, md,\> b (sb, bx), ub &
+%   sl, m, md,\> b (bx), sb, ub &
 %   n, it \\
 %   \addlinespace
 %   \midrule
 %   \addlinespace
 %   \acro{U} &
 %   FedraSerifPro-Extra &
-%   m, md,\> b (sb, bx), ub &
+%   sl, m, md,\> b (bx), sb, ub &
 %   n, it (sl) \\
 %   \addlinespace
 %   \midrule
@@ -601,6 +601,7 @@
   \PassOptionsToPackage{boldweight=#1}{fedraserif-fd}%
   \PassOptionsToPackage{boldweight=#1}{fdsymbol}%
 }
+%    \end{macrocode}
 % The next option toggles the math font setup.
 %    \begin{macrocode}
 \fdrsf@boolkey{nomath}{%
@@ -802,7 +803,7 @@
 %
 %    \begin{macrocode}
 \iffdrsf@math
-  \RequirePackage[scale=0.9]{fdsymbol}[2011/08/28]
+  \RequirePackage[scale=0.9]{fdsymbol}[2011/11/01]
 %    \end{macrocode}
 %
 % Some math symbols are taken from the text font by \pkg{fdsymbol}.
@@ -1425,15 +1426,19 @@
 %    \end{macrocode}
 % Now we can build up the configuration database.
 %    \begin{macrocode}
+\fdrsf@addconfig{weight/normal}{sl}{Book}
+\fdrsf@addconfig{weight/small}{sl}{Book}
 \fdrsf@addconfig{weight/normal}{m}{\fdrsf@mweight@normal}
 \fdrsf@addconfig{weight/small}{m}{\fdrsf@mweight@small}
 \fdrsf@addconfig{weight/normal}{md}{Demi}
 \fdrsf@addconfig{weight/small}{md}{Demi}
+\fdrsf@addconfig{weight/normal}{sb}{Medium}
+\fdrsf@addconfig{weight/small}{sb}{Medium}
 \fdrsf@addconfig{weight/normal}{b}{\fdrsf@bweight@normal}
 \fdrsf@addconfig{weight/small}{b}{\fdrsf@bweight@small}
 \fdrsf@addconfig{weight/small}{ub}{Bold}
 \fdrsf@addconfig{weight/normal}{ub}{Bold}
-\fdrsf@addconfig{subs/series}{sb,bx}{b}
+\fdrsf@addconfig{subs/series}{bx}{b}
 \fdrsf@addconfig{italic}{it,scit,sscit,sw,scsw,sscsw}{Italic}
 \fdrsf@addconfig[OML]{italic}{n}{French}
 \fdrsf@addconfig[OML]{italic}{it}{Mixed}
@@ -1493,16 +1498,16 @@
 }
 \fdrsf@makeglobal{DeclareFedraSerifFamily}
 \newcommand*\DeclareFedraSerifLargeFamily[2]{%
-  \DeclareFedraSerifFamily{#1}{#2}{m,md,sb,b,bx,ub}%
+  \DeclareFedraSerifFamily{#1}{#2}{sl,m,md,sb,b,bx,ub}%
     {n,it,sc,ssc,scit,sscit,sw,scsw,sscsw,sl,scsl,sscsl}%
 }
 \fdrsf@makeglobal{DeclareFedraSerifLargeFamily}
 \newcommand*\DeclareFedraSerifSmallFamily[2]{%
-  \DeclareFedraSerifFamily{#1}{#2}{m,md,sb,b,bx,ub}{n,it,sl}%
+  \DeclareFedraSerifFamily{#1}{#2}{sl,m,md,sb,b,bx,ub}{n,it,sl}%
 }
 \fdrsf@makeglobal{DeclareFedraSerifSmallFamily}
 \newcommand*\DeclareFedraSerifTinyFamily[2]{%
-  \DeclareFedraSerifFamily{#1}{#2}{m,md,sb,b,bx,ub}{n}%
+  \DeclareFedraSerifFamily{#1}{#2}{sl,m,md,sb,b,bx,ub}{n}%
 }
 \fdrsf@makeglobal{DeclareFedraSerifTinyFamily}
 \newcommand*\DeclareFedraSerifMathFamily[1]{%
