@@ -3,6 +3,7 @@
 %
 % LIGKERN || = 16 ;
 %
+% UNICODING bigcircle =: uni25EF;
 % UNICODING dblbracketleft =: uni301A;
 % UNICODING dblbracketright =: uni301B;
 % UNICODING born =: uni2605;
