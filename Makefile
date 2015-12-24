@@ -7,8 +7,11 @@ TFMTOPL := tftopl
 VFTOVP := vftovp
 PLTOTFM := pltotf
 VPLTOVF := vptovf
-PDFTEX := pdftex -interaction nonstopmode -halt-on-error
+LATEX := latex -interaction nonstopmode -halt-on-error
 PDFLATEX := pdflatex -interaction nonstopmode -halt-on-error
+LUALATEX := lualatex -interaction nonstopmode -halt-on-error
+PDFTEX := pdftex -interaction nonstopmode -halt-on-error
+DVIPS := dvips
 AWK := awk
 SED := sed
 RM := rm -rf
@@ -33,14 +36,22 @@ shapes_it := n sc ssc sw scsw sscsw
 encodings := OT1 T1 TS1 LY1 QX T5
 figures := LF OsF TLF TOsF
 
-dvipsdir := dvips
+encdir := dvips
 tfmdir := tfm
 vfdir := vf
 auxdir := misc
 testdir := test
-outdirs := $(dvipsdir) $(tfmdir) $(vfdir) $(auxdir) $(testdir)
+latexdir := latex
+outdirs := $(encdir) $(tfmdir) $(vfdir) $(auxdir) $(testdir)
 
-flags_basic := --encoding-directory=$(dvipsdir) --tfm-directory=$(tfmdir) --vf-directory=$(vfdir) --pl-directory=$(auxdir) --vpl-directory=$(auxdir) --no-type1 --no-dotlessj --no-updmap --no-map
+texvars := TEXINPUTS=$(latexdir): ENCFONTS=$(encdir): TFMFONTS=$(tfmdir): VFFONTS=$(vfdir):
+latex := $(texvars) $(LATEX)
+pdflatex := $(texvars) $(PDFLATEX)
+lualatex := $(texvars) $(LUALATEX)
+pdftex := $(texvars) $(PDFTEX)
+dvips := $(texvars) DVIPSHEADERS=$(encdir):$(tfmdir):$(vfdir): $(DVIPS)
+
+flags_basic := --encoding-directory=$(encdir) --tfm-directory=$(tfmdir) --vf-directory=$(vfdir) --pl-directory=$(auxdir) --vpl-directory=$(auxdir) --no-type1 --no-dotlessj --no-updmap --no-map
 flags_common := --warn-missing --feature=kern --feature=liga
 flags_OsF := --feature=pnum
 flags_TOsF := --feature=tnum
@@ -50,7 +61,7 @@ flags_sc := --feature=smcp --unicoding "germandbls =: SSsmall ; dotlessj =: j ; 
 flags_ssc := $(flags_sc) --letterspacing=80
 flags_sw := --feature=swsh
 flags_scsw := $(flags_sc) $(flags_sw)
-flags_sscsw := $(flags_ssc) $(flags_sw) 
+flags_sscsw := $(flags_ssc) $(flags_sw)
 flags_math := --letterspacing=40 --math-spacing
 
 otffiles_in := $(wildcard $(fontname)?-*.otf)
@@ -63,17 +74,17 @@ fonts := $(fonts_up) $(fonts_it)
 pfbfiles := $(fonts:%=%.pfb)
 suffixes := $(shell $(AWK) -f scripts/print-suffixes.awk glyphlist 2> /dev/null)
 glyphlists := $(suffixes:%=.glyphlist-%)
-encfiles := $(suffixes:%=$(dvipsdir)/$(pkg)-%.enc) 
+encfiles := $(suffixes:%=$(encdir)/$(pkg)-%.enc)
 baselists := $(fonts:%=%.base)
-mapfile := $(dvipsdir)/$(pkg).map
+mapfile := $(encdir)/$(pkg).map
 plfiles := $(foreach w,Book Regular Medium Bold,\
   $(foreach s,A B C E,$(auxdir)/FdSymbol$s-$w.pl))
-styfiles := $(addprefix latex/,$(pkg).sty $(pkg)-fd.sty mt-$(family).cfg)
+styfiles := $(addprefix $(latexdir)/,$(pkg).sty $(pkg)-fd.sty mt-$(family).cfg)
 fdfiles := $(foreach enc,$(encodings) OML,\
-  $(foreach ver,$(figures),latex/$(enc)$(family)-$(ver).fd)) \
-  latex/U$(family)-Extra.fd latex/U$(family)-Pi.fd \
-  latex/U$(family)-BB.fd
-tempfiles := $(addprefix latex/,$(pkg).aux $(pkg).log $(pkg).out $(pkg).toc $(pkg).hd)
+  $(foreach ver,$(figures),$(latexdir)/$(enc)$(family)-$(ver).fd)) \
+  $(latexdir)/U$(family)-Extra.fd $(latexdir)/U$(family)-Pi.fd \
+  $(latexdir)/U$(family)-BB.fd
+tempfiles := $(addprefix $(latexdir)/,$(pkg).aux $(pkg).log $(pkg).out $(pkg).toc $(pkg).hd)
 
 # create output directories
 
@@ -96,8 +107,7 @@ lc = $(subst A,a,$(subst B,b,$(subst C,c,$(subst D,d,$(subst E,e,$(subst F,f,$(s
 
 # $(call fonttable,font)
 define fonttable
-TEXFONTS=$(tfmdir):$(vfdir): ENCFONTS=$(dvipsdir): \
-$(PDFTEX) -output-dir $(testdir) -jobname $1 \
+$(pdftex) -output-dir $(testdir) -jobname $1 \
 \\pdfmapfile{=$(mapfile)}\\input fntproof.tex \\init $1 \\table\\bye
 endef
 
@@ -108,8 +118,8 @@ define baserule
 .PHONY: $1-basemetrics
 $1-basemetrics: $(auxdir)/$1-Base-$2.pl $(tfmdir)/$1-Base-$2.tfm
 
-$(tfmdir)/$1-Base-$2.tfm: $1.otf $(dvipsdir)/$(pkg)-$2.enc
-	$(OTFTOTFM) $(OTFTOTFMFLAGS) $(flags_basic) --literal-encoding=$(dvipsdir)/$(pkg)-$2.enc $1.otf $1-Base-$2
+$(tfmdir)/$1-Base-$2.tfm: $1.otf $(encdir)/$(pkg)-$2.enc
+	$(OTFTOTFM) $(OTFTOTFMFLAGS) $(flags_basic) --literal-encoding=$(encdir)/$(pkg)-$2.enc $1.otf $1-Base-$2
 
 $(auxdir)/$1-Base-$2.pl: $(tfmdir)/$1-Base-$2.tfm
 	$(TFMTOPL) $$< $$@
@@ -229,7 +239,7 @@ $(mapfile): glyphlist
 $(glyphlists): glyphlist
 	grep '^/' glyphlist | split -a 1 -l 256 - .glyphlist-
 
-$(encfiles): $(dvipsdir)/$(pkg)-%.enc: .glyphlist-%
+$(encfiles): $(encdir)/$(pkg)-%.enc: .glyphlist-%
 	echo "% CODINGSCHEME FONTSPECIFIC" > $@
 	I=$$(echo $* | tr [:lower:] [:upper:]); \
 	echo "/$(family)$$I [" >> $@
@@ -294,25 +304,39 @@ $(plfiles): $(auxdir)/%.pl:
 .PHONY: latex
 latex: $(styfiles) $(fdfiles)
 
-$(styfiles) $(fdfiles): latex/$(pkg).ins latex/$(pkg).dtx
-	cd latex && $(PDFLATEX) $(pkg).ins
+$(styfiles) $(fdfiles) $(latexdir)/test-$(pkg).tex: $(latexdir)/$(pkg).ins $(latexdir)/$(pkg).dtx
+	$(LATEX) -output-directory $(latexdir) $<
+
+# rules for testing the build
+
+.PHONY: test
+test: all $(latexdir)/test-$(pkg).tex
+	@echo "Testing pdflatex..."
+	$(pdflatex) -output-directory $(testdir) "\pdfmapfile{+$(mapfile)}\input{test-$(pkg)}"
+	@echo ""
+	@echo "Testing latex+dvips..."
+	$(latex) -output-directory $(testdir) "\input{test-$(pkg)}"
+	$(dvips) -u +$(mapfile) $(testdir)/test-$(pkg).dvi -o $(testdir)/test-$(pkg).ps
+	@echo ""
+	@echo "Testing lualatex..."
+	$(lualatex) -output-directory $(testdir) -jobname test-$(pkg)-luatex "\directlua{pdf.mapfile('+$(mapfile)')}\input{test-$(pkg)}"
 
 # rules for rebuilding the documentation
 
 .PHONY: doc
-doc: latex/$(pkg).pdf
+doc: $(latexdir)/$(pkg).pdf
 
-latex/$(pkg).pdf: latex/$(pkg).dtx
-	cd latex && $(PDFLATEX) $(pkg).dtx && \
-	(while grep -s 'Rerun to get' $(pkg).log; do \
-	  $(PDFLATEX) $(pkg).dtx; \
+$(latexdir)/$(pkg).pdf: $(latexdir)/$(pkg).dtx $(mapfile)
+	$(pdflatex) -output-directory $(latexdir) "\pdfmapfile{+$(mapfile)}\input{$(pkg).dtx}" && \
+	(while grep -s 'Rerun to get' $(latexdir)/$(pkg).log; do \
+	  $(pdflatex) -output-directory $(latexdir) "\pdfmapfile{+$(mapfile)}\input{$(pkg).dtx}"; \
 	done)
 
 # rule for checking whether base fonts are complete
 
 .PHONY: check
 check:
-	@! ls $(dvipsdir)/a_*.enc > /dev/null 2>&1 || ! echo "Found auto-generated encoding files: $$(ls -m $(dvipsdir)/a_*.enc)\nAdd glyphs to glyphlist, remove these files, and remake." 1>&2
+	@! ls $(encdir)/a_*.enc > /dev/null 2>&1 || ! echo "Found auto-generated encoding files: $$(ls -m $(encdir)/a_*.enc)\nAdd glyphs to glyphlist, remove these files, and remake." 1>&2
 	@! ls $(auxdir)/*--base.pl > /dev/null 2>&1 || ! echo "Found auto-generated base metrics: $$(ls -m $(auxdir)/*--base.pl)" 1>&2
 
 # rules for (un)installing everything
@@ -332,9 +356,9 @@ install: all check
 	$(INSTALLDIR) $(TEXMFDIR)/tex/latex/$(pkg)
 	$(INSTALLDATA) $(styfiles) $(fdfiles) $(TEXMFDIR)/tex/latex/$(pkg)
 	$(INSTALLDIR) $(TEXMFDIR)/doc/latex/$(pkg)
-	$(INSTALLDATA) latex/$(pkg).pdf $(TEXMFDIR)/doc/latex/$(pkg)
+	$(INSTALLDATA) $(latexdir)/$(pkg).pdf $(TEXMFDIR)/doc/latex/$(pkg)
 	$(INSTALLDIR) $(TEXMFDIR)/source/latex/$(pkg)
-	$(INSTALLDATA) latex/$(pkg).ins latex/$(pkg).dtx $(TEXMFDIR)/source/latex/$(pkg)
+	$(INSTALLDATA) $(latexdir)/$(pkg).ins $(latexdir)/$(pkg).dtx $(TEXMFDIR)/source/latex/$(pkg)
 
 .PHONY: uninstall
 uninstall:

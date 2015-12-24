@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (c) 2011 by Michael Ummels <michael.ummels@rwth-aachen.de>
+% Copyright (c) 2011-2015 by Michael Ummels <michael.ummels@rwth-aachen.de>
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3c
@@ -97,6 +97,21 @@
 \DocInput{fedraserif.dtx}
 \end{document}
 %</driver>
+%<*test>
+\documentclass[fleqn]{article}
+
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage[variant=B]{fedraserif}
+
+\raggedbottom
+\setlength{\parindent}{0pt}
+\linespread{1.5}
+
+\begin{document}
+Test.
+\end{document}
+%</test>
 %\fi
 %
 % \CheckSum{1123}
@@ -643,7 +658,7 @@
 \fdrsf@choicekey{figures}{text,osf,lining,lf}{%
   \ifcase\@tempb\relax
     \renewcommand\fdrsf@textfig{OsF}%
-  \or    
+  \or
     \renewcommand\fdrsf@textfig{OsF}%
   \or
     \renewcommand\fdrsf@textfig{LF}%
