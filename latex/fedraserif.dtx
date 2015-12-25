@@ -145,7 +145,7 @@ Test.
 %</test>
 %\fi
 %
-% \CheckSum{1148}
+% \CheckSum{1174}
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -403,15 +403,12 @@ Test.
 % Assuming that the \pkg{pifont} package is loaded, you can access Fedra
 % Serif's ornamental characters via:
 % \begin{quote}
-% \begin{tabular}{@{}ll}
-%   |\Pisymbol{FedraSerifProA-Pi}|\marg{number} & or \\
-%   |\Pisymbol{FedraSerifProB-Pi}|\marg{number} &
-% \end{tabular}
+%   |\ding|\marg{number}
 % \end{quote}
 % The available glyphs are listed in Table~\ref{table:dingbats}.
 % \begin{table}
 % \figureversion{tabular}\centering
-% \newcommand*\showding[1]{#1 & \Pisymbol{FedraSerifProB-Pi}{#1}}\relax
+% \newcommand*\showding[1]{#1 & \ding{#1}}\relax
 % \begin{tabular}{@{}*{4}{r@{\quad}l}@{}}
 % \toprule
 %  number & glyph & number & glyph & number & glyph & number & glyph\\
@@ -678,6 +675,7 @@ Test.
 \newcommand\fdrsf@textfamily{\fdrsf@family\fdrsf@variant-\fdrsf@textfig}
 \newcommand\fdrsf@mathfamily{\fdrsf@family\fdrsf@variant-\fdrsf@mathfig}
 \newcommand\fdrsf@mathtfamily{\fdrsf@family\fdrsf@variant-T\fdrsf@mathfig}
+\newcommand\fdrsf@pifamily{\fdrsf@family\fdrsf@variant-Pi}
 \newcommand\fdrsf@mathshape{it}
 %    \end{macrocode}
 %
@@ -1029,6 +1027,23 @@ Test.
   \DeclareMathSymbol{\gimel}{\mathord}{letters}{"BE}
   \DeclareMathSymbol{\daleth}{\mathord}{letters}{"BF}
 \fi
+%    \end{macrocode}
+%
+% \subsection{Dingbats}
+%
+% We redefined some of the commands provided by the \pkg{pifont} package
+% to replace Zapf Dingbats by Fedra Serif's dingbats font.
+%    \begin{macrocode}
+\IfFileExists{pifont.sty}{
+  \RequirePackage{pifont}[2005/04/12]
+  \renewcommand{\ding}{\Pisymbol{\fdrsf@pifamily}}
+  \renewcommand{\dingfill}{\Pifill{\fdrsf@pifamily}}
+  \renewcommand{\dingline}{\Piline{\fdrsf@pifamily}}
+  \renewenvironment{dinglist}[1]{\begin{Pilist}{\fdrsf@pifamily}{##1}}%
+    {\end{Pilist}}
+  \renewenvironment{dingautolist}[1]{\begin{Piautolist}{\fdrsf@pifamily}{##1}}%
+    {\end{Piautolist}}
+}{}
 %    \end{macrocode}
 %
 % \subsection{Bullet figures}
