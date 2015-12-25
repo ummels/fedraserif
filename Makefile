@@ -85,6 +85,7 @@ fdfiles := $(foreach enc,$(encodings) OML,$(foreach var,$(variants),\
   $(foreach ver,$(figures),$(latexdir)/$(enc)$(family)$(var)-$(ver).fd))) \
   $(foreach var,$(variants),$(latexdir)/U$(family)$(var)-Extra.fd \
   $(latexdir)/U$(family)$(var)-Pi.fd $(latexdir)/U$(family)$(var)-BB.fd)
+testfiles := $(foreach var,$(variants),$(latexdir)/test-$(pkg)-$(var).tex)
 tempfiles := $(addprefix $(latexdir)/,$(pkg).aux $(pkg).log $(pkg).out $(pkg).toc $(pkg).hd)
 
 # create output directories
@@ -305,22 +306,39 @@ $(plfiles): $(auxdir)/%.pl:
 .PHONY: latex
 latex: $(styfiles) $(fdfiles)
 
-$(styfiles) $(fdfiles) $(latexdir)/test-$(pkg).tex: $(latexdir)/$(pkg).ins $(latexdir)/$(pkg).dtx
+$(styfiles) $(fdfiles) $(testfiles): $(latexdir)/$(pkg).ins $(latexdir)/$(pkg).dtx
 	$(LATEX) -output-directory $(latexdir) $<
 
 # rules for testing the build
 
 .PHONY: test
-test: all $(latexdir)/test-$(pkg).tex
-	@echo "Testing pdflatex..."
-	$(pdflatex) -output-directory $(testdir) "\pdfmapfile{+$(mapfile)}\input{test-$(pkg)}"
+test: all $(testfiles)
+ifneq ($(filter $(fontname)A-%,$(fonts_up)),)
+	@echo "Testing Fedra Serif A with pdflatex..."
+	$(pdflatex) -output-directory $(testdir) "\pdfmapfile{$(mapfile)}\input{test-$(pkg)-a}"
 	@echo ""
-	@echo "Testing latex+dvips..."
-	$(latex) -output-directory $(testdir) "\input{test-$(pkg)}"
-	$(dvips) -u +$(mapfile) $(testdir)/test-$(pkg).dvi -o $(testdir)/test-$(pkg).ps
+	@echo "Testing Fedra Serif A with latex+dvips..."
+	$(latex) -output-directory $(testdir) "\input{test-$(pkg)-a}"
+	$(dvips) -u $(mapfile) $(testdir)/test-$(pkg)-a.dvi -o $(testdir)/test-$(pkg)-a.ps
 	@echo ""
-	@echo "Testing lualatex..."
-	$(lualatex) -output-directory $(testdir) -jobname test-$(pkg)-luatex "\directlua{pdf.mapfile('+$(mapfile)')}\input{test-$(pkg)}"
+	@echo "Testing Fedra Serif A with lualatex..."
+	$(lualatex) -output-directory $(testdir) -jobname test-$(pkg)-a-luatex "\directlua{pdf.mapfile('$(mapfile)')}\input{test-$(pkg)-a}"
+else
+	@echo "Fedra Serif Pro A not installed."
+endif
+ifneq ($(filter $(fontname)B-%,$(fonts_up)),)
+	@echo "Testing Fedra Serif B with pdflatex..."
+	$(pdflatex) -output-directory $(testdir) "\pdfmapfile{$(mapfile)}\input{test-$(pkg)-b}"
+	@echo ""
+	@echo "Testing Fedra Serif B with latex+dvips..."
+	$(latex) -output-directory $(testdir) "\input{test-$(pkg)-b}"
+	$(dvips) -u $(mapfile) $(testdir)/test-$(pkg)-b.dvi -o $(testdir)/test-$(pkg)-b.ps
+	@echo ""
+	@echo "Testing Fedra Serif B with lualatex..."
+	$(lualatex) -output-directory $(testdir) -jobname test-$(pkg)-b-luatex "\directlua{pdf.mapfile('$(mapfile)')}\input{test-$(pkg)-b}"
+else
+	@echo "Fedra Serif Pro B not installed."
+endif
 
 # rules for rebuilding the documentation
 
@@ -382,6 +400,7 @@ clean:
 	$(RM) $(outdirs)
 	$(RM) $(styfiles)
 	$(RM) $(fdfiles)
+	$(RM) $(testfiles)
 	$(RM) $(tempfiles)
 
 .PHONY: maintainer-clean
