@@ -34,6 +34,7 @@ weights := Book Demi Medium Bold
 shapes_up := n sc ssc
 shapes_it := n sc ssc sw scsw sscsw
 encodings := OT1 T1 TS1 LY1 QX T5
+variants := A B
 figures := LF OsF TLF TOsF
 
 encdir := dvips
@@ -80,10 +81,10 @@ mapfile := $(encdir)/$(pkg).map
 plfiles := $(foreach w,Book Regular Medium Bold,\
   $(foreach s,A B C E,$(auxdir)/FdSymbol$s-$w.pl))
 styfiles := $(addprefix $(latexdir)/,$(pkg).sty $(pkg)-fd.sty mt-$(family).cfg)
-fdfiles := $(foreach enc,$(encodings) OML,\
-  $(foreach ver,$(figures),$(latexdir)/$(enc)$(family)-$(ver).fd)) \
-  $(latexdir)/U$(family)-Extra.fd $(latexdir)/U$(family)-Pi.fd \
-  $(latexdir)/U$(family)-BB.fd
+fdfiles := $(foreach enc,$(encodings) OML,$(foreach var,$(variants),\
+  $(foreach ver,$(figures),$(latexdir)/$(enc)$(family)$(var)-$(ver).fd))) \
+  $(foreach var,$(variants),$(latexdir)/U$(family)$(var)-Extra.fd \
+  $(latexdir)/U$(family)$(var)-Pi.fd $(latexdir)/U$(family)$(var)-BB.fd)
 tempfiles := $(addprefix $(latexdir)/,$(pkg).aux $(pkg).log $(pkg).out $(pkg).toc $(pkg).hd)
 
 # create output directories
