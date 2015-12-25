@@ -99,7 +99,6 @@
 \usepackage[scaled=1.05]{inconsolata}
 \usepackage[british]{babel}
 \usepackage{booktabs}
-\usepackage{pifont}
 \usepackage{floatrow}
 \usepackage{hypdoc}
 \usepackage{microtype}
@@ -146,7 +145,7 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 %</test>
 %\fi
 %
-% \CheckSum{1174}
+% \CheckSum{1179}
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -401,11 +400,13 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 %
 % \subsection{Dingbats}
 %
-% Assuming that the \pkg{pifont} package is loaded, you can access Fedra
-% Serif's ornamental characters via:
+% Fedra Serif Pro provides a large set of ornamental characters, which can be
+% typeset using the following command:
 % \begin{quote}
 %   |\ding|\marg{number}
 % \end{quote}
+% More commands are made available by the \pkg{pifont} package, which is
+% automatically loaded if present.
 % The available glyphs are listed in Table~\ref{table:dingbats}.
 % \begin{table}
 % \figureversion{tabular}\centering
@@ -1044,7 +1045,9 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
     {\end{Pilist}}
   \renewenvironment{dingautolist}[1]{\begin{Piautolist}{\fdrsf@pifamily}{##1}}%
     {\end{Piautolist}}
-}{}
+}{
+  \newcommand{\ding}[1]{{\usefont{U}{\fdrsf@pifamily}{m}{n}\char##1}}
+}
 %    \end{macrocode}
 %
 % \subsection{Bullet figures}
