@@ -734,7 +734,6 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 % This options redefines the blackboard bold alphabet to use Fedra
 % Serif's blackboard letters.
 %    \begin{macrocode}
-%
 \fdrsf@boolkey{fedrabb}{%
   \iffdrsf@fedrabb
     \renewcommand\fdrsf@load@bb{%
@@ -856,7 +855,6 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 %
 % The font selection commands such as |\figureversion|, |\textsw|, and
 % |\textssc| are provided by the \pkg{fontaxes} package.
-%
 %    \begin{macrocode}
 \IfFileExists{fontaxes.sty}{
   \RequirePackage{fontaxes}[2007/03/31]
@@ -867,7 +865,6 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 % \subsection{Math font setup}
 %
 % We use FdSymbol for most mathematical symbols.
-%
 %    \begin{macrocode}
 \iffdrsf@math
   \RequirePackage[scale=0.9]{fdsymbol}[2011/11/01]
@@ -884,7 +881,6 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
     \fi
   }
 %    \end{macrocode}
-%
 % Redefine the standard math versions |normal| and |bold|.
 %    \begin{macrocode}
   \DeclareSymbolFont{operators}{T1}{\fdrsf@mathfamily}{m}{n}
