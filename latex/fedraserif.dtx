@@ -145,7 +145,7 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 %</test>
 %\fi
 %
-% \CheckSum{1161}
+% \CheckSum{1163}
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -1041,6 +1041,7 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
   \renewenvironment{dingautolist}[1]{\begin{Piautolist}{\fdrsf@pifamily}{##1}}%
     {\end{Piautolist}}
 }{
+  \providecommand{\ding}[1]{}
   \newcommand{\ding}[1]{{\usefont{U}{\fdrsf@pifamily}{m}{n}\char##1}}
 }
 %    \end{macrocode}
@@ -1421,6 +1422,7 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
   \csname #1\endcsname
 }
 %    \end{macrocode}
+%
 % \subsection{Options}
 %
 % These are the default values if it is impossible to process options.
