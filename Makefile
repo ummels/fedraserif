@@ -314,27 +314,27 @@ $(styfiles) $(fdfiles) $(testfiles): $(latexdir)/$(pkg).ins $(latexdir)/$(pkg).d
 .PHONY: test
 test: all $(testfiles)
 ifneq ($(filter $(fontname)A-%,$(fonts_up)),)
-	@echo "Testing Fedra Serif A with pdflatex..."
+	@echo "Testing Fedra Serif Pro A with pdflatex..."
 	$(pdflatex) -output-directory $(testdir) "\pdfmapfile{$(mapfile)}\input{test-$(pkg)-a}"
 	@echo ""
-	@echo "Testing Fedra Serif A with latex+dvips..."
+	@echo "Testing Fedra Serif Pro A with latex+dvips..."
 	$(latex) -output-directory $(testdir) "\input{test-$(pkg)-a}"
 	$(dvips) -u $(mapfile) $(testdir)/test-$(pkg)-a.dvi -o $(testdir)/test-$(pkg)-a.ps
 	@echo ""
-	@echo "Testing Fedra Serif A with lualatex..."
+	@echo "Testing Fedra Serif Pro A with lualatex..."
 	$(lualatex) -output-directory $(testdir) -jobname test-$(pkg)-a-luatex "\directlua{pdf.mapfile('$(mapfile)')}\input{test-$(pkg)-a}"
 else
 	@echo "Fedra Serif Pro A not installed."
 endif
 ifneq ($(filter $(fontname)B-%,$(fonts_up)),)
-	@echo "Testing Fedra Serif B with pdflatex..."
+	@echo "Testing Fedra Serif Pro B with pdflatex..."
 	$(pdflatex) -output-directory $(testdir) "\pdfmapfile{$(mapfile)}\input{test-$(pkg)-b}"
 	@echo ""
-	@echo "Testing Fedra Serif B with latex+dvips..."
+	@echo "Testing Fedra Serif Pro B with latex+dvips..."
 	$(latex) -output-directory $(testdir) "\input{test-$(pkg)-b}"
 	$(dvips) -u $(mapfile) $(testdir)/test-$(pkg)-b.dvi -o $(testdir)/test-$(pkg)-b.ps
 	@echo ""
-	@echo "Testing Fedra Serif B with lualatex..."
+	@echo "Testing Fedra Serif Pro B with lualatex..."
 	$(lualatex) -output-directory $(testdir) -jobname test-$(pkg)-b-luatex "\directlua{pdf.mapfile('$(mapfile)')}\input{test-$(pkg)-b}"
 else
 	@echo "Fedra Serif Pro B not installed."
