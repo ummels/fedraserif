@@ -667,26 +667,25 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 }
 %    \end{macrocode}
 %
-% \subsubsection*{Variant and Figure style}
+% \subsubsection*{Variant and figure style}
 %
 %    \begin{macrocode}
-\newcommand\fdrsf@family{FedraSerifPro}
-\newcommand\fdrsf@variant{A}
+\newcommand\fdrsf@family{FedraSerifProA}
 \newcommand\fdrsf@textfig{LF}
 \newcommand\fdrsf@mathfig{\fdrsf@textfig}
-\newcommand\fdrsf@textfamily{\fdrsf@family\fdrsf@variant-\fdrsf@textfig}
-\newcommand\fdrsf@mathfamily{\fdrsf@family\fdrsf@variant-\fdrsf@mathfig}
-\newcommand\fdrsf@mathtfamily{\fdrsf@family\fdrsf@variant-T\fdrsf@mathfig}
-\newcommand\fdrsf@pifamily{\fdrsf@family\fdrsf@variant-Pi}
+\newcommand\fdrsf@textfamily{\fdrsf@family-\fdrsf@textfig}
+\newcommand\fdrsf@mathfamily{\fdrsf@family-\fdrsf@mathfig}
+\newcommand\fdrsf@mathtfamily{\fdrsf@family-T\fdrsf@mathfig}
+\newcommand\fdrsf@pifamily{\fdrsf@family-Pi}
 \newcommand\fdrsf@mathshape{it}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
 \fdrsf@choicekey{variant}{a,b,auto}{%
   \ifcase\@tempb\relax
-    \renewcommand\fdrsf@variant{A}%
+    \renewcommand\fdrsf@family{FedraSerifProA}%
   \or
-    \renewcommand\fdrsf@variant{B}%
+    \renewcommand\fdrsf@family{FedraSerifProB}%
     \PassOptionsToPackage{largedelims}{fdsymbol}%
   \or
     \PackageWarning{fedraserif.sty}{Option `variant=auto' is deprecated and has no effect.}%
@@ -739,7 +738,7 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 \fdrsf@boolkey{fedrabb}{%
   \iffdrsf@fedrabb
     \renewcommand\fdrsf@load@bb{%
-      \DeclareMathAlphabet\mathbb{U}{\fdrsf@family\fdrsf@variant-BB}{m}{n}%
+      \DeclareMathAlphabet\mathbb{U}{\fdrsf@family-BB}{m}{n}%
       \renewcommand\Bbbk{\mathbb{k}}%
     }%
   \fi
@@ -757,14 +756,14 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
     \@ifundefined{deffootnotemark}{%
       \def\@makefnmark{%
         \begingroup
-        \usefont{U}{\fdrsf@family\fdrsf@variant-Extra}{m}{n}%
+        \usefont{U}{\fdrsf@family-Extra}{m}{n}%
         \@thefnmark\kern0.1em%
         \endgroup
       }%
     }{%
       \deffootnotemark{%
         \begingroup
-        \usefont{U}{\fdrsf@family\fdrsf@variant-Extra}{m}{n}%
+        \usefont{U}{\fdrsf@family-Extra}{m}{n}%
         \thefootnotemark
         \endgroup
       }%
@@ -772,7 +771,7 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
     \@ifundefined{deffootnote}{}{%
       \deffootnote[1em]{1.5em}{1em}{%
         \begingroup
-        \usefont{U}{\fdrsf@family\fdrsf@variant-Extra}{m}{n}%
+        \usefont{U}{\fdrsf@family-Extra}{m}{n}%
         \thefootnotemark\kern0.1em%
         \endgroup
       }%
@@ -794,9 +793,9 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 \RequirePackage[scale=0.9]{fedraserif-fd}
 \@ifpackageloaded{textcomp}{}{\RequirePackage{textcomp}}
 \renewcommand\rmdefault{\fdrsf@textfamily}
-\@for\fdrsf@@variant:=A,B\do{%
+\@for\fdrsf@fam:=FedraSerifProA,FedraSerifProB\do{%
   \@for\fdrsf@fig:=LF,TLF,OsF,TOsF\do{%
-    \DeclareEncodingSubset{TS1}{\fdrsf@family\fdrsf@@variant-\fdrsf@fig}{1}%
+    \DeclareEncodingSubset{TS1}{\fdrsf@fam-\fdrsf@fig}{1}%
   }%
 }
 %    \end{macrocode}
@@ -890,8 +889,8 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 %    \begin{macrocode}
   \DeclareSymbolFont{operators}{T1}{\fdrsf@mathfamily}{m}{n}
   \SetSymbolFont{operators}{bold}{T1}{\fdrsf@mathfamily}{b}{n}
-  \DeclareSymbolFont{letters}{OML}{\fdrsf@family\fdrsf@variant-TOsF}{m}{\fdrsf@mathshape}
-  \SetSymbolFont{letters}{bold}{OML}{\fdrsf@family\fdrsf@variant-TOsF}{b}{\fdrsf@mathshape}
+  \DeclareSymbolFont{letters}{OML}{\fdrsf@family-TOsF}{m}{\fdrsf@mathshape}
+  \SetSymbolFont{letters}{bold}{OML}{\fdrsf@family-TOsF}{b}{\fdrsf@mathshape}
   \DeclareMathAlphabet{\mathrm}{T1}{\fdrsf@mathfamily}{m}{n}
   \SetMathAlphabet{\mathrm}{bold}{T1}{\fdrsf@mathfamily}{b}{n}
   \DeclareMathAlphabet{\mathit}{T1}{\fdrsf@mathfamily}{m}{it}
@@ -908,7 +907,7 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
   \SetMathAlphabet{\mathbf}{tabular}{T1}{\fdrsf@mathtfamily}{b}{n}
   \DeclareMathVersion{boldtabular}
   \SetSymbolFont{operators}{boldtabular}{T1}{\fdrsf@mathtfamily}{b}{n}
-  \SetSymbolFont{letters}{boldtabular}{OML}{\fdrsf@family\fdrsf@variant-TOsF}{b}{\fdrsf@mathshape}
+  \SetSymbolFont{letters}{boldtabular}{OML}{\fdrsf@family-TOsF}{b}{\fdrsf@mathshape}
   \SetMathAlphabet{\mathrm}{boldtabular}{T1}{\fdrsf@mathtfamily}{b}{n}
   \SetMathAlphabet{\mathit}{boldtabular}{T1}{\fdrsf@mathtfamily}{b}{it}
   \SetMathAlphabet{\mathbf}{boldtabular}{T1}{\fdrsf@mathtfamily}{b}{n}
@@ -1033,7 +1032,7 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 %
 % \subsection{Dingbats}
 %
-% We redefined some of the commands provided by the \pkg{pifont} package
+% We redefine some of the commands provided by the \pkg{pifont} package
 % to replace Zapf Dingbats by Fedra Serif's dingbats font.
 %    \begin{macrocode}
 \IfFileExists{pifont.sty}{
@@ -1076,7 +1075,7 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 }
 \DeclareRobustCommand*{\openbullet}[1]{%
   \begingroup
-  \usefont{U}{\fdrsf@family\fdrsf@variant-Pi}{m}{n}%
+  \usefont{U}{\fdrsf@family-Pi}{m}{n}%
   \edef\@tempa{#1}\expandafter\fdrsf@openbullet\@tempa\end
   \endgroup
 }
@@ -1105,7 +1104,7 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 }
 \DeclareRobustCommand*{\closedbullet}[1]{%
   \begingroup
-  \usefont{U}{\fdrsf@family\fdrsf@variant-Pi}{m}{n}%
+  \usefont{U}{\fdrsf@family-Pi}{m}{n}%
   \edef\@tempa{#1}\expandafter\fdrsf@closedbullet\@tempa\end
   \endgroup
 }
@@ -1144,7 +1143,7 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 %    \begin{macrocode}
 \newcommand*{\fdrsf@smallfrac}[2]{%
   \begingroup
-  \fontencoding{U}\fontfamily{\fdrsf@family\fdrsf@variant-Extra}\fontshape{n}\selectfont
+  \fontencoding{U}\fontfamily{\fdrsf@family-Extra}\fontshape{n}\selectfont
   \leavevmode
   \setbox\@tempboxa\vbox{%
     \baselineskip\z@skip%
@@ -1163,7 +1162,7 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 }
 \newcommand*{\fdrsf@slantfrac}[2]{%
   \begingroup
-  \fontencoding{U}\fontfamily{\fdrsf@family\fdrsf@variant-Extra}\fontshape{n}\selectfont
+  \fontencoding{U}\fontfamily{\fdrsf@family-Extra}\fontshape{n}\selectfont
   #1\kern-0.05em/\kern0em\fdrsf@inferior{#2}%
   \endgroup
 }
