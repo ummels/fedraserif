@@ -207,8 +207,8 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 % \pkg{fdsymbol} package (version~0.7 or higher) installed. Apart from
 % \pkg{fdsymbol}, the \pkg{fedraserif} package automatically loads the
 % packages \pkg{textcomp} and \pkg{amsmath}.
-% Additionally, the \pkg{fontaxes} package is loaded if it is present in
-% your \LaTeX\ installation.
+% Additionally, the packages \pkg{fontaxes} and \pkg{pifont} package are
+% loaded if present in your \LaTeX\ installation.
 % If you want to pass options to these packages, you can
 % either load these packages beforehand, or you can include the options
 % in the |\documentclass| command. Unless the option \option{math=false} is
@@ -229,15 +229,15 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 % \toprule
 % Key & Values & Section \\
 % \midrule
-% |boldweight| & |Medium|*, |Bold|, |auto| & \ref{sec:weights} \\
-% |fedrabb| & |true|, |false|* & \ref{sec:mathbb} \\
-% |footnotemarks| & |true|, |false|* & \ref{sec:footnotes} \\
-% |figures| & |lining|* (|lf|), |text| (|osf|) & \ref{sec:figures} \\
-% |math| & |true|*, |false| & \ref{sec:math} \\
-% |math-style| & |tex|*, |iso|, |french| & \ref{sec:mathletters} \\
-% |normalweight| & |Book|*, |Demi|, |auto| & \ref{sec:weights} \\
-% |stdmathdigits| & |true|, |false|* & \ref{sec:mathdigits} \\
-% |variant| & |A|*, |B| & \ref{sec:variants} \\
+% \option{boldweight} & |Medium|*, |Bold|, |auto| & \ref{sec:weights} \\
+% \option{fedrabb} & |true|, |false|* & \ref{sec:mathbb} \\
+% \option{footnotemarks} & |true|, |false|* & \ref{sec:footnotes} \\
+% \option{figures} & |lining|* (|lf|), |text| (|osf|) & \ref{sec:figures} \\
+% \option{math} & |true|*, |false| & \ref{sec:math} \\
+% \option{math-style} & |tex|*, |iso|, |french| & \ref{sec:mathletters} \\
+% \option{normalweight} & |Book|*, |Demi|, |auto| & \ref{sec:weights} \\
+% \option{stdmathdigits} & |true|, |false|* & \ref{sec:mathdigits} \\
+% \option{variant} & |A|*, |B| & \ref{sec:variants} \\
 % \bottomrule
 % \end{tabular}
 % \caption{\label{tab:options}Summary of options}
@@ -251,7 +251,7 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 % \emph{Fedra Serif~A} has a lower contrast and shorter ascenders, which makes
 % it a good choice for small sizes, whereas \emph{Fedra Serif~B} features an
 % increased contrast and longer ascenders.
-% To select one variant, use the |variant| key: setting |variant=A| will
+% To select one variant, use the \option{variant} key: setting |variant=A| will
 % select Fedra Serif~A (the default), while |variant=B| will select
 % Fedra Serif~B.
 %
@@ -288,11 +288,11 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 % \caption{\label{tab:weights}Summary of font weights}
 % \end{table}
 % Of these, Book and Demi can be used as the standard text font, while Medium
-% and Bold can be used for bold text. The option keys |normalweight| and
-% |boldweight| allow to control which weights are used for the standard
-% \LaTeX\ font series |m| and |b| (or |bx|), selected by |\mdseries| and
-% |\bfseries|, respectively. For example, to use the Demi
-% weight as the standard text font, use the option |normalweight=Demi|.
+% and Bold can be used for bold text. The option keys \option{normalweight}
+% and \option{boldweight} allow to control which weights are used for the
+% standard \LaTeX\ font series |m| and |b| (or |bx|), selected by |\mdseries|
+% and |\bfseries|, respectively. For example, to use the Demi
+% weight as the standard text font, use the option \option{normalweight=Demi}.
 % By default, only the Book and the Medium weights are used. Additionally,
 % both keys can be set to the value |auto|, which selects a weight depending
 % on the font size (Book and Medium for normal and large sizes, Demi and
@@ -358,8 +358,8 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 % \end{table}
 %
 % By default, proportional lining figures are used throughout the document.
-% If you want to use text figures instead, use the option |figures=text| or
-% |figures=osf|.
+% If you want to use text figures instead, use the option \option{figures=text}
+% or \option{figures=osf}.
 %
 % Assuming that the \pkg{fontaxes} package is installed on your system, you
 % can use
@@ -394,8 +394,8 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 %
 % \subsection{Footnotes}\label{sec:footnotes}
 %
-% By setting the option |footnotemarks|, footnote marks are set using special
-% characters designed for this purpose, i.e.\ 
+% By setting the option \option{footnotemarks}, footnote marks are set using
+% special characters designed for this purpose, i.e.\ 
 % {\fontfamily{FedraSerifProB-Extra}\fontencoding{U}\selectfont 1,a} instead
 % of \textsuperscript{1,a}. However, this only works for footnote marks that
 % consist of figures and the lowercase letters a--z.
@@ -481,8 +481,8 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 %
 % By default, we change the math font to Fedra Serif Pro with mathematical
 % symbols taken from FdSymbol. To~disable this behaviour, use the option
-% |math=false|. Note that all other options described in this section have no
-% effect if math support is disabled.
+% \option{math=false}. Note that all other options described in this section
+% have no effect if math support is disabled.
 %
 % \subsection{Letters}\label{sec:mathletters}
 %
@@ -491,13 +491,13 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 % This differs from the \acro{ISO} standards \acro{ISO31-0:1992} to
 % \acro{ISO31-13:1992}, which mandate italics in this case. While
 % the package employs the \TeX\ tradition by default, you can select
-% the \acro{ISO} behaviour by setting the option |math-style=iso|.
+% the \acro{ISO} behaviour by setting the option \option{math-style=iso}.
 % Independently of this option, you can alyways select upright and
 % italic greek letters using the commands |\upalpha|, |\italpha|,
-% |\upGamma|, |\itGamma|, etc. Additionally, the |math-style| key
+% |\upGamma|, |\itGamma|, etc. Additionally, the \option{math-style} key
 % can take the value |french|, in which case all Greek and
 % uppercase roman letters are typeset upright. For an illustration
-% of the differences between the three values for |math-style|,
+% of the differences between the three values for \option{math-style},
 % see Table~\ref{tab:math-styles}.
 % \begin{table}
 % \centering
@@ -545,9 +545,9 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 % \subsection{Digits}\label{sec:mathdigits}
 %
 % By default, digits in math mode are typeset in the default figure version
-% for text mode (as~selected by the |figures| key). To use lining figures
-% in math mode even if |figures=text| is active, set the option
-% |stdmathdigits|.
+% for text mode (as~selected by the \option{figures} key). To use lining
+% figures in math mode even if \option{figures=text} is active, set the option
+% \option{stdmathdigits}.
 %
 % Apart from the standard math versions |normal| and |bold|, the package
 % introduces two new math versions |tabular| and |boldtabular|, in which
@@ -559,7 +559,7 @@ Test \emph{Test} $\varkappa$ $\upvarkappa$
 % Fedra Serif Pro has a limited set of blackboard characters, namely
 % \fedrabb{N}, \fedrabb{Z}, \fedrabb{Q}, \fedrabb{R}, \fedrabb{C},
 % \fedrabb{k} and \fedrabb{l}. To use these characters for the
-% math blackboard alphabet |\mathbb|, set the option |fedrabb|.
+% math blackboard alphabet |\mathbb|, set the option \option{fedrabb}.
 % If this option is not selected, the AMS blackboard bold font is
 % used instead, which has the advantage that all uppercase roman
 % letters are available.
