@@ -88,6 +88,11 @@ fdfiles := $(foreach enc,$(encodings) OML,$(foreach var,$(variants),\
 testfiles := $(foreach var,$(variants),$(latexdir)/test-$(pkg)-$(var).tex)
 tempfiles := $(addprefix $(latexdir)/,$(pkg).aux $(pkg).log $(pkg).out $(pkg).toc $(pkg).hd)
 
+# Warn if no OTF files found
+ifeq ($(strip $(fonts)),)
+$(warning No OTF files matching the name $(fontname)A-*.otf or $(fontname)B-*.otf found. Have you copied the fonts into the root directory?)
+endif
+
 # create output directories
 
 ifeq (,$(findstring clean,$(MAKECMDGOALS)))
