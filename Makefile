@@ -88,7 +88,7 @@ fdfiles := $(foreach enc,$(encodings) OML,$(foreach var,$(variants),\
 testfiles := $(foreach var,$(variants),$(latexdir)/test-$(pkg)-$(var).tex)
 tempfiles := $(addprefix $(latexdir)/,$(pkg).aux $(pkg).log $(pkg).out $(pkg).toc $(pkg).hd)
 
-# Inform about which fonts are being processed
+# inform about which fonts are being processed
 
 ifneq ($(strip $(otffiles)),)
 $(info Processing OTF files: $(otffiles))
