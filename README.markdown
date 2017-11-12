@@ -63,10 +63,22 @@ Finally, you need to activate the map file:
 
 For a system-wide installation, replace updmap by updmap-sys.
 
+Compatibility
+-------------
+
+This package has only been tested with version 3.5 (2012) of Fedra Serif Pro.
+Some glyphs might be incorrect or missing when an installation is performed
+with an older version of the fonts.
+To find out the version of the fonts in your environment, run
+
+    otfinfo -v
+
+on one of the OpenType font files.
+
 License
 -------
 
-Copyright (c) 2011-2015 by Michael Ummels <michael.ummels@rwth-aachen.de>
+Copyright (c) 2011-2017 by Michael Ummels <michael.ummels@rwth-aachen.de>
 
 The LaTeX support files contained in this software may be distributed
 and modified under the terms and conditions of the
