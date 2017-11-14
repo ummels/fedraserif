@@ -44,6 +44,8 @@ auxdir := misc
 testdir := test
 latexdir := latex
 outdirs := $(encdir) $(tfmdir) $(vfdir) $(auxdir) $(testdir)
+# create output directories
+create-outdirs := $(shell $(MKDIR) $(outdirs))
 
 texvars := TEXINPUTS=$(latexdir): ENCFONTS=$(encdir): TFMFONTS=$(tfmdir): VFFONTS=$(vfdir):
 latex := $(texvars) $(LATEX)
@@ -94,12 +96,6 @@ ifneq ($(strip $(otffiles)),)
 $(info Processing OTF files: $(otffiles))
 else
 $(warning No OTF files matching the name $(fontname)A-*.otf or $(fontname)B-*.otf found. Have you copied the fonts into the root directory?)
-endif
-
-# create output directories
-
-ifeq (,$(findstring clean,$(MAKECMDGOALS)))
-create-dirs := $(shell $(MKDIR) $(outdirs))
 endif
 
 # auxiliary functions
