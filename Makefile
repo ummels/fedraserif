@@ -44,8 +44,12 @@ auxdir := misc
 testdir := test
 latexdir := latex
 outdirs := $(encdir) $(tfmdir) $(vfdir) $(auxdir) $(testdir)
+
 # create output directories
+
+ifneq ($(MAKECMDGOALS),clean)
 create-outdirs := $(shell $(MKDIR) $(outdirs))
+endif
 
 texvars := TEXINPUTS=$(latexdir): ENCFONTS=$(encdir): TFMFONTS=$(tfmdir): VFFONTS=$(vfdir):
 latex := $(texvars) $(LATEX)
