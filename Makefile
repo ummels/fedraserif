@@ -17,6 +17,7 @@ SED := sed
 RM := rm -rf
 MKDIR := mkdir -p
 TOUCH := touch
+ZIP := zip
 INSTALL := install
 INSTALLDIR := $(INSTALL) -d
 INSTALLDATA := $(INSTALL) -m 644
@@ -365,6 +366,16 @@ $(latexdir)/$(pkg).pdf: $(latexdir)/$(pkg).dtx $(mapfile)
 check:
 	@! ls $(encdir)/a_*.enc > /dev/null 2>&1 || ! echo "Found auto-generated encoding files: $$(ls -m $(encdir)/a_*.enc)\nAdd glyphs to glyphlist, remove these files, and remake." 1>&2
 	@! ls $(auxdir)/*--base.pl > /dev/null 2>&1 || ! echo "Found auto-generated base metrics: $$(ls -m $(auxdir)/*--base.pl)" 1>&2
+
+# rules for building a TDS zip file
+
+.PHONY: tds
+tds: $(pkg).tds.zip
+
+$(pkg).tds.zip:
+	$(MAKE) install TEXMFDIR:=tds.tmp
+	(cd tds.tmp && $(ZIP) -r - *) > $@
+	$(RM) tds.tmp
 
 # rules for (un)installing everything
 

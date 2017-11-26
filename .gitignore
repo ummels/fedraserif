@@ -19,6 +19,7 @@
 *.pfb
 *.base
 .glyphlist-[a-z]
+*.tds.zip
 *.tar.gz
 *.synctex.gz
 dvips
