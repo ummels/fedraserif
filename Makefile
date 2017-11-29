@@ -364,7 +364,7 @@ $(latexdir)/$(pkg).pdf: $(latexdir)/$(pkg).dtx $(mapfile)
 
 .PHONY: check
 check:
-	@! ls $(encdir)/a_*.enc > /dev/null 2>&1 || ! echo "Found auto-generated encoding files: $$(ls -m $(encdir)/a_*.enc)\nAdd glyphs to glyphlist, remove these files, and remake." 1>&2
+	@! ls $(encdir)/a_*.enc > /dev/null 2>&1 || ! echo -e "Found auto-generated encoding files: $$(ls -m $(encdir)/a_*.enc)\nAdd glyphs to glyphlist, remove these files, and remake." 1>&2
 	@! ls $(auxdir)/*--base.pl > /dev/null 2>&1 || ! echo "Found auto-generated base metrics: $$(ls -m $(auxdir)/*--base.pl)" 1>&2
 
 # rules for building a TDS zip file
