@@ -1,6 +1,6 @@
 #/bin/bash
 
-cat dvips/*.enc enc/missing.enc |
+cat dvips/*.enc |
 sed -e 's/^.*\[//' -e 's/^%.*$//' |
 tr " " "\n" |
 grep -v "^/\.notdef$" |
