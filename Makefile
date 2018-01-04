@@ -34,7 +34,7 @@ variants := A B
 weights := Book Demi Medium Bold
 shapes_up := n sc ssc
 shapes_it := n sc ssc sw scsw sscsw
-encodings := OT1 T1 TS1 LY1 QX T5
+encodings := OT1 OT2 T1 T2A T2B T2C TS1 LY1 QX T5 X2
 variants := A B
 figures := LF OsF TLF TOsF
 
@@ -237,7 +237,7 @@ glyphlist:
 .PHONY: dvips
 dvips: $(mapfile) $(encfiles)
 
-$(mapfile): glyphlist
+$(mapfile): glyphlist $(otffiles)
 	$(RM) $@; $(TOUCH) $@
 	for font in $(fonts); do \
 	  psname=$$($(OTFINFO) -p $$font.otf); \
