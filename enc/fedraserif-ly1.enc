@@ -33,7 +33,7 @@
 /p /q /r /s /t /u /v /w
 /x /y /z /braceleft /bar /braceright /tilde /.notdef
 % 0x80
-/Lslash /quotesingle /quotesinglbase /florin /quotedblbase /ellipsis /dagger /daggerdbl
+/Lslash /.notdef /quotesinglbase /florin /quotedblbase /ellipsis /dagger /daggerdbl
 /.notdef /perthousand /Scaron /guilsinglleft /.notdef /Zcaron /asciicircum /minus
 % 0x90
 /lslash /.notdef /.notdef /quotedblleft /quotedblright /bullet /endash /emdash
@@ -42,7 +42,7 @@
 /nbspace /exclamdown /cent /sterling /currency /yen /brokenbar /section
 /dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /.notdef
 % 0xB0
-/degree /plusminus /twosuperior /threesuperior /.notdef /mu /paragraph /periodcentered
+/degree /plusminus /twosuperior /threesuperior /.notdef /mu /paragraph /.notdef
 /.notdef /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown
 % 0xC0
 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla

@@ -44,7 +44,7 @@
 % 0xB0
 /paragraph /sacute /scaron /scommaaccent /.notdef /tcommaaccent /.notdef
 /uogonek
-/ydieresis /zacute /zcaron /zdotaccent /ij /periodcentered /quotedbl /quotesingle
+/ydieresis /zacute /zcaron /zdotaccent /ij /.notdef /quotedbl /.notdef
 % 0xC0
 /Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /backslash /Ccedilla
 /Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis
