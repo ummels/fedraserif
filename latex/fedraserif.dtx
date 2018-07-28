@@ -68,6 +68,10 @@
 %<a&t5&osf>\ProvidesFile{T5FedraSerifProA-OsF.fd}[2015/12/31 v1.0 font definitions for T5/FedraSerifProA-OsF]
 %<a&t5&tlf>\ProvidesFile{T5FedraSerifProA-TLF.fd}[2015/12/31 v1.0 font definitions for T5/FedraSerifProA-TLF]
 %<a&t5&tosf>\ProvidesFile{T5FedraSerifProA-TOsF.fd}[2015/12/31 v1.0 font definitions for T5/FedraSerifProA-TOsF]
+%<a&lgr&lf>\ProvidesFile{LGRFedraSerifProA-LF.fd}[2015/12/31 v1.0 font definitions for LGR/FedraSerifProA-LF]
+%<a&lgr&osf>\ProvidesFile{LGRFedraSerifProA-OsF.fd}[2015/12/31 v1.0 font definitions for LGR/FedraSerifProA-OsF]
+%<a&lgr&tlf>\ProvidesFile{LGRFedraSerifProA-TLF.fd}[2015/12/31 v1.0 font definitions for LGR/FedraSerifProA-TLF]
+%<a&lgr&tosf>\ProvidesFile{LGRFedraSerifProA-TOsF.fd}[2015/12/31 v1.0 font definitions for LGR/FedraSerifProA-TOsF]
 %<a&x2&lf>\ProvidesFile{X2FedraSerifProA-LF.fd}[2015/12/31 v1.0 font definitions for X2/FedraSerifProA-LF]
 %<a&x2&osf>\ProvidesFile{X2FedraSerifProA-OsF.fd}[2015/12/31 v1.0 font definitions for X2/FedraSerifProA-OsF]
 %<a&x2&tlf>\ProvidesFile{X2FedraSerifProA-TLF.fd}[2015/12/31 v1.0 font definitions for X2/FedraSerifProA-TLF]
@@ -119,6 +123,10 @@
 %<b&t5&osf>\ProvidesFile{T5FedraSerifProB-OsF.fd}[2015/12/31 v1.0 font definitions for T5/FedraSerifProB-OsF]
 %<b&t5&tlf>\ProvidesFile{T5FedraSerifProB-TLF.fd}[2015/12/31 v1.0 font definitions for T5/FedraSerifProB-TLF]
 %<b&t5&tosf>\ProvidesFile{T5FedraSerifProB-TOsF.fd}[2015/12/31 v1.0 font definitions for T5/FedraSerifProB-TOsF]
+%<b&lgr&lf>\ProvidesFile{LGRFedraSerifProB-LF.fd}[2015/12/31 v1.0 font definitions for LGR/FedraSerifProB-LF]
+%<b&lgr&osf>\ProvidesFile{LGRFedraSerifProB-OsF.fd}[2015/12/31 v1.0 font definitions for LGR/FedraSerifProB-OsF]
+%<b&lgr&tlf>\ProvidesFile{LGRFedraSerifProB-TLF.fd}[2015/12/31 v1.0 font definitions for LGR/FedraSerifProB-TLF]
+%<b&lgr&tosf>\ProvidesFile{LGRFedraSerifProB-TOsF.fd}[2015/12/31 v1.0 font definitions for LGR/FedraSerifProB-TOsF]
 %<b&x2&lf>\ProvidesFile{X2FedraSerifProB-LF.fd}[2015/12/31 v1.0 font definitions for X2/FedraSerifProB-LF]
 %<b&x2&osf>\ProvidesFile{X2FedraSerifProB-OsF.fd}[2015/12/31 v1.0 font definitions for X2/FedraSerifProB-OsF]
 %<b&x2&tlf>\ProvidesFile{X2FedraSerifProB-TLF.fd}[2015/12/31 v1.0 font definitions for X2/FedraSerifProB-TLF]
@@ -138,6 +146,7 @@
 \usepackage[variant=B,footnotemarks,fedrabb]{fedraserif}
 \usepackage[scaled=1.05]{inconsolata}
 \usepackage[british]{babel}
+\usepackage{threeparttable}
 \usepackage{booktabs}
 \usepackage{floatrow}
 \usepackage{hypdoc}
@@ -171,9 +180,9 @@
 \documentclass[fleqn]{article}
 
 \usepackage{amsmath}
-\usepackage[T2A,T1]{fontenc}
+\usepackage[LGR,T2A,T1]{fontenc}
 \usepackage[utf8]{luainputenc}
-\usepackage[russian,english]{babel}
+\usepackage[greek,russian,english]{babel}
 %<a>\usepackage[variant=A]{fedraserif}
 %<b>\usepackage[variant=B]{fedraserif}
 
@@ -182,14 +191,18 @@
 \linespread{1.5}
 
 \begin{document}
-Test \emph{Test}
+Test \emph{Test} shelf{}ful
+
 \foreignlanguage{russian}{Привет \emph{Привет}}
+
+\foreignlanguage{greek}{Καλημέρα \emph{Καλημέρα}}
+
 $\varkappa$ $\upvarkappa$
 \end{document}
 %</test>
 %\fi
 %
-% \CheckSum{1270}
+% \CheckSum{1295}
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -304,7 +317,8 @@ $\varkappa$ $\upvarkappa$
 % The package currently supports the \acro{OT1}, \acro{T1}, \acro{LY1},
 % \acro{QX} and \acro{T5} encodings for typesetting text with Latin
 % characters, the \acro{OT2}, \acro{T2A}, \acro{T2B}, \acro{T2C} and
-% \acro {X2} encodings for typesetting text with Cyrillic characters,
+% \acro{X2} encodings for typesetting text with Cyrillic characters,
+% the \acro{LGR} encoding for typesetting (monotonic and polytonic) Greek,
 % as well as the \acro{TS1} encoding for typesetting text symbols.
 % For typesetting text with accented characters, it~is strongly
 % recommended to change the default font encoding from~\acro{OT1}
@@ -612,41 +626,46 @@ $\varkappa$ $\upvarkappa$
 % \section{\acro{NFSS} classification}
 %
 % Table~\ref{tab:nfss} lists all fonts made available with
-% this package. Parenthesised combinations are provided via substitutions.
+% this package. \meta{Fig} stands for the figure version
+% (see Section~\ref{sec:figures}) and can be replaced by
+% \acro{LF}, \acro{OsF}, \acro{TLF} or \acro{TOsF}.
+% Parenthesised combinations are provided via substitutions.
 % \begin{table}
+% \begin{threeparttable}
+% \caption{\label{tab:nfss}NFSS classification}
 % \let\>=\\%
+% \renewcommand\tnote[1]{\begingroup\usefont{U}{FedraSerifProB-Extra}{m}{n}#1\endgroup}
 % \begin{tabular}{@{}p{5em}p{11em}p{6.5em}p{11.5em}@{}}
 %   \toprule
 %   Encoding & Family & Series & Shape \\
 %   \midrule
-%   \raggedright \acro{OT1}, \acro{T1}, \acro{TS1}, \acro{LY1},
-%   \acro{QX}, \acro{T5} &
-%   FedraSerifProA-LF, FedraSerifProA-OsF, FedraSerifProA-TLF,
-%   FedraSerifProA-TOsF, FedraSerifProB-LF, FedraSerifProB-OsF,
-%   FedraSerifProB-TLF, FedraSerifProB-TOsF &
+%   \raggedright \acro{OT1}, \acro{T1}, \acro{LY1},
+%   \acro{QX}, \acro{T5}, \acro{TS1} &
+%   FedraSerifProA-\meta{Fig}, FedraSerifProB-\meta{Fig} &
 %   sl, m, md,\> b (bx), sb, ub &
-%   n, it (sl), sw,\>
-%   sc, scit (scsl), scsw,\>
-%   ssc, sscit (sscsl), sscsw \\
+%   n, it (sl), sw\tnote{a},\>
+%   sc, scit (scsl), scsw\tnote{a},\>
+%   ssc, sscit (sscsl), sscsw\tnote{a} \\
 %   \addlinespace
 %   \midrule
 %   \raggedright \acro{OT2}, \acro{T2A}, \acro{T2B}, \acro{T2C},
 %   \acro{X2} &
-%   FedraSerifProA-LF, FedraSerifProA-OsF, FedraSerifProA-TLF,
-%   FedraSerifProA-TOsF, FedraSerifProB-LF, FedraSerifProB-OsF,
-%   FedraSerifProB-TLF, FedraSerifProB-TOsF &
+%   FedraSerifProA-\meta{Fig}, FedraSerifProB-\meta{Fig} &
 %   sl, m, md,\> b (bx), sb, ub &
 %   n, it (sl),\>
 %   sc, scit (scsl),\>
 %   ssc, sscit (sscsl) \\
 %   \addlinespace
 %   \midrule
+%   \raggedright \acro{LGR} &
+%   FedraSerifProA-\meta{Fig}, FedraSerifProB-\meta{Fig} &
+%   sl, m, md,\> b (bx), sb, ub &
+%   n, it (sl) \\
+%   \addlinespace
+%   \midrule
 %   \addlinespace
 %   \acro{OML} &
-%   FedraSerifProA-TOsF
-%   (FedraSerifProA-LF, FedraSerifProA-OsF, FedraSerifProA-TLF),
-%   FedraSerifProB-TOsF
-%   (FedraSerifProB-LF, FedraSerifProB-OsF, FedraSerifProB-TLF) &
+%   FedraSerifProA-\meta{Fig}\tnote{b}, FedraSerifProB-\meta{Fig}\tnote{b} &
 %   sl, m, md,\> b (bx), sb, ub &
 %   n, it \\
 %   \addlinespace
@@ -670,7 +689,11 @@ $\varkappa$ $\upvarkappa$
 %   FedraSerifProA-BB, FedraSerifProB-BB & m & n \\
 %   \bottomrule
 % \end{tabular}
-% \caption{\label{tab:nfss}NFSS classification}
+% \begin{tablenotes}
+% \item[a] Provided via substitution in \acro{TS1} encoding
+% \item[b] All figure versions except \acro{TOsF} provided via substitution
+% \end{tablenotes}
+% \end{threeparttable}
 % \end{table}
 %
 % \StopEventually{}
@@ -910,6 +933,13 @@ $\varkappa$ $\upvarkappa$
   \UndeclareTextCommand{\textperthousand}{QX}
   \UndeclareTextCommand{\textanglearc}{QX}
   \UndeclareTextCommand{\textvisiblespace}{T5}
+  \UndeclareTextCommand{\textvarstigma}{LGR}
+  \UndeclareTextCommand{\textpentedeka}{LGR}
+  \UndeclareTextCommand{\textpentehekaton}{LGR}
+  \UndeclareTextCommand{\textpenteqilioi}{LGR}
+  \UndeclareTextCommand{\textpentemuria}{LGR}
+  \UndeclareTextCommand{\textdexiakeraia}{LGR}
+  \UndeclareTextCommand{\textaristerikeraia}{LGR}
   \let\textEuro\texteuro
   \let\copyright\textcopyright
   \let\textdivide\textdiv
@@ -1307,7 +1337,7 @@ $\varkappa$ $\upvarkappa$
 \SetProtrusion
    [ name     = FedraSerifPro-OT1,
      load     = FedraSerifPro-default ]
-   { encoding = {OT1,OT2,T2A,T2B,T2C,X2},
+   { encoding = {OT1,OT2,T2A,T2B,T2C,LGR,X2},
      family   = {FedraSerifProA-OsF,FedraSerifProA-LF,FedraSerifProA-TOsF,FedraSerifProA-TLF,%
                  FedraSerifProB-OsF,FedraSerifProB-LF,FedraSerifProB-TOsF,FedraSerifProB-TLF},
      shape    = {n,sc,ssc} }
@@ -1425,7 +1455,7 @@ $\varkappa$ $\upvarkappa$
 \SetProtrusion
   [ name     = FedraSerifPro-OT1-it,
     load     = FedraSerifPro-it      ]
-  { encoding = {OT1,OT2,T2A,T2B,T2C,X2}
+  { encoding = {OT1,OT2,T2A,T2B,T2C,LGR,X2}
     family   = {FedraSerifProA-OsF,FedraSerifProA-LF,FedraSerifProA-TOsF,FedraSerifProA-TLF,%
                 FedraSerifProB-OsF,FedraSerifProB-LF,FedraSerifProB-TOsF,FedraSerifProB-TLF},
     shape    = {it,scit,sscit,sw,scsw,sscsw} }
@@ -1652,6 +1682,9 @@ $\varkappa$ $\upvarkappa$
 \fdrsf@addconfig{subs/shape}{sl}{it}
 \fdrsf@addconfig{subs/shape}{scsl}{scit}
 \fdrsf@addconfig{subs/shape}{sscsl}{sscit}
+\fdrsf@addconfig[TS1]{subs/shape}{sw}{it}
+\fdrsf@addconfig[TS1]{subs/shape}{scsw}{scit}
+\fdrsf@addconfig[TS1]{subs/shape}{sscsw}{sscit}
 %    \end{macrocode}
 % This is the main macro to declare a single font shape.
 %    \begin{macrocode}
@@ -1809,6 +1842,10 @@ $\varkappa$ $\upvarkappa$
 %<a&t5&osf>\DeclareFedraSerifLargeFamily{T5}{A}{OsF}
 %<a&t5&tlf>\DeclareFedraSerifLargeFamily{T5}{A}{TLF}
 %<a&t5&tosf>\DeclareFedraSerifLargeFamily{T5}{A}{TOsF}
+%<a&lgr&lf>\DeclareFedraSerifSmallFamily{LGR}{A}{LF}
+%<a&lgr&osf>\DeclareFedraSerifSmallFamily{LGR}{A}{OsF}
+%<a&lgr&tlf>\DeclareFedraSerifSmallFamily{LGR}{A}{TLF}
+%<a&lgr&tosf>\DeclareFedraSerifSmallFamily{LGR}{A}{TOsF}
 %<a&x2&lf>\DeclareFedraSerifMediumFamily{X2}{A}{LF}
 %<a&x2&osf>\DeclareFedraSerifMediumFamily{X2}{A}{OsF}
 %<a&x2&tlf>\DeclareFedraSerifMediumFamily{X2}{A}{TLF}
@@ -1860,6 +1897,10 @@ $\varkappa$ $\upvarkappa$
 %<b&t5&osf>\DeclareFedraSerifLargeFamily{T5}{B}{OsF}
 %<b&t5&tlf>\DeclareFedraSerifLargeFamily{T5}{B}{TLF}
 %<b&t5&tosf>\DeclareFedraSerifLargeFamily{T5}{B}{TOsF}
+%<b&lgr&lf>\DeclareFedraSerifSmallFamily{LGR}{B}{LF}
+%<b&lgr&osf>\DeclareFedraSerifSmallFamily{LGR}{B}{OsF}
+%<b&lgr&tlf>\DeclareFedraSerifSmallFamily{LGR}{B}{TLF}
+%<b&lgr&tosf>\DeclareFedraSerifSmallFamily{LGR}{B}{TOsF}
 %<b&x2&lf>\DeclareFedraSerifMediumFamily{X2}{B}{LF}
 %<b&x2&osf>\DeclareFedraSerifMediumFamily{X2}{B}{OsF}
 %<b&x2&tlf>\DeclareFedraSerifMediumFamily{X2}{B}{TLF}

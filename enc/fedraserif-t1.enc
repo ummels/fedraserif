@@ -17,7 +17,7 @@
 /quotedblleft /quotedblright /quotedblbase /guillemotleft /guillemotright /endash /emdash /.notdef
 /.notdef /dotlessi /dotlessj /ff /fi /fl /ffi /ffl
 % 0x20
-/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright
+/visualspace /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright
 /parenleft /parenright /asterisk /plus /comma /hyphen /period /slash
 % 0x30
 /zero /one /two /three /four /five /six /seven

@@ -34,7 +34,9 @@ variants := A B
 weights := Book Demi Medium Bold
 shapes_up := n sc ssc
 shapes_it := n sc ssc sw scsw sscsw
-encodings := OT1 OT2 T1 T2A T2B T2C TS1 LY1 QX T5 X2
+encodings_latin := OT1 T1 LY1 QX T5
+encodings_cyr := OT2 T2A T2B T2C X2
+encodings := $(encodings_latin) $(encodings_cyr) LGR TS1 OML
 variants := A B
 figures := LF OsF TLF TOsF
 
@@ -70,6 +72,10 @@ flags_ssc := $(flags_sc) --letterspacing=80
 flags_sw := --feature=swsh
 flags_scsw := $(flags_sc) $(flags_sw)
 flags_sscsw := $(flags_ssc) $(flags_sw)
+flags_cyr := -scyrl
+flags_lgr_common := -sgrek --ligkern "psili_varia {-180} Alpha ; psili_varia {-50} Epsilon ; psili_varia {-50} Eta ; psili_varia {-50} Iota ; psili_varia {-50} Omicron ; psili_varia {-50} Omega ; psili_varia {-180} uni1FBC ; psili_varia {-50} uni1FCC ; psili_varia {-50} uni1FFC ; dasia_varia {-140} Alpha ; dasia_varia {-30} Omicron ; dasia_varia {-30} Omega ; dasia_varia {-140} uni1FBC ; dasia_varia {-30} uni1FFC ; dasia_tonos {-240} Alpha ; dasia_tonos {-50} Epsilon ; dasia_tonos {-50} Eta ; dasia_tonos {-50} Iota ; dasia_tonos {-140} Omicron ; dasia_tonos {-140} Omega ; dasia_tonos {-240} uni1FBC ; dasia_tonos {-50} uni1FCC ; dasia_tonos {-140} uni1FFC ;"
+flags_lgr := $(flags_lgr_common) --ligkern "psili {-200} Alpha ; psili {-50} Epsilon ; psili {-50} Eta ; psili {-50} Iota ; psili {-80} Omicron ; psili {-80} Omega ; psili {-200} uni1FBC ; psili {-50} uni1FCC ; psili {-80} uni1FFC ; dasia {-160} Alpha ; dasia {-40} Epsilon ; dasia {-40} Eta ; dasia {-40} Iota ; dasia {-60} Omicron ; dasia {-60} Omega ; dasia {-160} uni1FBC ; dasia {-40} uni1FCC ; dasia {-60} uni1FFC ; psili_tonos {-260} Alpha ; psili_tonos {-50} Epsilon ; psili_tonos {-50} Eta ; psili_tonos {-50} Iota ; psili_tonos {-130} Omicron ; psili_tonos {-130} Omega ; psili_tonos {-260} uni1FBC ; psili_tonos {-50} uni1FCC ; psili_tonos {-130} uni1FFC ; psili_tilde {-280} Alpha ; psili_tilde {-50} Epsilon ; psili_tilde {-50} Eta ; psili_tilde {-50} Iota ; psili_tilde {-160} Omicron ; psili_tilde {-160} Omega ; psili_tilde {-280} uni1FBC ; psili_tilde {-50} uni1FCC ; psili_tilde {-160} uni1FFC ; dasia_tilde {-280} Alpha ; dasia_tilde {-50} Epsilon ; dasia_tilde {-50} Eta ; dasia_tilde {-50} Iota ; dasia_tilde {-160} Omicron ; dasia_tilde {-160} Omega ; dasia_tilde {-280} uni1FBC ; dasia_tilde {-50} uni1FCC ; dasia_tilde {-160} uni1FFC"
+flags_lgr_it := $(flags_lgr_common) --ligkern "psili {-150} Alpha ; psili {-150} uni1FBC ; dasia {-110} Alpha ; dasia {-10} Omicron ; dasia {-10} Omega ; dasia {-110} uni1FBC ; dasia {-10} uni1FFC ; psili_tonos {-210} Alpha ; psili_tonos {-80} Omicron ; psili_tonos {-80} Omega ; psili_tonos {-210} uni1FBC ; psili_tonos {-80} uni1FFC ; psili_tilde {-380} Alpha ; psili_tilde {-150} Epsilon ; psili_tilde {-150} Eta ; psili_tilde {-150} Iota ; psili_tilde {-230} Omicron ; psili_tilde {-230} Omega ; psili_tilde {-380} uni1FBC ; psili_tilde {-150} uni1FCC ; psili_tilde {-230} uni1FFC ; dasia_tilde {-380} Alpha ; dasia_tilde {-150} Epsilon ; dasia_tilde {-150} Eta ; dasia_tilde {-150} Iota ; dasia_tilde {-80} Upsilon ; dasia_tilde {-260} Omicron ; dasia_tilde {-260} Omega ; dasia_tilde {-380} uni1FBC ; dasia_tilde {-150} uni1FCC ; dasia_tilde {-260} uni1FFC"
 flags_math := --letterspacing=40 --math-spacing
 
 otffiles_in := $(wildcard $(fontname)?-*.otf)
@@ -88,7 +94,7 @@ mapfile := $(encdir)/$(pkg).map
 plfiles := $(foreach w,Book Regular Medium Bold,\
   $(foreach s,A B C E,$(auxdir)/FdSymbol$s-$w.pl))
 styfiles := $(addprefix $(latexdir)/,$(pkg).sty $(pkg)-fd.sty mt-$(family).cfg)
-fdfiles := $(foreach enc,$(encodings) OML,$(foreach var,$(variants),\
+fdfiles := $(foreach enc,$(encodings),$(foreach var,$(variants),\
   $(foreach ver,$(figures),$(latexdir)/$(enc)$(family)$(var)-$(ver).fd))) \
   $(foreach var,$(variants),$(latexdir)/U$(family)$(var)-Extra.fd \
   $(latexdir)/U$(family)$(var)-Pi.fd $(latexdir)/U$(family)$(var)-BB.fd)
@@ -159,18 +165,12 @@ $(testdir)/$1-$4$(call shapestr,$3)-$2.pdf: $(tfmdir)/$1-$4$(call shapestr,$3)-$
 	$(call fonttable,$1-$4$(call shapestr,$3)-$2)
 endef
 
-# $(call fontrules,font,shapes)
+# $(call fontrules,font,encondigs,shapes,flags)
 define fontrules
-# regular encodings
-$(foreach enc,$(encodings),\
-  $(foreach shape,$2,\
+$(foreach enc,$2,\
+  $(foreach shape,$3,\
     $(foreach fig,$(figures),\
-      $(eval $(call fontrule,$1,$(enc),$(shape),$(fig),$(flags_common))))))
-# OML encoding
-$(eval $(call fontrule,$1,OML,n,TOsF,$(flags_math)))
-# extra encodings
-$(foreach ver,Extra Orn BB,\
-  $(eval $(call fontrule,$1,U,n,$(ver),$(flags_common))))
+      $(eval $(call fontrule,$1,$(enc),$(shape),$(fig),$4)))))
 endef
 
 # $(call pirule,font)
@@ -287,10 +287,33 @@ math: $(fonts_up:%=%-math)
 .PHONY: tables
 tables: $(fonts:%=%-tables)
 
+# Base
 $(foreach font,$(fonts),$(eval $(call baserules,$(font))))
-$(foreach font,$(fonts_up),$(eval $(call fontrules,$(font),$(shapes_up))))
-$(foreach font,$(fonts_it),$(eval $(call fontrules,$(font),$(shapes_it))))
+
+# Latin
+$(foreach font,$(fonts_up),$(eval $(call fontrules,$(font),$(encodings_latin),$(shapes_up),$(flags_common))))
+$(foreach font,$(fonts_it),$(eval $(call fontrules,$(font),$(encodings_latin),$(shapes_it),$(flags_common))))
+$(foreach font,$(fonts),$(eval $(call fontrules,$(font),TS1,$(shapes_up),$(flags_common))))
+
+# Cyrillic
+$(foreach font,$(fonts),$(eval $(call fontrules,$(font),$(encodings_cyr),$(shapes_up),$(flags_common) $(flags_cyr))))
+
+# Greek
+$(foreach font,$(fonts_up),$(eval $(call fontrules,$(font),LGR,n,$(flags_common) $(flags_lgr))))
+$(foreach font,$(fonts_it),$(eval $(call fontrules,$(font),LGR,n,$(flags_common) $(flags_lgr_it))))
+
+# Extra encodings
+$(foreach font,$(fonts_up),\
+  $(foreach ver,Extra Orn BB,\
+    $(eval $(call fontrule,$(font),U,n,$(ver),$(flags_common)))))
+$(foreach font,$(fonts_it),\
+  $(foreach ver,Extra Orn,\
+    $(eval $(call fontrule,$(font),U,n,$(ver),$(flags_common)))))
 $(foreach font,$(fonts_up),$(eval $(call pirule,$(font))))
+
+# Math
+$(foreach font,$(fonts),\
+  $(eval $(call fontrule,$(font),OML,n,TOsF,$(flags_math))))
 $(foreach font,$(fonts_up),$(eval $(call mathrule,$(font),Mixed)))
 $(foreach font,$(fonts_up),$(eval $(call mathrule,$(font),French)))
 
