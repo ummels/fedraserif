@@ -132,7 +132,7 @@ endef
 
 # $(call baserule,font,suffix)
 define baserule
-.PHONY: $1-basemetrics
+.PHONY: $1-baserule
 $1-basemetrics: $(auxdir)/$1-Base-$2.pl $(tfmdir)/$1-Base-$2.tfm
 
 $(tfmdir)/$1-Base-$2.tfm: $1.otf $(encdir)/$(pkg)-$2.enc
@@ -150,7 +150,7 @@ endef
 # $(call fontrule,font,encoding,shape,version,flags)
 define fontrule
 .PHONY: $1-metrics
-$1-metrics: $(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf $(auxdir)/$1-$4$(call shapestr,$3)-$2.vpl
+$1-metrics: $(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf
 
 $(tfmdir)/$1-$4$(call shapestr,$3)-$2.tfm $(vfdir)/$1-$4$(call shapestr,$3)-$2.vf: $1.otf enc/$(pkg)-$(call encname,$2,$4).enc $1.base $(suffixes:%=$(tfmdir)/$1-Base-%.tfm)
 	$(OTFTOTFM) $(OTFTOTFMFLAGS) $(flags_basic) $(flags_$4) $(flags_$3) $5 --base-encoding=$1.base --encoding=enc/$(pkg)-$(call encname,$2,$4).enc $1.otf $1-$4$(call shapestr,$3)-$2
