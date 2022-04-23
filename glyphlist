@@ -189,7 +189,6 @@
 /alpha
 /alpha.smcp
 /alphatonos
-/alphatonos.smcp
 /ampersand
 /ampersand.smcp
 /anoteleia
@@ -250,7 +249,6 @@
 /cent.tln
 /cent.ton
 /chi
-/chi.smcp
 /circumflex
 /circumflex.cap
 /colon
@@ -330,15 +328,11 @@
 /eogonek
 /eogonek.smcp
 /epsilon
-/epsilon.smcp
 /epsilontonos
-/epsilontonos.smcp
 /equal
 /estimated
 /eta
-/eta.smcp
 /etatonos
-/etatonos.smcp
 /eth
 /eth.smcp
 /exclam
@@ -398,7 +392,6 @@
 /g.smcp
 /g.superior
 /gamma
-/gamma.smcp
 /gamma_gamma
 /gbreve
 /gbreve.smcp
@@ -444,13 +437,9 @@
 /iogonek
 /iogonek.smcp
 /iota
-/iota.smcp
 /iotadieresis
-/iotadieresis.smcp
 /iotadieresistonos
-/iotadieresistonos.smcp
 /iotatonos
-/iotatonos.smcp
 /itilde
 /itilde.smcp
 /j
@@ -462,7 +451,6 @@
 /k.smcp
 /k.superior
 /kappa
-/kappa.smcp
 /l
 /l.inferior
 /l.smcp
@@ -470,7 +458,6 @@
 /lacute
 /lacute.smcp
 /lambda
-/lambda.smcp
 /lambda_lambda
 /lcaron
 /lcaron.smcp
@@ -518,7 +505,6 @@
 /ntilde
 /ntilde.smcp
 /nu
-/nu.smcp
 /numbersign
 /numbersign.pln
 /numbersign.tln
@@ -543,13 +529,9 @@
 /ohungarumlaut
 /ohungarumlaut.smcp
 /omega
-/omega.smcp
 /omegatonos
-/omegatonos.smcp
 /omicron
-/omicron.smcp
 /omicrontonos
-/omicrontonos.smcp
 /one
 /one.closecirc_fina
 /one.closecirc_init
@@ -640,7 +622,6 @@
 /primedbl1
 /primedblrev1
 /psi
-/psi.smcp
 /q
 /q.inferior
 /q.smcp
@@ -667,7 +648,6 @@
 /rcaron.smcp
 /registered
 /rho
-/rho.smcp
 /ring
 /ring.cap
 /s
@@ -700,7 +680,6 @@
 /seveninferior
 /sevensuperior
 /sigma
-/sigma.smcp
 /six
 /six.closecirc_fina
 /six.closecirc_init
@@ -725,14 +704,12 @@
 /t.smcp
 /t.superior
 /tau
-/tau.smcp
 /tcaron
 /tcaron.smcp
 /tcommaaccent
 /tcommaaccent.smcp
 /theta
 /theta.alt
-/theta.smcp
 /thorn
 /thorn.smcp
 /three
@@ -785,11 +762,9 @@
 /uni00A0
 /uni0237
 /uni0259
-/uni0259.smcp
 /uni0374
 /uni0375
 /uni03C2
-/uni03C2.smcp
 /uni03D0
 /uni03D8
 /uni03D9
@@ -1333,6 +1308,8 @@
 /uni20AE
 /uni20B1
 /uni20B4
+/uni20B9
+/uni20BA
 /uni2113
 /uni2116
 /uni2116.pln
@@ -1423,13 +1400,9 @@
 /uogonek
 /uogonek.smcp
 /upsilon
-/upsilon.smcp
 /upsilondieresis
-/upsilondieresis.smcp
 /upsilondieresistonos
-/upsilondieresistonos.smcp
 /upsilontonos
-/upsilontonos.smcp
 /uring
 /uring.smcp
 /utilde
@@ -1448,7 +1421,6 @@
 /x.smcp
 /x.superior
 /xi
-/xi.smcp
 /y
 /y.inferior
 /y.smcp
@@ -1489,4 +1461,3 @@
 /zeroinferior
 /zerosuperior
 /zeta
-/zeta.smcp

@@ -54,7 +54,7 @@
 /referencemark /onesuperior /ordmasculine /radical /onequarter /onehalf /threequarters /euro
 % 0xC0
 /cruzeiro /franc /mill /peseta /rupee /sheqel /kip /tugrik
-/hryvnia /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/hryvnia /uni20B9 /uni20BA /.notdef /.notdef /.notdef /.notdef /.notdef
 % 0xD0
 /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /multiply /.notdef
 /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
