@@ -434,7 +434,7 @@
 \setslot{envelope}
 \endsetslot
 
-\setslot{postcard}
+\setslot{earth}
 \endsetslot
 
 \setslot{phone}
@@ -443,61 +443,13 @@
 \setslot{fax}
 \endsetslot
 
-\setslot{house}
-\endsetslot
-
-\setslot{factory}
-\endsetslot
-
-\setslot{earth}
-\endsetslot
-
 \setslot{pencil}
 \endsetslot
 
 \setslot{watch}
 \endsetslot
 
-\setslot{document}
-\endsetslot
-
-\setslot{floppy}
-\endsetslot
-
-\setslot{shopping}
-\endsetslot
-
 \setslot{flower}
-\endsetslot
-
-\setslot{dog}
-\endsetslot
-
-\setslot{blackbottle}
-\endsetslot
-
-\setslot{whitebottle}
-\endsetslot
-
-\setslot{glass}
-\endsetslot
-
-\setslot{airmail}
-\endsetslot
-
-\setslot{priority}
-\endsetslot
-
-\setslot{new}
-\endsetslot
-
-\setslot{newalt}
-\endsetslot
-
-\setslot{old}
-\endsetslot
-
-\setslot{speechbubble}
 \endsetslot
 
 \setslot{orn01}
@@ -507,9 +459,6 @@
 \endsetslot
 
 \setslot{orn02}
-\endsetslot
-
-\setslot{wave}
 \endsetslot
 
 \setslot{orn03}
@@ -600,6 +549,63 @@
 \endsetslot
 
 \setslot{orn33}
+\endsetslot
+
+\setslot{orn34}
+\endsetslot
+
+\setslot{orn35}
+\endsetslot
+
+\setslot{airmail}
+\endsetslot
+
+\setslot{priority}
+\endsetslot
+
+\setslot{postcard}
+\endsetslot
+
+\setslot{document}
+\endsetslot
+
+\setslot{floppy}
+\endsetslot
+
+\setslot{house}
+\endsetslot
+
+\setslot{factory}
+\endsetslot
+
+\setslot{shopping}
+\endsetslot
+
+\setslot{dog}
+\endsetslot
+
+\setslot{blackbottle}
+\endsetslot
+
+\setslot{whitebottle}
+\endsetslot
+
+\setslot{glass}
+\endsetslot
+
+\setslot{new}
+\endsetslot
+
+\setslot{newalt}
+\endsetslot
+
+\setslot{old}
+\endsetslot
+
+\setslot{speechbubble}
+\endsetslot
+
+\setslot{wave}
 \endsetslot
 
 \endencoding
