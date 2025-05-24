@@ -202,23 +202,6 @@ $\varkappa$ $\upvarkappa$
 %</test>
 %\fi
 %
-% \CheckSum{1303}
-% \CharacterTable
-%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
-%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
-%   Digits        \0\1\2\3\4\5\6\7\8\9
-%   Exclamation   \!     Double quote  \"     Hash (number) \#
-%   Dollar        \$     Percent       \%     Ampersand     \&
-%   Acute accent  \'     Left paren    \(     Right paren   \)
-%   Asterisk      \*     Plus          \+     Comma         \,
-%   Minus         \-     Point         \.     Solidus       \/
-%   Colon         \:     Semicolon     \;     Less than     \<
-%   Equals        \=     Greater than  \>     Question mark \?
-%   Commercial at \@     Left bracket  \[     Backslash     \\
-%   Right bracket \]     Circumflex    \^     Underscore    \_
-%   Grave accent  \`     Left brace    \{     Vertical bar  \|
-%   Right brace   \}     Tilde         \~}
-%
 % \GetFileInfo{fedraserif.dtx}
 %
 % \title{\LaTeX\ support for Fedra Serif Pro}
@@ -264,7 +247,7 @@ $\varkappa$ $\upvarkappa$
 % \pkg{fdsymbol} package (version~0.7 or higher) installed. Apart from
 % \pkg{fdsymbol}, the \pkg{fedraserif} package automatically loads the
 % packages \pkg{textcomp} and \pkg{amsmath}.
-% Additionally, the packages \pkg{fontaxes} and \pkg{pifont} are
+% Additionally, the packages \pkg{figureversions} and \pkg{pifont} are
 % loaded if present in your \LaTeX\ installation.
 % If you want to pass options to these packages, you can
 % either load these packages beforehand, or you can include the options
@@ -404,7 +387,7 @@ $\varkappa$ $\upvarkappa$
 % \caption{\label{tab:shapes}Summary of font shapes}
 % \end{table}
 %
-% If the \pkg{fontaxes} package is available, you can use the commands
+% In newer \LaTeX versions, you can use the commands
 % |\sscshape| and |\textssc|\marg{text} to switch to letterspaced small caps
 % and the commands |\swshape| and |\textsw|\marg{text} to switch to swash
 % capitals.
@@ -436,9 +419,8 @@ $\varkappa$ $\upvarkappa$
 % If you want to use text figures instead, use the option \option{figures=text}
 % or \option{figures=osf}.
 %
-% Assuming that the \pkg{fontaxes} package is installed on your system, you
-% can use
-% the command |\figureversion| to switch between different figure
+% Assuming that the \pkg{figureversions} package is installed on your system,
+% you can use the command |\figureversion| to switch between different figure
 % versions inside the document. Possible arguments are |text| or |osf|
 % for text figures, |lining| or |lf| for lining figures, |tabular| or |tab|
 % for tabular figures, and |proportional| or |prop| for proportional figures.
@@ -994,11 +976,11 @@ $\varkappa$ $\upvarkappa$
 }
 %    \end{macrocode}
 %
-% The font selection commands such as |\figureversion|, |\textsw|, and
-% |\textssc| are provided by the \pkg{fontaxes} package.
+% The figure selection commands such as |\figureversion| are provided by the
+% \pkg{figureversions} package.
 %    \begin{macrocode}
-\IfFileExists{fontaxes.sty}{
-  \RequirePackage{fontaxes}[2007/03/31]
+\IfFileExists{figureversions.sty}{
+  \RequirePackage{figureversions}
   \let\oldstylenums\textfigures
 }{}
 %    \end{macrocode}
