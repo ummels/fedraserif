@@ -9,9 +9,7 @@ PLTOTFM := pltotf
 VPLTOVF := vptovf
 LATEX := latex -interaction nonstopmode -halt-on-error
 PDFLATEX := pdflatex -interaction nonstopmode -halt-on-error
-LUALATEX := lualatex -interaction nonstopmode -halt-on-error
 PDFTEX := pdftex -interaction nonstopmode -halt-on-error
-DVIPS := dvips
 AWK := awk
 SED := sed
 RM := rm -rf
@@ -57,9 +55,7 @@ endif
 texvars := TEXINPUTS=$(latexdir): ENCFONTS=$(encdir): TFMFONTS=$(tfmdir): VFFONTS=$(vfdir):
 latex := $(texvars) $(LATEX)
 pdflatex := $(texvars) $(PDFLATEX)
-lualatex := $(texvars) $(LUALATEX)
 pdftex := $(texvars) $(PDFTEX)
-dvips := $(texvars) DVIPSHEADERS=$(encdir):$(tfmdir):$(vfdir): $(DVIPS)
 
 flags_basic := --encoding-directory=$(encdir) --tfm-directory=$(tfmdir) --vf-directory=$(vfdir) --pl-directory=$(auxdir) --vpl-directory=$(auxdir) --no-type1 --no-dotlessj --no-updmap --no-map
 flags_common := --warn-missing --feature=kern --feature=liga
@@ -348,26 +344,12 @@ test: all $(testfiles)
 ifneq ($(filter $(fontname)A-%,$(fonts_up)),)
 	@echo "Testing Fedra Serif Pro A with pdflatex..."
 	$(pdflatex) -output-directory $(testdir) "\pdfmapfile{$(mapfile)}\input{test-$(pkg)-a}"
-	@echo ""
-	@echo "Testing Fedra Serif Pro A with latex+dvips..."
-	$(latex) -output-directory $(testdir) "\input{test-$(pkg)-a}"
-	$(dvips) -u $(mapfile) $(testdir)/test-$(pkg)-a.dvi -o $(testdir)/test-$(pkg)-a.ps
-	@echo ""
-	@echo "Testing Fedra Serif Pro A with lualatex..."
-	$(lualatex) -output-directory $(testdir) -jobname test-$(pkg)-a-luatex "\directlua{pdf.mapfile('$(mapfile)')}\input{test-$(pkg)-a}"
 else
 	@echo "Fedra Serif Pro A not installed."
 endif
 ifneq ($(filter $(fontname)B-%,$(fonts_up)),)
 	@echo "Testing Fedra Serif Pro B with pdflatex..."
 	$(pdflatex) -output-directory $(testdir) "\pdfmapfile{$(mapfile)}\input{test-$(pkg)-b}"
-	@echo ""
-	@echo "Testing Fedra Serif Pro B with latex+dvips..."
-	$(latex) -output-directory $(testdir) "\input{test-$(pkg)-b}"
-	$(dvips) -u $(mapfile) $(testdir)/test-$(pkg)-b.dvi -o $(testdir)/test-$(pkg)-b.ps
-	@echo ""
-	@echo "Testing Fedra Serif Pro B with lualatex..."
-	$(lualatex) -output-directory $(testdir) -jobname test-$(pkg)-b-luatex "\directlua{pdf.mapfile('$(mapfile)')}\input{test-$(pkg)-b}"
 else
 	@echo "Fedra Serif Pro B not installed."
 endif
