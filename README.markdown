@@ -78,7 +78,7 @@ on one of the OpenType font files.
 License
 -------
 
-Copyright (c) 2011-2022 by Michael Ummels <michael@ummels.de>
+Copyright (c) 2011-2025 by Michael Ummels <michael@ummels.de>
 
 The LaTeX support files contained in this software may be distributed
 and modified under the terms and conditions of the
