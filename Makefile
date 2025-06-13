@@ -91,7 +91,7 @@ glyphlists := $(suffixes:%=.glyphlist-%)
 encfiles := $(suffixes:%=$(encdir)/$(pkg)-%.enc)
 baselists := $(fonts:%=%.base)
 mapfile := $(encdir)/$(pkg).map
-plfiles := $(foreach w,Book Regular Medium Bold,\
+plfiles := $(foreach w,$(weights),\
   $(foreach s,A B C E,$(auxdir)/FdSymbol$s-$w.pl))
 styfiles := $(addprefix $(latexdir)/,$(pkg).sty $(pkg)-fd.sty mt-$(family).cfg)
 fdfiles := $(foreach enc,$(encodings),$(foreach var,$(variants),\
@@ -202,7 +202,7 @@ $1-math: $(tfmdir)/$1$2-TOsF-OML.tfm $(vfdir)/$1$2-TOsF-OML.vf $(auxdir)/$1$2-TO
 endif
 
 $(auxdir)/$1$2-TOsF-OML.vpl: $(auxdir)/$1-TOsF-OML.vpl $(auxdir)/$1Italic-TOsF-OML.vpl $(plfiles) $(foreach s,a b c e,fontinst/fdsymbol-$s.etx) $(foreach s,french it mixed up,fontinst/$(pkg)-oml-$s.etx) $(addprefix fontinst/,adjustoml.mtx missing.mtx tie.mtx makeoml.tex macros.tex)
-	weight=$$$$(echo $1 | $(SED) 's/.*-\(.*\)/\1/;s/Demi/Regular/'); \
+	weight=$$$$(echo $1 | $(SED) 's/.*-\(.*\)/\1/'); \
 	TEXINPUTS=fontinst:misc: $(PDFTEX) -output-dir $(auxdir) \
 	\\input makeoml \\installoml{$1}{$$$$weight}{$2}\\bye
 	$(RM) $(auxdir)/makeoml.log
